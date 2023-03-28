@@ -1,14 +1,20 @@
-# volumes:
+volumes:
+  hooked-data:
+    external: true
 services:
   fastapi:
     build:
-      context: sample_service
+      context: hooked
       dockerfile: Dockerfile.dev
+    environment:
+      DATABASE_URL: postgresql://hooked_user:hooked_pw@db/hooked
+      WAIT_HOSTS: db:5432
+      PORT: 8000
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
-      - ./sample_service:/app
-      
+      - ./hooked:/app
+
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
@@ -22,5 +28,14 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
-            
+      REACT_APP_HOOKED_API_HOST: http://localhost:8000
+  db:
+    image: postgres:14.5-bullseye
+    environment:
+      POSTGRES_PASSWORD: hooked_pw
+      POSTGRES_USER: hooked_user
+      POSTGRES_DB: hooked
+    ports:
+      - "15432:5432"
+    volumes:
+      - hooked-data:/var/lib/postgresql/data
