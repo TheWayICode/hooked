@@ -4,7 +4,7 @@ from queries.hooked import (
     Error,
     UserIn,
     UserOut,
-    UserRepository,
+    UserRepository
 )
 
 
@@ -17,6 +17,16 @@ def get_all_users(
 ):
     return repo.get_all_users()
 
+@router.get('/api/users/{user_id}', response_model=Optional[UserOut])
+def get_one_user(
+    user_id: int,
+    response: Response,
+    repo: UserRepository = Depends(),
+) -> UserOut:
+    user = repo.get_one(user_id)
+    if user is None:
+        response.status_code = 400
+    return user
 
 @router.post('/api/users', response_model=Union[UserOut, Error])
 def create_user(

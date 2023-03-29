@@ -19,6 +19,29 @@ class UserOut(BaseModel):
     email: str
 
 class UserRepository:
+    def get_one(self, user_id: int) -> Optional[UserOut]:
+        try:
+            with pool.getconn() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , name
+                            , email
+                        FROM users
+                        WHERE id = %s
+                        """,
+                        [user_id]
+                    )
+                    print("=====================================", result)
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_user_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "User not found"}
+
     def get_all_users(self) -> Optional[UserOut]:
         try:
             with pool.getconn() as conn:
@@ -54,7 +77,7 @@ class UserRepository:
                     id = result.fetchone()[0]
                     if id is None:
                         return None
-                    return self.record_to_user_in(id, user)
+                    return self.record_to_user_in_to_out(id, user)
 
         except Exception as e:
             print("Create did not work", e)
@@ -62,7 +85,7 @@ class UserRepository:
 
 
 
-    def record_to_user_in(self, id: int, user: UserIn):
+    def record_to_user_in_to_out(self, id: int, user: UserIn):
         old_data = user.dict()
         return UserOut(id=id, **old_data)
 
