@@ -83,7 +83,21 @@ class UserRepository:
             print("Create did not work", e)
             return None
 
-
+    def update(self, user_id: int, user: UserIn) -> Union[UserOut, Error]:
+        try:
+            with pool.connection() as connection:
+                with connection.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE users
+                        SET name = %s, email = %s
+                        WHERE id = %s
+                        """,
+                        [user.name, user.email, user_id]
+                    )
+                    return self.record_to_user_in_to_out(user_id, user)
+        except Exception as e:
+            return {"message": "User could not be updated"}
 
     def record_to_user_in_to_out(self, id: int, user: UserIn):
         old_data = user.dict()

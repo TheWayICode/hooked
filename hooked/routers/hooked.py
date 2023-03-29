@@ -39,3 +39,15 @@ def create_user(
         response.status_code = 400
     else:
         return response
+
+@router.put("/api/users/{user_id}", response_model=Union[UserOut, Error])
+def update_user(
+    user_id: int,
+    user: UserIn,
+    response: Response,
+    repo: UserRepository = Depends()
+) -> UserOut:
+    response = repo.update(user_id, user)
+    if response is None:
+        response.status_code = 400
+    return response
