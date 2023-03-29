@@ -21,7 +21,6 @@ def create_post(
     else:
         return response
 
-
 @router.put("/api/posts/{post_id}", response_model=Union[PostOut, Error])
 def update_post(
     post_id: int,
@@ -33,3 +32,9 @@ def update_post(
     if response is None:
         response.status_code = 400
     return response
+
+@router.get('/api/posts', response_model=Union[List[PostOut], Error])
+def get_all_posts(
+    repo: PostRepository = Depends()
+):
+    return repo.get_all_posts()

@@ -14,6 +14,7 @@ class PostIn(BaseModel):
     fish: str
     description: str
     picture_url: str
+    created_at: date
 
 class PostOut(BaseModel):
     id: int
@@ -22,20 +23,39 @@ class PostOut(BaseModel):
     fish: str
     description: str
     picture_url: str
+    created_at: date
 
 class PostRepository:
+    def get_all_posts(self) -> Optional[PostOut]:
+        try:
+            with pool.getconn() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, user_id, location, fish, description, picture_url, created_at
+                        FROM posts
+                        ORDER BY id DESC
+                        """
+                    )
+                    return [
+                        self.record_to_post_out(record)
+                        for record in result
+                    ]
+        except Exception as e:
+            print(e)
+            return None
     def create_post(self, post: PostIn) -> Union[PostOut, Error]:
         try:
             with pool.getconn() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO posts (user_id, location, fish, description, picture_url)
-                        VALUES (%s, %s, %s, %s, %s)
+                        INSERT INTO posts (user_id, location, fish, description, picture_url, created_at)
+                        VALUES (%s, %s, %s, %s, %s, %s)
                         RETURNING id;
                         """
                     ,
-                    [post.user_id, post.location, post.fish, post.description, post.picture_url]
+                    [post.user_id, post.location, post.fish, post.description, post.picture_url, post.created_at]
                     )
                     id = result.fetchone()[0]
                     if id is None:
@@ -66,3 +86,14 @@ class PostRepository:
     def record_to_post_in_to_out(self, id: int, post: PostIn):
         old_data = post.dict()
         return PostOut(id=id, **old_data)
+
+    def record_to_post_out(self, record):
+        return PostOut(
+            id=record[0],
+            user_id=record[1],
+            location=record[2],
+            fish=record[3],
+            description=record[4],
+            picture_url=record[5],
+            created_at=record[6]
+        )
