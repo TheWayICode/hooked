@@ -51,3 +51,14 @@ def update_user(
     if response is None:
         response.status_code = 400
     return response
+
+@router.delete("/api/user/{user_id}", response_model =bool)
+def delete_user(
+    user_id: int,
+    response: Response,
+    repo: UserRepository = Depends(),
+)->  bool:
+    response = repo.delete_user(user_id)
+    if response is None:
+        response.status_code=400
+    return response

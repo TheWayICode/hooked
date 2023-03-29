@@ -99,6 +99,22 @@ class UserRepository:
         except Exception as e:
             return {"message": "User could not be updated"}
 
+    def delete_user(self, user_id: int) -> Union[bool, Error]:
+        try:
+            with pool.connection() as connection:
+                with connection.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE from users
+                        WHERE id = %s
+                        """,
+                        [user_id]
+                    )
+                    return True
+        except Exception as e:
+            return {"message": "User does not exist"}
+
+
     def record_to_user_in_to_out(self, id: int, user: UserIn):
         old_data = user.dict()
         return UserOut(id=id, **old_data)
