@@ -23,7 +23,8 @@ steps = [
             location VARCHAR(100) NOT NULL,
             fish VARCHAR(50) NOT NULL,
             description TEXT NOT NULL,
-            picture_url TEXT NOT NULL
+            picture_url TEXT NOT NULL,
+            created_at DATE DEFAULT CURRENT_DATE
         );
         """,
         # "Down" SQL statement
