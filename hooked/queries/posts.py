@@ -46,14 +46,23 @@ class PostRepository:
             print("Create did not work", e)
             return None
 
+    def update_post(self, post_id: int, post: PostIn) -> Union[PostOut, Error]:
+        try:
+            with pool.getconn() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE posts
+                        SET user_id = %s, location = %s, fish = %s, description = %s, picture_url = %s
+                        WHERE id = %s
+                        """
+                    ,
+                    [post.user_id, post.location, post.fish, post.description, post.picture_url, post_id]
+                    )
+                    return self.record_to_post_in_to_out(post_id, post)
+        except Exception as e:
+            return {"message": "Update failed"}
+
     def record_to_post_in_to_out(self, id: int, post: PostIn):
         old_data = post.dict()
         return PostOut(id=id, **old_data)
-
-
-    def record_to_post_out(self, record):
-        return PostOut(
-            id=record[0],
-            name=record[1],
-            email=record[2],
-        )

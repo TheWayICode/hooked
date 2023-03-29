@@ -20,3 +20,16 @@ def create_post(
         response.status_code = 400
     else:
         return response
+
+
+@router.put("/api/posts/{post_id}", response_model=Union[PostOut, Error])
+def update_post(
+    post_id: int,
+    post: PostIn,
+    response: Response,
+    repo: PostRepository = Depends()
+):
+    response = repo.update_post(post_id, post)
+    if response is None:
+        response.status_code = 400
+    return response
