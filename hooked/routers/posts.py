@@ -20,3 +20,9 @@ def create_post(
         response.status_code = 400
     else:
         return response
+
+@router.get('/api/posts', response_model=Union[List[PostOut], Error])
+def get_all_posts(
+    repo: PostRepository = Depends()
+):
+    return repo.get_all_posts()
