@@ -17,6 +17,23 @@ steps = [
     [
         # "Up" SQL statement
         """
+        CREATE TABLE posts (
+            id SERIAL PRIMARY KEY NOT NULL,
+            user_id SMALLINT NOT NULL,
+            location VARCHAR(100) NOT NULL,
+            fish VARCHAR(50) NOT NULL,
+            description TEXT NOT NULL,
+            picture_url TEXT NOT NULL
+        );
+        """,
+        # "Down" SQL statement
+        """
+        DROP TABLE posts;
+        """
+    ],
+    [
+        # "Up" SQL statement
+        """
         CREATE TABLE location (
             id SERIAL PRIMARY KEY NOT NULL,
             required_limited_text VARCHAR(1000) NOT NULL,
