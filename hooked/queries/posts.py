@@ -46,14 +46,22 @@ class PostRepository:
             print("Create did not work", e)
             return None
 
+
+    def delete(self, post_id: int) -> Union[bool, Error]:
+        try:
+            with pool.connection() as connection:
+                with connection.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE from posts
+                        WHERE id = %s
+                        """,
+                        [post_id]
+                    )
+                    return True
+        except Exception:
+            return {"message": "Post does not exist"}
+
     def record_to_post_in_to_out(self, id: int, post: PostIn):
         old_data = post.dict()
         return PostOut(id=id, **old_data)
-
-
-    def record_to_post_out(self, record):
-        return PostOut(
-            id=record[0],
-            name=record[1],
-            email=record[2],
-        )

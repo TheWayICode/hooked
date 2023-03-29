@@ -20,3 +20,14 @@ def create_post(
         response.status_code = 400
     else:
         return response
+
+@router.delete("/api/posts/{post_id}", response_model= bool)
+def delete_post(
+    post_id: int,
+    response: Response,
+    repo: PostRepository = Depends(),
+)-> bool:
+    response = repo.delete(post_id)
+    if response is None:
+        response.status_code = 400
+    return response
