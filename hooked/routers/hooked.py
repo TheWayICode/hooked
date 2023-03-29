@@ -34,7 +34,6 @@ def create_user(
     response: Response,
     repo: UserRepository = Depends(),
 ):
-
     response = repo.create_user(user)
     if response is None:
         response.status_code = 400
