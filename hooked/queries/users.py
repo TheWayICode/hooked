@@ -33,7 +33,6 @@ class UserRepository:
                         """,
                         [user_id]
                     )
-                    print("=====================================", result)
                     record = result.fetchone()
                     if record is None:
                         return None
