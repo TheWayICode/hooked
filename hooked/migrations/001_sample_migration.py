@@ -37,12 +37,12 @@ steps = [
         """
         CREATE TABLE location (
             id SERIAL PRIMARY KEY NOT NULL,
-            required_limited_text VARCHAR(1000) NOT NULL,
-            required_unlimited_text TEXT NOT NULL,
-            required_date_time TIMESTAMP NOT NULL,
-            automatically_set_date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            required_integer INTEGER NOT NULL,
-            required_money MONEY NOT NULL
+            state TEXT NOT NULL,
+            city TEXT NOT NULL,
+            type_of_fishing VARCHAR(50) NOT NULL,
+            fish VARCHAR(50) NOT NULL,
+            picture_url TEXT NOT NULL,
+            description TEXT NOT NULL
         );
         """,
         # "Down" SQL statement

@@ -26,9 +26,9 @@ class PostOut(BaseModel):
     created_at: date
 
 class PostRepository:
-    def get_all_posts(self) -> Optional[PostOut]:
+    def get_all_posts(self) -> Union[List[PostOut], Error]:
         try:
-            with pool.getconn() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
@@ -47,7 +47,7 @@ class PostRepository:
 
     def create_post(self, post: PostIn) -> Union[PostOut, Error]:
         try:
-            with pool.getconn() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
@@ -66,9 +66,10 @@ class PostRepository:
         except Exception as e:
             print("Create did not work", e)
             return None
+
     def get_one_post(self, post_id: int) -> Optional[PostOut]:
         try:
-            with pool.getconn() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
@@ -103,7 +104,7 @@ class PostRepository:
 
     def update_post(self, post_id: int, post: PostIn) -> Union[PostOut, Error]:
         try:
-            with pool.getconn() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """

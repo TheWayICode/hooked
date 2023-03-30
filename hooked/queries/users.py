@@ -21,7 +21,7 @@ class UserOut(BaseModel):
 class UserRepository:
     def get_one(self, user_id: int) -> Optional[UserOut]:
         try:
-            with pool.getconn() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
@@ -42,9 +42,9 @@ class UserRepository:
             print(e)
             return {"message": "User not found"}
 
-    def get_all_users(self) -> Optional[UserOut]:
+    def get_all_users(self) -> Union[Error, UserOut]:
         try:
-            with pool.getconn() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
@@ -63,7 +63,7 @@ class UserRepository:
 
     def create_user(self, user: UserIn) -> Union[UserOut, Error]:
         try:
-            with pool.getconn() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
@@ -112,7 +112,7 @@ class UserRepository:
                     )
                     return True
         except Exception as e:
-            return {"message": "User does not exist"}
+            return {"message": "User does not exists"}
 
 
     def record_to_user_in_to_out(self, id: int, user: UserIn):
@@ -122,7 +122,7 @@ class UserRepository:
 
     def record_to_user_out(self, record):
         return UserOut(
-            id=record[0],
+            id=record [0],
             name=record[1],
             email=record[2],
         )
