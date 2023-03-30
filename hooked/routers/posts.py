@@ -49,3 +49,14 @@ def get_all_posts(
     repo: PostRepository = Depends()
 ):
     return repo.get_all_posts()
+
+@router.get('/api/posts/{post_id}', response_model=Optional[PostOut])
+def get_one_post(
+    post_id: int,
+    response: Response,
+    repo: PostRepository = Depends(),
+) -> PostOut:
+    post = repo.get_one_post(post_id)
+    if post is None:
+        response.status_code = 400
+    return post
