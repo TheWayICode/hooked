@@ -101,6 +101,20 @@ class LocationRepository:
             except Exception as e:
                 print(e)
                 return {"message": "Location not found"}
+    def delete_location(self, location_id: int) -> Union[bool, Error]:
+        try:
+            with pool.connection() as connection:
+                with connection.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE from location
+                        WHERE id = %s
+                        """,
+                        [location_id]
+                    )
+                    return True
+        except Exception:
+            return {"message": "Location does not exist"}
 
     def record_to_location_in_to_out(self, id: int, location: LocationIn):
         old_data = location.dict()

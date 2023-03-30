@@ -51,3 +51,14 @@ def get_one_location(
     if location is None:
         response.status_code = 400
     return location
+
+@router.delete("/api/locations/{location_id}", response_model =bool)
+def delete_location(
+    location_id: int,
+    response: Response,
+    repo: LocationRepository = Depends(),
+)->  bool:
+    response = repo.delete_location(location_id)
+    if response is None:
+        response.status_code=400
+    return response
