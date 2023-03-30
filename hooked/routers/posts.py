@@ -16,7 +16,7 @@ def create_post(
     repo: PostRepository = Depends(),
 ):
     response = repo.create_post(post)
-    if response is None:
+    if not response:
         response.status_code = 400
     else:
         return response
@@ -28,7 +28,7 @@ def delete_post(
     repo: PostRepository = Depends(),
 )-> bool:
     response = repo.delete(post_id)
-    if response is None:
+    if not response:
         response.status_code = 400
     return response
 
@@ -38,9 +38,9 @@ def update_post(
     post: PostIn,
     response: Response,
     repo: PostRepository = Depends()
-):
+) -> Union[PostOut, Error]:
     response = repo.update_post(post_id, post)
-    if response is None:
+    if not response:
         response.status_code = 400
     return response
 
@@ -57,6 +57,6 @@ def get_one_post(
     repo: PostRepository = Depends(),
 ) -> PostOut:
     post = repo.get_one_post(post_id)
-    if post is None:
+    if not post:
         response.status_code = 400
     return post
