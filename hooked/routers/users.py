@@ -24,9 +24,10 @@ def get_one_user(
     repo: UserRepository = Depends(),
 ) -> UserOut:
     user = repo.get_one(user_id)
-    if user is None:
+    if not user:
         response.status_code = 400
-    return user
+    else:
+        return user
 
 @router.post('/api/users', response_model=Union[UserOut, Error])
 def create_user(
@@ -35,7 +36,7 @@ def create_user(
     repo: UserRepository = Depends(),
 ):
     response = repo.create_user(user)
-    if response is None:
+    if not response:
         response.status_code = 400
     else:
         return response
@@ -48,9 +49,10 @@ def update_user(
     repo: UserRepository = Depends()
 ) -> UserOut:
     response = repo.update(user_id, user)
-    if response is None:
+    if not response:
         response.status_code = 400
-    return response
+    else:
+        return response
 
 @router.delete("/api/user/{user_id}", response_model =bool)
 def delete_user(
@@ -59,6 +61,7 @@ def delete_user(
     repo: UserRepository = Depends(),
 )->  bool:
     response = repo.delete_user(user_id)
-    if response is None:
+    if not response:
         response.status_code=400
-    return response
+    else:
+        return response

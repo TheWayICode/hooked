@@ -41,7 +41,7 @@ class UserRepository:
             print(e)
             return {"message": "User not found"}
 
-    def get_all_users(self) -> Optional[UserOut]:
+    def get_all_users(self) -> Union[Error, UserOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -111,7 +111,7 @@ class UserRepository:
                     )
                     return True
         except Exception as e:
-            return {"message": "User does not exist"}
+            return {"message": "User does not exists"}
 
 
     def record_to_user_in_to_out(self, id: int, user: UserIn):
@@ -121,7 +121,7 @@ class UserRepository:
 
     def record_to_user_out(self, record):
         return UserOut(
-            id=record[0],
+            id=record [0],
             name=record[1],
             email=record[2],
         )
