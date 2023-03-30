@@ -40,3 +40,14 @@ def update_location(
     if response is None:
         response.status_code = 400
     return response
+
+@router.get('/api/locations/{location_id}', response_model=Optional[LocationOut])
+def get_one_location(
+    location_id: int,
+    response: Response,
+    repo: LocationRepository = Depends(),
+) -> LocationOut:
+    location = repo.get_one_location(location_id)
+    if location is None:
+        response.status_code = 400
+    return location

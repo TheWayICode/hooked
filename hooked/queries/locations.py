@@ -81,6 +81,27 @@ class LocationRepository:
         except Exception as e:
             return {"message": "Update location failed"}
 
+
+    def get_one_location(self,location_id: int) -> Optional[LocationOut]:
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as db:
+                        result = db.execute(
+                            """
+                            SELECT id, state, city, type_of_fishing, fish, picture_url, description
+                            FROM location
+                            WHERE id = %s
+                            """,
+                        [location_id]
+                        )
+                        record = result.fetchone()
+                        if record is None:
+                            return None
+                        return self.record_to_location_out(record)
+            except Exception as e:
+                print(e)
+                return {"message": "Location not found"}
+
     def record_to_location_in_to_out(self, id: int, location: LocationIn):
         old_data = location.dict()
         return LocationOut(id=id, **old_data)
