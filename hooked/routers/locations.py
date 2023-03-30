@@ -28,3 +28,15 @@ def create_location(
         response.status_code = 400
     else:
         return response
+
+@router.put("/api/locations/{location_id}", response_model=Union[LocationOut, Error])
+def update_location(
+    location_id: int,
+    location: LocationIn,
+    response: Response,
+    repo: LocationRepository = Depends()
+) -> LocationOut:
+    response = repo.update_location(location_id, location)
+    if response is None:
+        response.status_code = 400
+    return response

@@ -64,6 +64,23 @@ class LocationRepository:
             print("Create Location did not work", e)
             return None
 
+    def update_location(self, location_id: int, location: LocationIn) -> Union[LocationOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE location
+                        SET state = %s, city = %s, type_of_fishing = %s, fish = %s, picture_url = %s, description = %s
+                        WHERE id = %s
+                        """
+                    ,
+                    [location.state, location.city, location.type_of_fishing, location.fish, location.picture_url, location.description, location_id]
+                    )
+                    return self.record_to_location_in_to_out(location_id, location)
+        except Exception as e:
+            return {"message": "Update location failed"}
+
     def record_to_location_in_to_out(self, id: int, location: LocationIn):
         old_data = location.dict()
         return LocationOut(id=id, **old_data)
