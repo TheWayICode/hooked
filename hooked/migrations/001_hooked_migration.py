@@ -55,12 +55,10 @@ steps = [
         """
         CREATE TABLE fish (
             id SERIAL PRIMARY KEY NOT NULL,
-            required_limited_text VARCHAR(1000) NOT NULL,
-            required_unlimited_text TEXT NOT NULL,
-            required_date_time TIMESTAMP NOT NULL,
-            automatically_set_date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            required_integer INTEGER NOT NULL,
-            required_money MONEY NOT NULL
+            name VARCHAR(50) NOT NULL,
+            size VARCHAR(50) NOT NULL,
+            fishing_technique TEXT NOT NULL,
+            type VARCHAR(50) NOT NULL
         );
         """,
         # "Down" SQL statement
