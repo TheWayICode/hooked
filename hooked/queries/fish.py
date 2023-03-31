@@ -39,6 +39,31 @@ class FishRepository:
         except Exception:
             return {"message": "Unable to successfully create a fish"}
 
+    def get_one_fish(self, fish_id:int) -> Optional[FishOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    print(FishOut)
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , name
+                            , size
+                            , fishing_technique
+                            , type
+                        FROM fish
+                        WHERE id = %s
+                        """,
+                        [fish_id]
+                    )
+                    record = result.fetchone()
+                if record is None:
+                    return None
+                return self.record_to_fish_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Fish not found"}
+
     def create_fish(self, fish: FishIn) -> Union[FishOut, Error]:
         try:
             with pool.connection() as conn:
@@ -104,4 +129,4 @@ class FishRepository:
             size=record[2],
             fishing_technique=record[3],
             type=record[4]
-            )
+        )

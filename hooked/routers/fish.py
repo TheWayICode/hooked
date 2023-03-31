@@ -15,6 +15,18 @@ def get_all_fish(
 ):
     return repo.get_all_fish()
 
+@router.get('/api/fish/{fish_id}', response_model=Optional[FishOut])
+def get_one_fish(
+    fish_id: int,
+    response: Response,
+    repo: FishRepository = Depends(),
+) -> FishOut:
+    fish = repo.get_one_fish(fish_id)
+    if not fish:
+        response.status_code = 400
+    else:
+        return fish
+
 @router.post('/api/fish', response_model=Union[FishOut, Error])
 def create_fish(
     fish: FishIn,
