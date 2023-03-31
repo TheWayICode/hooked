@@ -74,6 +74,25 @@ class FishRepository:
         except Exception as e:
             return {"message": "User does not exists"}
 
+    def update_fish(self, fish_id: int, fish: FishIn) -> Union[FishOut, Error]:
+        print(fish)
+        try:
+            with pool.connection() as connection:
+                with connection.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE fish
+                        SET name = %s, size = %s, fishing_technique = %s, type = %s
+                        WHERE id = %s
+                        """
+                        ,
+                        [fish.name, fish.size, fish.fishing_technique, fish.type, fish_id]
+                    )
+                    return self.record_to_fish_in_to_out(fish_id, fish)
+        except Exception as e:
+            return {"message": "Fish could not be updated"}
+
+
     def record_to_fish_in_to_out(self, id: int, fish: FishIn):
         old_data = fish.dict()
         return FishOut(id=id, **old_data)

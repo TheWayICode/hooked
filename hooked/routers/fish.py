@@ -38,3 +38,16 @@ def delete_fish(
         response.status_code=400
     else:
         return response
+
+@router.put("/api/fish/{fish_id}", response_model=Union[FishOut, Error])
+def update_fish(
+    fish_id: int,
+    fish: FishIn,
+    response: Response,
+    repo: FishRepository = Depends()
+) -> FishOut:
+    response = repo.update_fish(fish_id, fish)
+    if not response:
+        response.status_code=400
+    else:
+        return response
