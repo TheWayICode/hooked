@@ -9,8 +9,23 @@ from queries.fish import (
 
 router = APIRouter()
 
+@router.get('/api/fish', response_model=Union[List[FishOut], Error])
+def get_all_fish(
+    repo: FishRepository = Depends()
+):
+    return repo.get_all_fish()
 
-
+@router.post('/api/fish', response_model=Union[FishOut, Error])
+def create_fish(
+    fish: FishIn,
+    response: Response,
+    repo: FishRepository = Depends(),
+):
+    response = repo.create_fish(fish)
+    if not fish:
+        response.status_code = 400
+    else:
+        return response
 
 @router.delete("/api/fish/{fish_id}", response_model =bool)
 def delete_fish(
