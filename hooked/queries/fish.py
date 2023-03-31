@@ -74,6 +74,7 @@ class FishRepository:
         except Exception as e:
             return {"message": "User does not exists"}
 
+
     def record_to_fish_in_to_out(self, id: int, fish: FishIn):
         old_data = fish.dict()
         return FishOut(id=id, **old_data)

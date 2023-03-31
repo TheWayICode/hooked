@@ -18,8 +18,11 @@ class UserOut(BaseModel):
     name: str
     email: str
 
+class UserOutWithPassword(UserOut):
+    hased_password: str
+
 class UserRepository:
-    def get_one(self, user_id: int) -> Optional[UserOut]:
+    def get_one(self, email: str) -> Optional[UserOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -29,9 +32,9 @@ class UserRepository:
                             , name
                             , email
                         FROM users
-                        WHERE id = %s
+                        WHERE email = %s
                         """,
-                        [user_id]
+                        [email]
                     )
                     record = result.fetchone()
                     if record is None:
@@ -41,7 +44,7 @@ class UserRepository:
             print(e)
             return {"message": "User not found"}
 
-    def get_all_users(self) -> Union[Error, UserOut]:
+    def get_all_users(self) -> Union[Error, UserOutWithPassword]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -124,4 +127,10 @@ class UserRepository:
             id=record [0],
             name=record[1],
             email=record[2],
+        )
+
+    def record_to_user_with_pw_out(self, record):
+        return UserOut(
+            id=record [0],
+            hashed_password=record[1],
         )

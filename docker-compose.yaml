@@ -7,8 +7,11 @@ services:
       context: hooked
       dockerfile: Dockerfile.dev
     environment:
-      DATABASE_URL: postgresql://hooked_user:hooked_pw@db/hooked
+      SIGNING_KEY: bMTjK6hBHkG20zNO55tqDeiT9r5JIjKxfa4TTc27DUYz
       WAIT_HOSTS: db:5432
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
+      DATABASE_URL: postgresql://hooked_user:hooked_pw@db/hooked
       PORT: 8000
     ports:
       - "8000:8000"

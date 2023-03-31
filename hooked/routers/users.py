@@ -17,13 +17,13 @@ def get_all_users(
 ):
     return repo.get_all_users()
 
-@router.get('/api/users/{user_id}', response_model=Optional[UserOut])
+@router.get('/api/users/{email}', response_model=Optional[UserOut])
 def get_one_user(
-    user_id: int,
+    email: str,
     response: Response,
     repo: UserRepository = Depends(),
 ) -> UserOut:
-    user = repo.get_one(user_id)
+    user = repo.get_one(email)
     if not user:
         response.status_code = 400
     else:

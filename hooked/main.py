@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import posts, users, locations, fish
+from authenticator import authenticator
 
 import os
 
@@ -9,6 +10,7 @@ app.include_router(users.router)
 app.include_router(posts.router)
 app.include_router(locations.router)
 app.include_router(fish.router)
+app.include_router(authenticator.router)
 
 
 app.add_middleware(
