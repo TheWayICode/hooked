@@ -44,7 +44,7 @@ class UserRepository:
                     record = result.fetchone()
                     if record is None:
                         return None
-                    return self.record_to_user_out(record)
+                    return self.record_to_hashed_user_out(record)
         except Exception as e:
             print(e)
             return {"message": "User not found"}
@@ -130,6 +130,14 @@ class UserRepository:
 
 
     def record_to_user_out(self, record):
+            return UserOut(
+                id=record [0],
+                name=record[1],
+                email=record[2]
+            )
+
+
+    def record_to_hashed_user_out(self, record):
         return UserOutWithPassword(
             id=record [0],
             name=record[1],

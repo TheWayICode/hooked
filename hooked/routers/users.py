@@ -24,6 +24,15 @@ class HttpError(BaseModel):
 
 router = APIRouter()
 
+
+@router.get('/api/protected', response_model=bool)
+async def get_protected(
+    account_data: dict = Depends(authenticator.get_current_account_data)
+):
+    print(account_data)
+    return True
+
+
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
@@ -33,7 +42,7 @@ async def get_token(
         return {
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
-            "user": user,
+            "account": user,
         }
 
 
@@ -49,10 +58,11 @@ def get_one_user(
     email: str,
     response: Response,
     repo: UserRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ) -> UserOut:
     user = repo.get_one(email)
-    if not user:
-        response.status_code = 400
+    if not user or not account_data:
+        response.status_code = 404
     else:
         return user
 
