@@ -52,6 +52,13 @@ def get_all_posts(
 ):
     return repo.get_all_posts()
 
+@router.get('/api/posts/{user_id}', response_model=Union[List[PostOut], Error])
+def get_all_user_posts(
+    user_id: int,
+    repo: PostRepository = Depends()
+):
+    return repo.get_all_user_posts(user_id)
+
 @router.get('/api/posts/{post_id}', response_model=Optional[PostOut])
 def get_one_post(
     post_id: int,
