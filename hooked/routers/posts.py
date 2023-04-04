@@ -8,6 +8,7 @@ from queries.posts import (
     PostOut,
     PostRepository
 )
+from authenticator import authenticator
 from queries.users import UserOut
 
 class AccountToken(Token):
@@ -75,7 +76,8 @@ def update_post(
 
 @router.get('/api/posts', response_model=Union[List[PostOut], Error])
 def get_all_posts(
-    repo: PostRepository = Depends()
+    account_data: dict = Depends(authenticator.get_current_account_data),
+    repo: PostRepository = Depends(),
 ):
     return repo.get_all_posts()
 
@@ -83,6 +85,7 @@ def get_all_posts(
 def get_one_post(
     post_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostRepository = Depends(),
 ) -> PostOut:
     post = repo.get_one_post(post_id)
