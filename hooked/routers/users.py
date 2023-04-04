@@ -61,8 +61,8 @@ def get_one_user(
     account_data: dict = Depends(authenticator.get_current_account_data)
 ) -> UserOut:
     user = repo.get_one(email)
-    if not user or not account_data:
-        response.status_code = 404
+    if not user:
+        response.status_code = 400
     else:
         return user
 

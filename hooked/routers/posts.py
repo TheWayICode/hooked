@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Response
 from typing import List, Optional, Union
+from authenticator import authenticator
 from queries.posts import (
     Error,
     PostIn,
@@ -14,6 +15,7 @@ def create_post(
     post: PostIn,
     response: Response,
     repo: PostRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ):
     response = repo.create_post(post)
     if not response:
