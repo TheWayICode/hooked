@@ -55,6 +55,7 @@ def delete_post(
     post_id: int,
     response: Response,
     repo: PostRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 )-> bool:
     response = repo.delete(post_id)
     if not response:
