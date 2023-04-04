@@ -26,6 +26,26 @@ class PostOut(BaseModel):
     created_at: date
 
 class PostRepository:
+    def get_one_post(self, post_id: int) -> Union[PostOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, user_id, location, fish, description, picture_url, created_at
+                        FROM posts
+                        WHERE id = %s
+                        """,
+                        [post_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_post_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Post not found"}
+
     def get_all_posts(self) -> Union[List[PostOut], Error]:
         try:
             with pool.connection() as conn:
@@ -88,25 +108,7 @@ class PostRepository:
             print("Create did not work", e)
             return None
 
-    def get_one_post(self, post_id: int) -> Optional[PostOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    result = db.execute(
-                        """
-                        SELECT id, user_id, location, fish, description, picture_url, created_at
-                        FROM posts
-                        WHERE id = %s
-                        """,
-                        [post_id]
-                    )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.record_to_post_out(record)
-        except Exception as e:
-            print(e)
-            return {"message": "Post not found"}
+
 
     def delete(self, post_id: int) -> Union[bool, Error]:
         try:

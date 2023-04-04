@@ -77,24 +77,17 @@ def update_post(
 
 @router.get('/api/posts', response_model=Union[List[PostOut], Error])
 def get_all_posts(
-    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_posts()
-
-@router.get('/api/posts/{user_id}', response_model=Union[List[PostOut], Error])
-def get_all_user_posts(
-    user_id: int,
-    repo: PostRepository = Depends()
-):
-    return repo.get_all_user_posts(user_id)
 
 @router.get('/api/posts/{post_id}', response_model=Optional[PostOut])
 def get_one_post(
     post_id: int,
     response: Response,
-    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> PostOut:
     post = repo.get_one_post(post_id)
     if not post:

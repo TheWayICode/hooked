@@ -8,6 +8,11 @@ from queries.users import (
     UserOutWithPassword,
     DuplicateUserError
 )
+from queries.posts import (
+    PostRepository,
+    PostOut,
+    )
+
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from pydantic import BaseModel
@@ -65,6 +70,14 @@ def get_one_user(
         response.status_code = 400
     else:
         return user
+
+@router.get('/api/user/posts/{user_id}', response_model=Union[List[PostOut], Error])
+def get_all_user_posts(
+    user_id: int,
+    repo: PostRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return repo.get_all_user_posts(user_id)
 
 @router.post('/api/users', response_model= AccountToken | HttpError)
 async def create_user(
