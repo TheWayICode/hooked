@@ -64,7 +64,7 @@ class FishRepository:
             print(e)
             return {"message": "Fish not found"}
 
-    def create_fish(self, fish: FishIn) -> Union[FishOut, Error]:
+    def create_fish(self, fish: FishIn, location_fish_id: int) -> Union[FishOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -79,6 +79,13 @@ class FishRepository:
                     id = result.fetchone()[0]
                     if id is None:
                         return None
+                    db.execute(
+                        """
+                        INSERT INTO location_fish (location_id, fish_id)
+                        VALUES (%s, %s);
+                        """,
+                    [location_fish_id, id]  # Replace 1 with the actual location_id
+                    )
                     return self.record_to_fish_in_to_out(id, fish)
         except Exception:
             print("Create fish did not work")

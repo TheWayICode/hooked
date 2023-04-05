@@ -9,8 +9,6 @@ class Error(BaseModel):
 class LocationIn(BaseModel):
     state: str
     city: str
-    type_of_fishing: str
-    fish: str
     picture_url: str
     description: str
 
@@ -18,19 +16,19 @@ class LocationOut(BaseModel):
     id:int
     state: str
     city: str
-    type_of_fishing: str
-    fish: str
     picture_url: str
     description: str
+    fish: List[dict] = []
 
 class LocationRepository:
+
     def get_all_locations(self) -> Optional[LocationOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, state, city, type_of_fishing, fish, picture_url, description
+                        SELECT id, state, city, picture_url, description
                         FROM location
                         ORDER BY state DESC
                         """
@@ -49,12 +47,12 @@ class LocationRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO location (state, city, type_of_fishing, fish, picture_url, description)
-                        VALUES (%s, %s, %s, %s, %s, %s)
+                        INSERT INTO location (state, city, picture_url, description)
+                        VALUES (%s, %s, %s, %s)
                         RETURNING id;
                         """
                     ,
-                    [location.state, location.city, location.type_of_fishing, location.fish, location.picture_url, location.description]
+                    [location.state, location.city, location.picture_url, location.description]
                     )
                     id = result.fetchone()[0]
                     if id is None:
@@ -88,7 +86,7 @@ class LocationRepository:
                     with conn.cursor() as db:
                         result = db.execute(
                             """
-                            SELECT id, state, city, type_of_fishing, fish, picture_url, description
+                            SELECT id, state, city, picture_url, description
                             FROM location
                             WHERE id = %s
                             """,
@@ -97,7 +95,26 @@ class LocationRepository:
                         record = result.fetchone()
                         if record is None:
                             return None
-                        return self.record_to_location_out(record)
+                        fish_result = db.execute(
+                            """
+                            SELECT fish.name, fish.size, fish.fishing_technique, fish.type
+                            FROM fish
+                            JOIN location_fish ON fish.id = location_fish.fish_id
+                            JOIN location ON location.id = location_fish.location_id
+                            WHERE location.id = %s;
+                            """,
+                            [location_id]
+                        )
+                        fish_records = fish_result.fetchall()
+                        fish_list = []
+                        for fish_record in fish_records:
+                            fish_list.append({
+                                "name": fish_record[0],
+                                "size": fish_record[1],
+                                "fishing_technique": fish_record[2],
+                                "type": fish_record[3]
+                            })
+                        return self.record_to_location_out(record, fish_list)
             except Exception as e:
                 print(e)
                 return {"message": "Location not found"}
@@ -120,13 +137,12 @@ class LocationRepository:
         old_data = location.dict()
         return LocationOut(id=id, **old_data)
 
-    def record_to_location_out(self,record):
+    def record_to_location_out(self, record, fish_list):
         return LocationOut(
             id=record[0],
             state=record[1],
             city=record[2],
-            type_of_fishing=record[3],
-            fish=record[4],
-            picture_url=record[5],
-            description=record[6],
-            )
+            picture_url=record[3],
+            description=record[4],
+            fish=fish_list
+        )

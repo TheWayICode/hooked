@@ -30,10 +30,11 @@ def get_one_fish(
 @router.post('/api/fish', response_model=Union[FishOut, Error])
 def create_fish(
     fish: FishIn,
+    location_fish_id: int,
     response: Response,
     repo: FishRepository = Depends(),
 ):
-    response = repo.create_fish(fish)
+    response = repo.create_fish(fish, location_fish_id)
     if not fish:
         response.status_code = 400
     else:
