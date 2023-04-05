@@ -129,6 +129,17 @@ class PostRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM posts
+                        WHERE id = %s
+                        """,
+                        [post_id]
+                    )
+                    fetching = result.fetchone()
+                    if not fetching:
+                        return {"message": "Post does not exist"}
                     db.execute(
                         """
                         UPDATE posts

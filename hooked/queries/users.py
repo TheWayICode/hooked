@@ -95,6 +95,17 @@ class UserRepository:
         try:
             with pool.connection() as connection:
                 with connection.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM users
+                        WHERE id = %s
+                        """,
+                        [user_id]
+                    )
+                    fetching = result.fetchone()
+                    if not fetching:
+                        return {"message": "User does not exist"}
                     db.execute(
                         """
                         UPDATE users
@@ -103,7 +114,7 @@ class UserRepository:
                         """,
                         [user.name, user.email, user_id]
                     )
-                    return self.record_to_user_in_to_out(user_id, user)
+                    return self.record_to_user_in_to_out_without_password(user_id, user)
         except Exception as e:
             return {"message": "User could not be updated"}
 
@@ -128,10 +139,13 @@ class UserRepository:
         old_data = user.dict()
         return UserOutWithPassword(id=id, hashed_password=hashed_password,**old_data)
 
+    def record_to_user_in_to_out_without_password(self, id: int, user: UserIn):
+        old_data = user.dict()
+        return UserOut(id=id, **old_data)
 
     def record_to_user_out(self, record):
             return UserOut(
-                id=record [0],
+                id=record[0],
                 name=record[1],
                 email=record[2]
             )
@@ -139,7 +153,7 @@ class UserRepository:
 
     def record_to_hashed_user_out(self, record):
         return UserOutWithPassword(
-            id=record [0],
+            id=record[0],
             name=record[1],
             email=record[2],
             hashed_password=record[3],
@@ -147,6 +161,6 @@ class UserRepository:
 
     def record_to_user_with_pw_out(self, record):
         return UserOut(
-            id=record [0],
+            id=record[0],
             hashed_password=record[1],
         )

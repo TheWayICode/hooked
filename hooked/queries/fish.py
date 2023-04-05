@@ -97,6 +97,13 @@ class FishRepository:
                 with connection.cursor() as db:
                     db.execute(
                         """
+                        DELETE from location_fish
+                        WHERE fish_id = %s
+                        """,
+                        [fish_id]
+                    )
+                    db.execute(
+                        """
                         DELETE from fish
                         WHERE id = %s
                         """,
@@ -111,6 +118,18 @@ class FishRepository:
         try:
             with pool.connection() as connection:
                 with connection.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT *
+                        FROM fish
+                        WHERE id = %s
+                        """
+                        ,
+                        [fish_id]
+                    )
+                    fetching = result.fetchone()
+                    if not fetching:
+                        return {"message": "Fish does not exist"}
                     db.execute(
                         """
                         UPDATE fish

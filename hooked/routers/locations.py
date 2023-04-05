@@ -4,7 +4,8 @@ from queries.locations import (
     Error,
     LocationIn,
     LocationOut,
-    LocationRepository
+    LocationRepository,
+    LocationOutWithFish,
 )
 
 
@@ -41,12 +42,12 @@ def update_location(
         response.status_code = 400
     return response
 
-@router.get('/api/locations/{location_id}', response_model=Optional[LocationOut])
+@router.get('/api/locations/{location_id}', response_model=Optional[LocationOutWithFish])
 def get_one_location(
     location_id: int,
     response: Response,
     repo: LocationRepository = Depends(),
-) -> LocationOut:
+) -> LocationOutWithFish:
     location = repo.get_one_location(location_id)
     if location is None:
         response.status_code = 400
