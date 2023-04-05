@@ -7,6 +7,7 @@ class Error(BaseModel):
     message: str
 
 class FishIn(BaseModel):
+    fish_id:int
     name: str
     size: str
     fishing_technique: str
@@ -14,6 +15,7 @@ class FishIn(BaseModel):
 
 class FishOut(BaseModel):
     id:int
+    fish_id:int
     name: str
     size: str
     fishing_technique: str
@@ -27,7 +29,7 @@ class FishRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, name, size, fishing_technique, type
+                        SELECT id, fish_id, name, size, fishing_technique, type
                         FROM fish
                         ORDER BY id
                         """
@@ -70,11 +72,11 @@ class FishRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO fish (name, size, fishing_technique, type)
-                        VALUES (%s, %s, %s, %s)
+                        INSERT INTO fish (fish_id, name, size, fishing_technique, type)
+                        VALUES (%s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
-                    [fish.name, fish.size, fish.fishing_technique, fish.type]
+                    [fish.fish_id, fish.name, fish.size, fish.fishing_technique, fish.type]
                     )
                     id = result.fetchone()[0]
                     if id is None:
@@ -125,8 +127,9 @@ class FishRepository:
     def record_to_fish_out(self, record):
         return FishOut(
             id=record[0],
-            name=record[1],
-            size=record[2],
-            fishing_technique=record[3],
-            type=record[4]
+            fish_id=record[1],
+            name=record[2],
+            size=record[3],
+            fishing_technique=record[4],
+            type=record[5]
         )

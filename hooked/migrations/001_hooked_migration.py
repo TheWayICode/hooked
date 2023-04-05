@@ -35,26 +35,9 @@ steps = [
     [
         # "Up" SQL statement
         """
-        CREATE TABLE location (
-            id SERIAL PRIMARY KEY NOT NULL,
-            state TEXT NOT NULL,
-            city TEXT NOT NULL,
-            type_of_fishing VARCHAR(50) NOT NULL,
-            fish VARCHAR(50) NOT NULL,
-            picture_url TEXT NOT NULL,
-            description TEXT NOT NULL
-        );
-        """,
-        # "Down" SQL statement
-        """
-        DROP TABLE location;
-        """
-    ],
-    [
-        # "Up" SQL statement
-        """
         CREATE TABLE fish (
             id SERIAL PRIMARY KEY NOT NULL,
+            fish_id INT NOT NULL UNIQUE,
             name VARCHAR(50) NOT NULL,
             size VARCHAR(50) NOT NULL,
             fishing_technique TEXT NOT NULL,
@@ -64,6 +47,24 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE fish;
+        """
+    ],
+    [
+        # "Up" SQL statement
+        """
+        CREATE TABLE location (
+            id SERIAL PRIMARY KEY NOT NULL,
+            state TEXT NOT NULL,
+            city TEXT NOT NULL,
+            type_of_fishing VARCHAR(50) NOT NULL,
+            fish_id INT NOT NULL REFERENCES fish(fish_id),
+            picture_url TEXT NOT NULL,
+            description TEXT NOT NULL
+        );
+        """,
+        # "Down" SQL statement
+        """
+        DROP TABLE location;
         """
     ]
 ]
