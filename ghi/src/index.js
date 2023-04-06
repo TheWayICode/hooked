@@ -9,11 +9,7 @@ import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
-      {/* <AuthProvider tokenUrl={`${process.env.REACT_APP_HOOKED_API_HOST}/token`}>
-        <App />
-      </AuthProvider> */}
-    </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
 

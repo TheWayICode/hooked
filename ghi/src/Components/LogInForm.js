@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 
-function Signup() {
-  const [name, setName] = useState("");
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleNameChange = (e) => {
-    const value = e.target.value;
-    setName(value);
-  };
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -18,10 +13,9 @@ function Signup() {
     setPassword(value);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const data = {};
-    data.name = name;
     data.email = email;
     data.password = password;
 
@@ -36,7 +30,6 @@ function Signup() {
 
     const response = await fetch(userUrl, fetchConfig);
     if (response.ok) {
-      setName("");
       setEmail("");
       setPassword("");
     }
@@ -45,27 +38,8 @@ function Signup() {
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
-        <h1 className="text-center text-2xl font-bold mb-4">
-          Join the HOOKED community!
-        </h1>
+        <h1 className="text-center text-2xl font-bold mb-4">Login</h1>
         <form onSubmit={handleSubmit} id="new-user">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleNameChange}
-              placeholder="name"
-              required
-              type="text"
-              name="name"
-              value={name}
-            />
-          </div>
           <div className="mb-4">
             <label
               className="block text-gray-700 font-bold mb-2"
@@ -111,4 +85,4 @@ function Signup() {
     </div>
   );
 }
-export default Signup;
+export default Login;
