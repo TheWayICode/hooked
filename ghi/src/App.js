@@ -8,9 +8,12 @@ import LoginForm from "./Components/LogInForm";
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider tokenUrl={`${process.env.REACT_APP_HOOKED_API_HOST}/token`}>
+      <AuthProvider
+        tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
+      >
         <NavBar />
         <Routes>
+          <Route path="/" />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
         </Routes>

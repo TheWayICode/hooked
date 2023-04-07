@@ -16,14 +16,12 @@ function Navbar() {
                 <NavLink
                   to="/signup"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  activeClassName="bg-gray-900 text-white"
                 >
                   Sign up
                 </NavLink>
                 <NavLink
                   to="/login"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  activeClassName="bg-gray-900 text-white"
                 >
                   Login
                 </NavLink>

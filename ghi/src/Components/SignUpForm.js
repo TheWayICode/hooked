@@ -25,12 +25,12 @@ function Signup() {
     data.email = email;
     data.password = password;
 
-    const userUrl = `${process.env.REACT_APP_HOOKED_API_HOST}/api/users`;
+    const userUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/users`;
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "Application/json",
+        "Content-Type": "application/json",
       },
     };
 
