@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function Login() {
+  const { login, token } = useToken();
+  console.log("Token from local storage:", token);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +19,8 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await login(email, password);
+
     const data = {};
     data.email = email;
     data.password = password;
@@ -24,12 +30,16 @@ function Login() {
       method: "post",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "Application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/x-www-form-urlencoded",
       },
     };
 
     const response = await fetch(userUrl, fetchConfig);
     if (response.ok) {
+      const responseData = await response.json();
+      const fetchedToken = responseData.token;
+      console.log("Fetched token:", fetchedToken);
       setEmail("");
       setPassword("");
     }
@@ -69,7 +79,7 @@ function Login() {
               onChange={handlePasswordChange}
               placeholder="password"
               required
-              type="text"
+              type="password"
               name="password"
               value={password}
             />
@@ -78,11 +88,12 @@ function Login() {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Sign Up
+            Sign In
           </button>
         </form>
       </div>
     </div>
   );
 }
+
 export default Login;

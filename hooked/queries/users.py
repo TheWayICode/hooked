@@ -8,9 +8,10 @@ class Error(BaseModel):
     message: str
 
 class UserIn(BaseModel):
-    name: str
-    email: str
-    password: str
+    name: Optional[str]
+    email: Optional[str]
+    password: Optional[str]
+
 
 class UserOut(BaseModel):
     id: int
