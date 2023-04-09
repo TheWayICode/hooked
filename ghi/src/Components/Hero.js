@@ -24,7 +24,12 @@ const Hero = () => {
               loop
             />
           </div>
-          <button className="bg-[#05bd83] w-[150px] rounded-md font-medium my-6 mx-auto py-3 hover:bg-[#009767]">
+          <div>
+            <p className="md:text-xl text-l font-medium py-2 text-[#ffffff]">
+              Plan your next adventure with community built databases.
+            </p>
+          </div>
+          <button className="bg-[#05bd83] w-[150px] rounded-md font-medium my-3 mx-auto py-3 hover:bg-[#009767]">
             Get Started
           </button>
         </div>

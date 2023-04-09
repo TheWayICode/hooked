@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useToken } from "@galvanize-inc/jwtdown-for-react";
 
 export const LoggedNav = () => {
   return (
