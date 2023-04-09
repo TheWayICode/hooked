@@ -5,6 +5,7 @@ import NavBar from "./Components/Navbar";
 import SignUpForm from "./Components/SignUpForm";
 import LoginForm from "./Components/LogInForm";
 import Hero from "./Components/Hero";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );
