@@ -7,6 +7,7 @@ class Error(BaseModel):
     message: str
 
 class LocationIn(BaseModel):
+    name: str
     state: str
     city: str
     picture_url: str
@@ -14,6 +15,7 @@ class LocationIn(BaseModel):
 
 class LocationOut(BaseModel):
     id:int
+    name: str
     state: str
     city: str
     picture_url: str
@@ -30,9 +32,9 @@ class LocationRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, state, city, picture_url, description
+                        SELECT id, name, state, city, picture_url, description
                         FROM location
-                        ORDER BY state DESC
+                        ORDER BY name DESC
                         """
                     )
                     return [
@@ -49,12 +51,12 @@ class LocationRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO location (state, city, picture_url, description)
-                        VALUES (%s, %s, %s, %s)
+                        INSERT INTO location (name, state, city, picture_url, description)
+                        VALUES (%s, %s, %s, %s, %s)
                         RETURNING id;
                         """
                     ,
-                    [location.state, location.city, location.picture_url, location.description]
+                    [location.name, location.state, location.city, location.picture_url, location.description]
                     )
                     id = result.fetchone()[0]
                     if id is None:
@@ -82,24 +84,24 @@ class LocationRepository:
                     db.execute(
                         """
                         UPDATE location
-                        SET state = %s, city = %s, picture_url = %s, description = %s
+                        SET name = %s, state = %s, city = %s, picture_url = %s, description = %s
                         WHERE id = %s
                         """
                     ,
-                    [location.state, location.city, location.picture_url, location.description, location_id]
+                    [location.name, location.state, location.city, location.picture_url, location.description, location_id]
                     )
                     return self.record_to_location_in_to_out(location_id, location)
         except Exception as e:
             return {"message": "Update location failed"}
 
 
-    def get_one_location(self,location_id: int) -> Optional[LocationOutWithFish]:
+    def get_one_location(self, location_id: int) -> Optional[LocationOutWithFish]:
             try:
                 with pool.connection() as conn:
                     with conn.cursor() as db:
                         result = db.execute(
                             """
-                            SELECT id, state, city, picture_url, description
+                            SELECT id, name, state, city, picture_url, description
                             FROM location
                             WHERE id = %s
                             """,
@@ -160,18 +162,20 @@ class LocationRepository:
     def record_to_location_out(self, record):
         return LocationOut(
             id=record[0],
-            state=record[1],
-            city=record[2],
-            picture_url=record[3],
-            description=record[4],
+            name=record[1],
+            state=record[2],
+            city=record[3],
+            picture_url=record[4],
+            description=record[5],
         )
 
     def record_to_location_out_with_fish(self, record, fish_list):
         return LocationOutWithFish(
             id=record[0],
-            state=record[1],
-            city=record[2],
-            picture_url=record[3],
-            description=record[4],
+            name=record[1],
+            state=record[2],
+            city=record[3],
+            picture_url=record[4],
+            description=record[5],
             fish=fish_list
         )

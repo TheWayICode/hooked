@@ -53,6 +53,7 @@ steps = [
         """
         CREATE TABLE location (
             id SERIAL PRIMARY KEY NOT NULL,
+            name VARCHAR(100) NOT NULL UNIQUE,
             state TEXT NOT NULL,
             city TEXT NOT NULL,
             picture_url TEXT NOT NULL,
