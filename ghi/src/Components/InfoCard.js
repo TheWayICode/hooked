@@ -1,5 +1,6 @@
 import React from "react";
 import image from "./assets/techpic.png";
+import { Link } from "react-router-dom";
 
 const InfoCard = () => {
   return (
@@ -22,7 +23,7 @@ const InfoCard = () => {
             cillum dolore quis nostrud exercitation ullamco laboris.
           </p>
           <button className="text-white font-medium bg-[#00df9a] rounded-md my-3 mx-auto py-3 w-[150px] hover:bg-[#09ba82]">
-            Get Started
+            <Link to="/signup">Get Started</Link>
           </button>
         </div>
       </div>
