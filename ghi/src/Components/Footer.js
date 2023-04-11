@@ -26,7 +26,7 @@ const Footer = () => {
           <div>
             <h6 className="text-white font-medium py-2">Support</h6>
             <ul className="text-white">
-              <li className="py-2 text-sm">Gitlab Repository</li>
+              <li className="py-2 text-sm"><a href="https://gitlab.com/hooked2/module3-project-gamma" target="_blank" rel="noopener noreferrer">Gitlab Repository</a></li>
               <li className="py-2 text-sm">Technologies</li>
               <li className="py-2 text-sm">Complaints</li>
               <li className="py-2 text-sm">Report</li>

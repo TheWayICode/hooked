@@ -6,6 +6,7 @@ import SignUpForm from "./Components/SignUpForm";
 import LoginForm from "./Components/LogInForm";
 import Hero from "./Components/Hero";
 import Footer from "./Components/Footer";
+import Guide from './Components/Guide';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Hero />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/guides" element={<Guide />} />
         </Routes>
         <Footer />
       </AuthProvider>
