@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <>
-      <div className="text-white bg-[#00000053] pb-5 bg">
-        <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
+      <div className="text-white pb-5 bg ">
+        <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center ">
           <p className="text-[#00df9a] text-xl font-bold">MODERN DAY FISHING</p>
           <h1 className="md:text-7xl sm:text-6xl text-4xl font-bold md:py-1">
             Fish smarter.

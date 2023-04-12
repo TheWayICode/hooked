@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     login(username, password);
     console.log("Login successful", token);
-    navigate("/");
+    navigate("/searchpage");
     e.target.reset();
   };
 

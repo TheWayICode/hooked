@@ -1,5 +1,7 @@
 import React from "react";
 import image from "./assets/boatofpeople.jpg";
+import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
 
 const SearchPage = () => {
   const style = {
@@ -10,6 +12,14 @@ const SearchPage = () => {
     width: "100%",
     height: "100vh",
   };
+
+  const navigate = useNavigate();
+  const { token } = useToken();
+
+  if (!token) {
+    navigate("/login");
+  }
+
   return (
     <div className="w-full h-screen relative mt-[-80px] bg-white" style={style}>
       <div className="absolute w-full h-full top-0 left-0 bg-gray-900/50"></div>
