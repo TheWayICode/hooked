@@ -6,7 +6,7 @@ const NewsUpdate = () => {
   return (
     <div className="w-full bg-[#00df9a] pb-10 pt-3 px-4">
       <div className="max-w-[1240px] mx-auto">
-        <h1 className="md:text-4xl sm:text-3xl text-2xl text-white font-bold py-4">
+        <h1 className="md:text-5xl sm:text-4xl text-3xl text-black font-bold py-4 pb-6">
           Recent Events & Fishing News
         </h1>
         <div className="flex justify-between items-center gap-8">

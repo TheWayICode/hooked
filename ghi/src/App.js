@@ -21,7 +21,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/searchpage" element={<SearchPage />} />
-          <Route path="/locationlist" element={<LocationList />} />
+          <Route path="/locationlist/:data" element={<LocationList />} />
         </Routes>
         <Footer />
       </AuthProvider>
