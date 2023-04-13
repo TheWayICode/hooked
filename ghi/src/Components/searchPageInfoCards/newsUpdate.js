@@ -11,7 +11,7 @@ const NewsUpdate = () => {
         </h1>
         <div className="flex justify-between items-center gap-8">
           <div className="max-w-[400px] max-h-[800px] mx-auto">
-            <img src={image} />
+            <img src={image} alt="newspic" />
             <h1 className="md:text-2xl sm:text-xl text-l font-bold pt-3">
               Shark Found in Big Lake
             </h1>
@@ -29,7 +29,7 @@ const NewsUpdate = () => {
             </Link>
           </div>
           <div className="max-w-[400px] m-auto">
-            <img src={image} />
+            <img src={image} alt="newspic" />
             <h1 className="md:text-2xl sm:text-xl text-l font-bold pt-3">
               Fish Bait Prices Increase
             </h1>
@@ -47,7 +47,7 @@ const NewsUpdate = () => {
             </Link>
           </div>
           <div className="max-w-[400px] m-auto">
-            <img src={image} />
+            <img src={image} alt="newspic" />
             <h1 className="md:text-2xl sm:text-xl text-l font-bold pt-3">
               Fishing Tiktok Goes Viral
             </h1>
@@ -65,7 +65,7 @@ const NewsUpdate = () => {
             </Link>
           </div>
           <div className="max-w-[400px] m-auto">
-            <img src={image} />
+            <img src={image} alt="newspic" />
             <h1 className="md:text-2xl sm:text-xl text-l font-bold pt-3">
               5-Minute Tilapia Recipe
             </h1>

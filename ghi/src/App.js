@@ -7,6 +7,7 @@ import LoginForm from "./Components/LogInForm";
 import Hero from "./Components/Hero";
 import Footer from "./Components/Footer";
 import SearchPage from "./Components/SearchPage";
+import LocationList from "./Components/LocationList";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/searchpage" element={<SearchPage />} />
+          <Route path="/locationlist" element={<LocationList />} />
         </Routes>
         <Footer />
       </AuthProvider>
