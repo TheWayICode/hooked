@@ -44,7 +44,7 @@ function GuideItem({ title, description, link, tutorial }) {
 function Guide() {
   return (
     <div
-      className="guide-container bg-center bg-no-repeat bg-cover w-full"
+      className="guide-container bg-center bg-no-repeat bg-cover w-full mt-[-80px] pt-[80px]"
       style={{
         backgroundImage: `url(${Fisherman})`,
         backgroundAttachment: "fixed",
