@@ -9,6 +9,9 @@ import Footer from "./Components/Footer";
 import Guide from "./Components/Guide";
 import SearchPage from "./Components/SearchPage";
 import LocationList from "./Components/LocationList";
+import PostList from "./Components/PostList";
+import UserProfile from "./Components/UserProfile";
+
 
 function App() {
   return (
@@ -22,8 +25,10 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/guides" element={<Guide />} />
+          <Route path="/forum" element={<PostList />} />
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/locationlist/:data" element={<LocationList />} />
+          <Route path="/users" element={<UserProfile />} />
         </Routes>
         <Footer />
       </AuthProvider>
