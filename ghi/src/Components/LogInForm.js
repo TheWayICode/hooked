@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
@@ -9,12 +9,22 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { login, token } = useToken();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (token) {
+      navigate("/searchpage");
+    }
+  }, [navigate, token]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
-    console.log("Login successful", token);
-    navigate("/searchpage");
-    e.target.reset();
+
+    await login(username, password);
+
+    if (token) {
+      console.log("Login successful");
+      navigate("/searchpage");
+      e.target.reset();
+    }
   };
 
   return (
