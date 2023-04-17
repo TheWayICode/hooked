@@ -2,12 +2,13 @@ import React from "react";
 import Typed from "react-typed";
 import InfoCard from "./InfoCard";
 import Newsletter from "./Newsletter";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
     <>
-      <div className="text-white bg-[#00000053] pb-5">
-        <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
+      <div className="text-white pb-5 bg ">
+        <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center ">
           <p className="text-[#00df9a] text-xl font-bold">MODERN DAY FISHING</p>
           <h1 className="md:text-7xl sm:text-6xl text-4xl font-bold md:py-1">
             Fish smarter.
@@ -29,8 +30,9 @@ const Hero = () => {
               Plan your next adventure with community built databases.
             </p>
           </div>
+
           <button className="bg-[#05bd83] w-[150px] rounded-md font-medium my-3 mx-auto py-3 hover:bg-[#009767]">
-            Get Started
+            <Link to="/signup">Get Started</Link>
           </button>
         </div>
       </div>

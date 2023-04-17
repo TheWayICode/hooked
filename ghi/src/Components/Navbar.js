@@ -7,7 +7,19 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 function Navbar() {
   const { token } = useToken();
 
-  return <>{token ? <LoggedNav /> : <LogoutNav />}</>;
+  if (!token) {
+    return (
+      <>
+        <LogoutNav />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <LoggedNav />
+    </>
+  );
 }
 
 export default Navbar;

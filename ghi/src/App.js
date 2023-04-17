@@ -15,6 +15,12 @@ import Sebago_Lake_Details from "./Components/LocationDetails/SebagoLake";
 import Moosehead_Lake_Details from "./Components/LocationDetails/MooseheadLake";
 import Hero from "./Components/Hero";
 import Footer from "./Components/Footer";
+import Guide from "./Components/Guide";
+import SearchPage from "./Components/SearchPage";
+import LocationList from "./Components/LocationList";
+import PostList from "./Components/PostList";
+import UserProfile from "./Components/UserProfile";
+
 
 function App() {
   return (
@@ -38,6 +44,11 @@ function App() {
             <Route path="Moosehead_Lake" element={<Moosehead_Lake_Details />} />
             <Route path="Sebago_Lake" element={<Sebago_Lake_Details />} />
           </Route>
+          <Route path="/guides" element={<Guide />} />
+          <Route path="/forum" element={<PostList />} />
+          <Route path="/searchpage" element={<SearchPage />} />
+          <Route path="/locationlist/:data" element={<LocationList />} />
+          <Route path="/users" element={<UserProfile />} />
         </Routes>
         <Footer />
       </AuthProvider>

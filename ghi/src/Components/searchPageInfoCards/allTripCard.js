@@ -1,16 +1,16 @@
 import React from "react";
-import image from "./assets/techpic.png";
-import { Link } from "react-router-dom";
+import image from "../assets/campingcircle.png";
 
-const InfoCard = () => {
+const AllTripCard = () => {
   return (
     <div className="w-full bg-white py-10 px-4">
       <div className="max-w-[1240px] mx-auto grid md:grid-cols-2">
-        <img className="w-[500px] mx-auto my-4" src={image} alt="techpic" />
         <div className="flex flex-col justify-center">
-          <p className="text-[#00df9a] font-bold">FISHING DATA DASHBOARD</p>
+          <p className="text-[#00df9a] font-bold">
+            ALL THE INFORMATION YOU NEED
+          </p>
           <h1 className="md:text-3xl sm:text-2xl text-xl py-2 font-bold">
-            Easily Accessible Fishing Information
+            Find All About Your Next Trip
           </h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -22,13 +22,11 @@ const InfoCard = () => {
             culpa qui officia deserunt mollit anim id est laborum velit esse
             cillum dolore quis nostrud exercitation ullamco laboris.
           </p>
-          <button className="text-white font-medium bg-[#00df9a] rounded-md my-3 mx-auto py-3 w-[150px] hover:bg-[#09ba82]">
-            <Link to="/signup">Get Started</Link>
-          </button>
         </div>
+        <img className="w-[500px] mx-auto my-4" src={image} alt="techpic" />
       </div>
     </div>
   );
 };
 
-export default InfoCard;
+export default AllTripCard;
