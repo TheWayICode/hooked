@@ -19,14 +19,14 @@ function Lake_Texoma_Details() {
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [33.909157256060276, -96.6733002959825],
+        center: [-96.6733002959825, 33.909157256060276],
         zoom: 12
       });
 
       map.addControl(new mapboxgl.NavigationControl());
 
       const marker = new mapboxgl.Marker()
-        .setLngLat([33.909157256060276, -96.6733002959825])
+        .setLngLat([-96.6733002959825, 33.909157256060276])
         .addTo(map);
 
 

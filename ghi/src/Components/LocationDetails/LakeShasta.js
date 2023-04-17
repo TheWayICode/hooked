@@ -19,14 +19,14 @@ function Lake_Shasta_Details() {
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [40.84971148740533, -122.28624704243704],
+        center: [-122.362651, 40.679964],
         zoom: 12
       });
 
       map.addControl(new mapboxgl.NavigationControl());
 
       const marker = new mapboxgl.Marker()
-        .setLngLat([40.84971148740533, -122.28624704243704])
+        .setLngLat([-122.362651, 40.679964])
         .addTo(map);
 
 
@@ -70,7 +70,7 @@ function Lake_Shasta_Details() {
           <hr className="mb-8 border-t-2 border-gray-400"></hr>
           <div className="md:text-2xl font-bold mb-4">Location</div>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
-            <a href={`https://www.google.com/maps/dir/?api=1&destination=${40.84971148740533},${-122.28624704243704}`} className="mb-4">Get directions</a>
+            <a href={`https://www.google.com/maps/dir/?api=1&destination=${40.6804}, ${-122.362651}`} className="mb-4">Get directions</a>
           </button>
           <div id="map" style={{ width: "100%", height: "400px" }}></div>
         </div>

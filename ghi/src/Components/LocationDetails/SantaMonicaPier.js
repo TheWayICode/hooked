@@ -54,7 +54,7 @@ function Santa_Monica_Pier_Details() {
                 <div className="max-w-[1240px] mx-auto grid md:grid-cols-2 mb-8">
                   <div>
                     {fish.map(fish => (
-                      <div className="flex items-center my-2" key={fish.id}>
+                      <div className="flex items-center my-2" key={fish.name}>
                         <img src={image} className="w-8 h-8 mr-2 filter invert" alt="Fish Icon" />
                         <span className="md:text-2xl text-white">{fish.name}</span>
                       </div>

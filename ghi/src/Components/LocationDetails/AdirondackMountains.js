@@ -19,14 +19,14 @@ function Adirondack_Mountains_Details() {
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [45.720359266865664, -74.1558973404018],
+        center: [-73.86663077768854, 44.13089086909482],
         zoom: 12
       });
 
       map.addControl(new mapboxgl.NavigationControl());
 
       const marker = new mapboxgl.Marker()
-        .setLngLat([45.720359266865664, -74.1558973404018])
+        .setLngLat([-73.86663077768854, 44.13089086909482])
         .addTo(map);
 
 
@@ -70,7 +70,7 @@ function Adirondack_Mountains_Details() {
           <hr className="mb-8 border-t-2 border-gray-400"></hr>
           <div className="md:text-2xl font-bold mb-4">Location</div>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
-            <a href={`https://www.google.com/maps/dir/?api=1&destination=${45.720359266865664},${-74.1558973404018}`} className="mb-4">Get directions</a>
+            <a href={`https://www.google.com/maps/dir/?api=1&destination=${44.13089086909482},${-73.86663077768854}`} className="mb-4">Get directions</a>
           </button>
           <div id="map" style={{ width: "100%", height: "400px" }}></div>
         </div>
