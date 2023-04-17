@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 
 function UserProfile() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  const fetchUser = async () => {
-    const response = await fetch("http://localhost:8000/api/users/");
-    if (response.ok) {
-      const data = await response.json();
-      setUsers(data);
-    }
-  };
+  // const fetchUser = async () => {
+  //   const response = await fetch("http://localhost:8000/api/users/");
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setUsers(data);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
 
   return (
     <div className="bg-black bg-opacity-70 flex items-center justify-center py-20 px-20">
@@ -25,12 +25,18 @@ function UserProfile() {
                 Edit
               </button>
             </div>
-            <h2 className="text-2xl p-5 font-bold text-gray-800 text-center">User Profile</h2>
+            <h2 className="text-2xl p-5 font-bold text-gray-800 text-center">
+              User Profile
+            </h2>
           </div>
           <div className="bg-gray-100 px-5 py-5 rounded-lg">
             <div className="flex items-center">
               <div className="flex-shrink-0 items-center">
-                <img className="h-16 w-16 md:h-32 md:w-32 rounded-full" src="https://via.placeholder.com/150" alt=""/>
+                <img
+                  className="h-16 w-16 md:h-32 md:w-32 rounded-full"
+                  src="https://via.placeholder.com/150"
+                  alt=""
+                />
               </div>
               <div className="ml-4">
                 <div className="text-xl font-semibold text-gray-800">
