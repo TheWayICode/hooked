@@ -15,15 +15,23 @@ export const LoggedNav = () => {
   return (
     <nav className="sticky top-0 z-10 bg-[#0000005f] backdrop-filter backdrop-blur-lg bg-opacity-30">
       <div className="flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 text-white">
-        <Link to="/" className="w-full text-5xl font-bold text-[#fff] ">
-          <h1>HOOKED.</h1>
-        </Link>
+        <h1>
+          <span className="border-red-800">
+            <Link
+              to="/searchpage"
+              className="w-full text-5xl font-bold text-[#fff]"
+            >
+              HOOKED.
+            </Link>
+          </span>
+        </h1>
+
         <ul className="flex">
           <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
             Locations
           </li>
-          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">Guides</li>
-          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">Forum</li>
+          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]"><a href="/guides">Guides</a></li>
+          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]"><a href="/forum">Forum</a></li>
           <li className="p-4 font-bold text-xl hover:text-[#29b798] text-[#2ddfb8]">
             <button onClick={handleLogout}>Logout</button>
           </li>

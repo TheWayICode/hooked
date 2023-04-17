@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -43,7 +44,7 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex justify-center items-center mt-[-86px] bg">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
         <h1 className="text-center text-2xl font-bold mb-4">
           Join the HOOKED community!
@@ -76,7 +77,7 @@ function Signup() {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={handleEmailChange}
-              placeholder="Example@email.com"
+              placeholder="example@email.com"
               required
               type="text"
               name="email"
@@ -95,17 +96,22 @@ function Signup() {
               onChange={handlePasswordChange}
               placeholder="********"
               required
-              type="text"
+              type="password"
               name="password"
               value={password}
             />
           </div>
-          <button
-            className="bg-[#05bd83] hover:bg-[#009767] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Sign Up
-          </button>
+          <div className="flex justify-between">
+            <button
+              className="bg-[#05bd83] hover:bg-[#009767] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Sign Up
+            </button>
+            <p className="text-sm font-medium text-[#000000] hover:text-[#05bd83]">
+              <Link to="/login">Already a member?</Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>
