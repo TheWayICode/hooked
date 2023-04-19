@@ -9,7 +9,7 @@ const NewsUpdate = () => {
         <h1 className="md:text-5xl sm:text-4xl text-3xl text-black font-bold py-4 pb-6">
           Recent Events & Fishing News
         </h1>
-        <div className="flex justify-between items-center gap-8">
+        <div className="flex justify-between items-center gap-12">
           <div className="max-w-[400px] max-h-[800px] mx-auto">
             <img src={image} alt="newspic" />
             <h1 className="md:text-2xl sm:text-xl text-l font-bold pt-3">
@@ -64,7 +64,7 @@ const NewsUpdate = () => {
               Read More &gt;&gt;
             </Link>
           </div>
-          <div className="max-w-[400px] m-auto">
+          {/* <div className="max-w-[400px] m-auto">
             <img src={image} alt="newspic" />
             <h1 className="md:text-2xl sm:text-xl text-l font-bold pt-3">
               5-Minute Tilapia Recipe
@@ -81,7 +81,7 @@ const NewsUpdate = () => {
             >
               Read More &gt;&gt;
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
