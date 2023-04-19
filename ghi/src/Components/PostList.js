@@ -1,10 +1,15 @@
 import Fisherman from "./assets/fishermanforum.jpg";
 import FishPicture from "./assets/fish-background.jpg";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Typed from "react-typed";
 
 export default function PostList() {
+  const { token } = useToken();
+  const [user, setUser] = useState("");
+  const [users, setUsers] = useState([]);
+
   async function isImageURL(url) {
     const urlRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi;
     return urlRegex.test(url);
@@ -24,6 +29,22 @@ export default function PostList() {
     }
     fetchPosts();
   }, []);
+
+  const fetchUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setUser(data.account);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [token]);
 
   if (posts.lengths === 0) {
     return (
@@ -60,7 +81,7 @@ export default function PostList() {
         }}
       >
         <div className="bg-black bg-opacity-40 forum-item justify-center items-center">
-          <h1 className="bg-black bg-opacity-40 text-center text-white p-60 lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold mx-auto">
+          <h1 className="bg-black bg-opacity-40 text-center flex justify-center text-white p-60 lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold mx-auto">
             COMMUNITY FORUM
           </h1>
         </div>
@@ -114,9 +135,10 @@ export default function PostList() {
                 </div>
                 <div className="font-bold mt-2">Location: {post.location}</div>
                 <div className="font-bold mt-2">Name: {post.fish}</div>
-                <div className="font-bold mt-2">
+                <div className="font-bold mt-2 overflow-wrap">
                   Description: {post.description}
                 </div>
+                <p className="font-bold mt-2">Posted by: {user.name}</p>
                 <div className="font-bold mt-2">
                   Posted on: {post.created_at}
                 </div>

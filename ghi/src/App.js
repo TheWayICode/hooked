@@ -20,7 +20,6 @@ import SearchPage from "./Components/SearchPage";
 import LocationList from "./Components/LocationList";
 import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
-import UserProfile2 from "./Components/UserProfile2";
 import PostForm from "./Components/PostForm";
 
 function App() {
@@ -53,7 +52,6 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/locationlist/:data" element={<LocationList />} />
           <Route path="/users" element={<UserProfile />} />
-          <Route path="/users2" element={<UserProfile2 />} />
         </Routes>
         <Footer />
       </AuthProvider>
