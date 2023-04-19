@@ -8,6 +8,17 @@ function UserProfile() {
   const [user, setUser] = useState("");
   const [users, setUsers] = useState([]);
 
+  const deleteUserPost = async (id) => {
+    const url = `http://localhost:8000/api/posts/${id}`;
+    const response = await fetch(url, {
+      method: "delete",
+      credentials: "include",
+    });
+    if (response.ok) {
+      fetchUserPosts();
+    }
+  };
+
   const fetchUserPosts = async () => {
     const url = `http://localhost:8000/api/user/posts/${user.id}`;
     const response = await fetch(url, {
@@ -54,11 +65,11 @@ function UserProfile() {
         backgroundPosition: "70% 30%",
       }}
     >
-      <div className="border-4 border-white mt-8 mx-8">
-        <h1 className="bg-[#22577E] text-center text-white p-20 lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold mx-auto">
+      <div className="border-4 border-white mt-8 mx-16">
+        <h1 className="bg-[#22577E] text-white p-20 lg:text-6xl md:text-6xl sm:text-5xl text-3xl font-bold mx-auto">
           {user && (
             <option
-              className="font-bold text-white text-center"
+              className="font-bold text-white text-center mx-auto"
               key={user.id}
               value={user.id}
             >
@@ -114,6 +125,12 @@ function UserProfile() {
                   className="bg-white rounded-xl shadow-lg m-5 p-5 w-96"
                   key={post.id}
                 >
+                  <button
+                    onClick={() => deleteUserPost(post.id)}
+                    className="bg-slate-500 rounded-2xl p-2 mb-2 mx-1 font-semibold text-white"
+                  >
+                    Delete
+                  </button>
                   <div className="text-center font-bold px-2 py-2 bg-[#22577E] bg-opacity-80 text-white text-xl">
                     {post.fish}
                   </div>
@@ -151,6 +168,7 @@ function UserProfile() {
         )}
       </div>
     </div>
+
   );
 }
 

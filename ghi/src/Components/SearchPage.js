@@ -71,7 +71,7 @@ const SearchPage = () => {
                 onChange={handleInputChange}
               >
                 {allStates.map((state) => {
-                  return <option value={state.label}>{state.label}</option>;
+                  return <option key={state.label} value={state.label}>{state.label}</option>;
                 })}
               </select>
             </div>
