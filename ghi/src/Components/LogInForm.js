@@ -10,18 +10,6 @@ const Login = () => {
   const { login, token } = useToken();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   login(username, password);
-  //   if (token) {
-  //     console.log("Login successful", token);
-  //     navigate("/searchpage");
-  //     e.target.reset();
-  //   } else {
-  //     return alert("Invalid");
-  //   }
-  // };
-
   useEffect(() => {
     if (formSubmitted) {
       if (token) {
