@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useToken from "@galvanize-inc/jwtdown-for-react";
+import useAuthContext, { getToken } from "@galvanize-inc/jwtdown-for-react";
+import { useContext } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, token } = useToken();
+  const { login, token } = useAuthContext();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (token) {
+      navigate("/searchpage");
+    }
+  }, [navigate, token]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
-    console.log("Login successful", token);
-    navigate("/searchpage");
-    e.target.reset();
+    await login(username, password);
+
+    if (token) {
+      console.log("Login successful");
+      e.target.reset();
+    }
   };
 
   return (

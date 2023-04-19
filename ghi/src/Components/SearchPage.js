@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AllTripCard from "./searchPageInfoCards/allTripCard";
 import SubmitStory from "./searchPageInfoCards/submitStory";
 import NewsUpdate from "./searchPageInfoCards/newsUpdate";
-import { stateData } from "../stateData";
+import { allStates } from "../allStates";
 
 const SearchPage = () => {
   const style = {
@@ -17,10 +17,13 @@ const SearchPage = () => {
     height: "100vh",
   };
 
-  const stateList = stateData.map((state) => state.state);
   const navigate = useNavigate();
   const { token } = useToken();
   const [input, setInput] = useState("");
+
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
 
   if (!token) {
     navigate("/login");
@@ -28,13 +31,15 @@ const SearchPage = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (input === "") {
-      return alert("Please enter a location");
-    } else if (
-      !stateList.includes(input.charAt(0).toUpperCase() + input.slice(1))
-    ) {
-      return alert("Please enter a valid location");
-    }
+    // if (input === "") {
+    //   return alert("Please enter a location");
+    // } else if (
+    //   !stateList.includes(
+    //     input.charAt(0).toUpperCase() + input.slice(1).toLowerCase()
+    //   )
+    // ) {
+    //   return alert("Please enter a valid location");
+    // }
     navigate(`/locationlist/${input}`);
   };
 
@@ -56,16 +61,19 @@ const SearchPage = () => {
             </span>
           </h2>
           <form
-            className="flex items-center justify-between max-w-[400px] md:max-w-[600px] sm:max-w-[500px] mx-auto w-full border rounded-md p-1 bg-white"
+            className="flex items-center justify-between max-w-[270px] md:max-w-[270px] sm:max-w-[270px] mx-auto w-full border rounded-md p-1 bg-white"
             onSubmit={handleSearch}
           >
             <div>
-              <input
-                className="bg-transparent w-[300px] sm:w-[400px] focus:outline-none pl-1 "
-                type="text"
-                placeholder="Ex: California"
-                onChange={(e) => setInput(e.target.value)}
-              />
+              <select
+                className="p-2"
+                value={input}
+                onChange={handleInputChange}
+              >
+                {allStates.map((state) => {
+                  return <option value={state.label}>{state.label}</option>;
+                })}
+              </select>
             </div>
             <div>
               <button className="px-3 py-2 rounded-md text-white font-medium bg-[#05bd83] hover:bg-[#009767]">
