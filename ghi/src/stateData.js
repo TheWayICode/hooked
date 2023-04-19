@@ -357,7 +357,7 @@ export const stateData = [
   {
     id: 72,
     state: "California",
-    city: "Long Beach",
+    city: "Santa Monica",
   },
   {
     id: 73,

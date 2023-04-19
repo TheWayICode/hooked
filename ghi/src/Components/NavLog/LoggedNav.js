@@ -27,8 +27,18 @@ export const LoggedNav = () => {
         </h1>
 
         <ul className="flex">
-          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]"><a href="/guides">Guides</a></li>
-          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]"><a href="/forum">Forum</a></li>
+          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
+            <a href="/searchpage">Search</a>
+          </li>
+          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
+            <a href="/guides">Guides</a>
+          </li>
+          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
+            <a href="/forum">Forum</a>
+          </li>
+          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
+            <a href="/users">Profile</a>
+          </li>
           <li className="p-4 font-bold text-xl hover:text-[#29b798] text-[#2ddfb8]">
             <button onClick={handleLogout}>Logout</button>
           </li>
