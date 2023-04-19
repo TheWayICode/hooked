@@ -1,7 +1,8 @@
 import Fisherman from "./assets/fishermanforum.jpg";
+import FishPicture from "./assets/fish-background.jpg";
 import { useState, useEffect } from "react";
-import useToken from "@galvanize-inc/jwtdown-for-react";
 import { Link } from "react-router-dom";
+import Typed from "react-typed";
 
 export default function PostList() {
   async function isImageURL(url) {
@@ -10,15 +11,11 @@ export default function PostList() {
   }
 
   const [posts, setPosts] = useState([]);
-  const { token } = useToken();
-  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     async function fetchPosts() {
       const response = await fetch("http://localhost:8000/api/posts/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: "include",
       });
       if (response.ok) {
         const data = await response.json();
@@ -26,12 +23,12 @@ export default function PostList() {
       }
     }
     fetchPosts();
-  }, [token]);
+  }, []);
 
   if (!posts) {
     return (
       <div
-        className="forum-container bg-center bg-no-repeat bg-cover w-full mt-[-80px] pt-[80px] md:pt-40 lg:pt-60 pb-20 md:pb-40 lg:pb-60 px-4 sm:px-8 lg:px-40 text-center text-white mx-auto my-auto"
+        className="forum-container bg-center bg-no-repeat bg-cover w-full mt-[-80px] pt-[80px] md:pt-40 lg:pt-60 pb-20 md:pb-40 lg:pb-60 lg:px-40 text-center text-white mx-auto my-auto"
         style={{
           backgroundImage: `url(${Fisherman})`,
           backgroundAttachment: "fixed",
@@ -48,7 +45,7 @@ export default function PostList() {
             <p>Be the first Hooked member to share their adventure!</p>
           </div>
           <button className="bg-gray-500 text-sm sm:text-base rounded-xl p-3 sm:p-4 font-bold hover:bg-hooked m-4">
-            <a href="/forum/new">Submit</a>
+            <Link to="/forum/new">Submit</Link>
           </button>
         </div>
       </div>
@@ -56,30 +53,49 @@ export default function PostList() {
   } else {
     return (
       <div
-        className="forum-container bg-center bg-no-repeat bg-cover w-full mt-[-80px] pt-[80px] md:pt-40 lg:pt-60 pb-20 md:pb-40 lg:pb-60 px-4 sm:px-8 lg:px-40 mx-auto my-auto"
+        className="bg-center bg-no-repeat w-full mt-[-80px] pt-[80px]"
         style={{
-          backgroundImage: `url(${Fisherman})`,
+          backgroundImage: `url(${FishPicture})`,
           backgroundAttachment: "fixed",
         }}
       >
-        <div
-          className="forum-item bg-black bg-opacity-50 rounded-3xl justify-center items-center p-6 sm:p-10 mx-auto my-auto mt-10 mb-40"
-          style={{ maxWidth: "850px", maxHeight: "450px" }}
-        >
-          <h1 className="text-white text-center text-3xl sm:text-3xl lg:text-4xl font-bold mb-5 lg:mb-8">
-            Explore the newest <br />
-            adventures from the <br />
-            Hooked community!
+        <div className="bg-black bg-opacity-40 forum-item justify-center items-center">
+          <h1 className="bg-black bg-opacity-40 text-center text-white p-60 lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold mx-auto">
+            COMMUNITY FORUM
           </h1>
         </div>
-        <div className="flex flex-wrap justify-center items-center gap-5">
+        <div className="bg-white p-4 md:p-14 mx-auto justify-center items-center">
+          <h2 className="pt-2 text-2xl md:text-3xl lg:text-4xl font-bold text-center">
+            EXPLORE THE LATEST POSTS CONTRIBUTED BY THE COMMUNITY
+          </h2>
+          <div className="p-6 md:p-10 mx-auto justify-center items-center flex flex-col sm:flex-row md:flex-row">
+            <p className="text-lg md:text-2xl text-hooked font-bold py-2 xl:ml-40 lg:ml-15 md:ml-5 sm:ml-5 md:py-4 md:mr-5 flex sm:flex-row md:flex-row">
+              Join our community today and share your latest fishing adventure
+              with other enthusiasts! Not only can you inspire others to explore
+              new fishing spots, but you can also gain inspiration from other
+              members and enhance your own fishing experience
+            </p>
+            <img
+              src="https://st2.depositphotos.com/3903847/5566/v/600/depositphotos_55666937-stock-illustration-fisherman-catching-the-big-one.jpg"
+              className="lg:h-70 md:h-60 h-48 lg:w-110 md:w-80 sm:w-60 xs:w-50 px-4 md:px-0 mr-10"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="bg-[#5584AC] bg-opacity-80 font-bold text-white p-8 sm:p-10 md:p-14 lg:p-16 text-lg md:text-2xl text-center">
+          <h2>EXPLORE THE NEWEST ADVENTURES FROM THE HOOKED COMMUNITY</h2>
+        </div>
+        <div className="flex flex-wrap justify-center lg:p-20 md:p-10 sm:p-5 p-5 items-center gap-5 bg-black bg-opacity-80">
           {posts.map((post) => {
             return (
               <div
-                className="bg-hooked rounded-xl shadow-lg m-5 p-5 w-96"
+                className="bg-white rounded-xl shadow-lg m-5 p-5 w-96"
                 key={post.id}
               >
-                <div className="relative h-64 bg-gray-200 text-center font-bold items-center mx-auto my-auto">
+                <div className="text-center font-bold px-2 py-2 bg-[#22577E] bg-opacity-80 text-white text-xl">
+                  {post.fish}
+                </div>
+                <div className="relative h-64 bg-[#C4DDFF] text-center font-bold items-center mx-auto my-auto">
                   {!post.picture_url ||
                   (!post.picture_url.match(/\.(jpeg|jpg|gif|png)$/) &&
                     !isImageURL(post.picture_url)) ? (
@@ -92,42 +108,43 @@ export default function PostList() {
                     <img
                       src={post.picture_url}
                       alt=""
-                      className="w-full h-full object-cover p-8"
+                      className="w-full h-full object-cover p-5"
                     />
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 px-2 py-2 bg-blue-400 bg-opacity-75 text-white text-lg">
-                    {post.fish}
-                  </div>
                 </div>
-                <div className="font-bold mt-2 text-white">
-                  Location: {post.location}
-                </div>
-                <div className="font-bold mt-2 text-white">
-                  Name: {post.fish}
-                </div>
-                <div className="font-bold mt-2 text-white">
+                <div className="font-bold mt-2">Location: {post.location}</div>
+                <div className="font-bold mt-2">Name: {post.fish}</div>
+                <div className="font-bold mt-2">
                   Description: {post.description}
+                </div>
+                <div className="font-bold mt-2">
+                  Posted on: {post.created_at}
                 </div>
               </div>
             );
           })}
         </div>
-        <button
-          onMouseEnter={() => setIsExpanded(true)}
-          onMouseLeave={() => setIsExpanded(false)}
-          className="fixed bottom-0 right-0 m-12 p-2 bg-blue-400 text-white font-bold rounded-full shadow-lg hover:bg-hooked"
-        >
-          {isExpanded ? (
-            <Link to="/forum/new">
-              <span className="block w-6 h-6 border-2 border-white rounded-full transform"></span>
-              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-2 text-white bg-blue-400 rounded-lg text-md pointer-events-none transition-opacity duration-400">
-                Have a new catch? Add to community forum!
-              </span>
-            </Link>
-          ) : (
-            <span className="block w-6 h-6 border-2 border-white rounded-full "></span>
-          )}
-        </button>
+        <div className="bg-[#5584AC] bg-opacity-80 flex flex-col justify-center items-center p-20 text-gray-100 mx-auto">
+          <h2 className="text-4xl font-bold mb-6 text-white text-center">
+            CONTRIBUTE TO THE FORUM
+          </h2>
+          <p className="font-semibold text-2xl animate-typewriter">
+            Share your personal&nbsp;
+            <Typed
+              className="text-2xl font-semi text-[#00df9a]"
+              strings={["story", "adventure", "catch"]}
+              typeSpeed={60}
+              backSpeed={80}
+              loop
+            />
+          </p>
+          <a
+            href="/forum/new"
+            className="bg-yellow-400 text-gray-800 font-bold py-4 px-4 my-4 rounded-full hover:bg-yellow-500 transition duration-300 ease-in-out"
+          >
+            NEW +
+          </a>
+        </div>
       </div>
     );
   }

@@ -70,7 +70,7 @@ function Guide() {
           transform your next adventure!
         </p>
         <p className="text-5xl text-yellow-400 text-center font-bold py-2 px-4">
-          Explore Guides below!
+          Explore Guides below
         </p>
       </div>
       <div className="guides-bubbles-container bg-white flex justify-center items-center py-10 lg:pb-20 md:pb-30 sm:pb-20 pb-10">

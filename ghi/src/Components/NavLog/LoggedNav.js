@@ -27,7 +27,6 @@ export const LoggedNav = () => {
         </h1>
 
         <ul className="flex">
-          <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]"><a href="/locations">Locations</a></li>
           <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]"><a href="/guides">Guides</a></li>
           <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]"><a href="/forum">Forum</a></li>
           <li className="p-4 font-bold text-xl hover:text-[#29b798] text-[#2ddfb8]">
