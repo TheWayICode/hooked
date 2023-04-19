@@ -3,31 +3,30 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function PostForm() {
   const { token } = useToken();
-  const [locations, setLocations] = useState([]);
-  const [fishes, setFishs] = useState([]);
   const [user_id, setUser] = useState("");
+  const [locations, setLocations] = useState([]);
   const [location, setLocation] = useState("");
-  const [created_at, setCreatedAt] = useState("");
-  const handleLocationChange = (event) => setLocation(event.target.value);
-  const handleCreatedChange = (event) => setCreatedAt(event.target.value);
-  const handleUserChange = (event) => setUser(event.target.value);
-
+  const [fishes, setFishs] = useState([]);
   const [fish, setFish] = useState("");
-  const handleFishChange = (event) => setFish(event.target.value);
-  const [description, setDescription] = useState("");
-  const handleDescriptionChange = (event) => setDescription(event.target.value);
-
   const [picture_url, setPhotoURL] = useState("");
+  const [description, setDescription] = useState("");
+  const [created_at, setCreatedAt] = useState(new Date().toLocaleDateString());
+
+  const handleLocationChange = (event) => setLocation(event.target.value);
+  const handleFishChange = (event) => setFish(event.target.value);
+  const handleDescriptionChange = (event) => setDescription(event.target.value);
   const handlePhotoURLChange = (event) => setPhotoURL(event.target.value);
+  const handleCreatedChange = (event) => setCreatedAt(event.target.value);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
+    console.log(data);
     data.user_id = user_id.id;
     data.location = location;
     data.fish = fish;
-    data.description = description;
     data.picture_url = picture_url;
+    data.description = description;
     data.created_at = created_at;
 
     const postFormURL = "http://localhost:8000/api/posts/";
@@ -43,8 +42,8 @@ function PostForm() {
     if (response.ok) {
       setLocation("");
       setFish("");
-      setDescription("");
       setPhotoURL("");
+      setDescription("");
       setCreatedAt("");
     }
   };
@@ -86,9 +85,9 @@ function PostForm() {
   }, [token]);
 
   return (
-    <div className="min-h-screen flex justify-center items-center mx-auto my-10">
+    <div className="bg-black bg-opacity-80 min-h-screen flex justify-center items-center p-10 mx-auto my-[-80px] pt-[80px]">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
-        <h1 className="text-center text-2xl font-bold mb-4">
+        <h1 className="text-center text-3xl font-bold my-4">
           Create a post, {user_id.name}
         </h1>
         <form
@@ -96,29 +95,7 @@ function PostForm() {
           id="new-post"
           className="mx-auto my-auto p-2"
         >
-          <div className="mb-3">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="password"
-            >
-              Current User
-            </label>
-            <div
-              className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleUserChange}
-              id="user"
-              required
-              name="user"
-              value={user_id}
-            >
-              {user_id && (
-                <option key={user_id.id} value={user_id.id}>
-                  {user_id.name}
-                </option>
-              )}
-            </div>
-          </div>
-          <div className="mb-4">
+          <div className="my-4">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="location"
@@ -144,12 +121,12 @@ function PostForm() {
                 })}
             </select>
           </div>
-          <div className="mb-4">
+          <div className="my-4">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="email"
             >
-              Any Fishers?
+              Fish
             </label>
             <select
               className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -170,12 +147,12 @@ function PostForm() {
                 })}
             </select>
           </div>
-          <div className="mb-3">
+          <div className="my-6">
             <label
               className="block text-gray-700 font-bold mb-2"
               htmlFor="password"
             >
-              Pics or it didn't happen
+              Picture
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -188,7 +165,7 @@ function PostForm() {
               id="picture_url"
             />
           </div>
-          <div className="mb-3">
+          <div className="my-6">
             <label className="block text-gray-700 font-bold mb-2">
               Description
             </label>
@@ -202,23 +179,23 @@ function PostForm() {
             name="description"
             value={description}
           />
+          <div className="my-6">
+            <label className="block text-gray-700 font-bold mb-2">
+              Created at
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={handleCreatedChange}
+              placeholder="created_at"
+              required
+              type="date"
+              name="created_at"
+              value={created_at}
+            />
+          </div>
           <div>
-            <div className="mb-6 mt-3">
-              <label className="block text-gray-700 font-bold mb-2">
-                Created at
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                onChange={handleCreatedChange}
-                placeholder="created_at"
-                required
-                type="date"
-                name="created_at"
-                value={created_at}
-              />
-            </div>
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 text-white my-6 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Post

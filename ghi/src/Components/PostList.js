@@ -28,7 +28,7 @@ export default function PostList() {
     fetchPosts();
   }, [token]);
 
-  if (!posts) {
+  if (posts.lengths === 0) {
     return (
       <div
         className="forum-container bg-center bg-no-repeat bg-cover w-full mt-[-80px] pt-[80px] md:pt-40 lg:pt-60 pb-20 md:pb-40 lg:pb-60 px-4 sm:px-8 lg:px-40 text-center text-white mx-auto my-auto"
