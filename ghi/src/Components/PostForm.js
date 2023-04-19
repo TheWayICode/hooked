@@ -22,7 +22,6 @@ function PostForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
-    console.log(data);
     data.user_id = user_id.id;
     data.location = location;
     data.fish = fish;
