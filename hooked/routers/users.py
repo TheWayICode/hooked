@@ -43,6 +43,7 @@ async def get_token(
     request: Request,
     user: UserOut = Depends(authenticator.try_get_current_account_data)
 ) -> AccountToken | None:
+    print(request)
     if authenticator.cookie_name in request.cookies:
         return {
             "access_token": request.cookies[authenticator.cookie_name],

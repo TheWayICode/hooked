@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
@@ -8,13 +8,37 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, token } = useToken();
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   login(username, password);
+  //   if (token) {
+  //     console.log("Login successful", token);
+  //     navigate("/searchpage");
+  //     e.target.reset();
+  //   } else {
+  //     return alert("Invalid");
+  //   }
+  // };
+
+  useEffect(() => {
+    if (formSubmitted) {
+      if (token) {
+        console.log("Login successful", token);
+        navigate("/searchpage");
+      }
+    } else {
+      setFormSubmitted(false)
+    }
+  }, [formSubmitted, token]);
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
-    console.log("Login successful", token);
-    navigate("/searchpage");
-    e.target.reset();
+    await login(username, password);
+    console.log(login.status);
+    setFormSubmitted(true);
   };
 
   return (
@@ -56,6 +80,13 @@ const Login = () => {
                 placeholder="********"
                 required
               />
+            </div>
+            <div className="w-full text-center">
+              {formSubmitted && !token && (
+                <div className="w-full bg-[#ffa3a9] rounded-md border border-gray-500 p-4 mb-4 inline-block">
+                  <div className="text-[#a3000b]">Invalid email or password</div>
+                </div>
+              )}
             </div>
             <div className="flex items-center justify-between">
               <button
