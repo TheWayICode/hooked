@@ -1,10 +1,26 @@
 import React from "react";
-import { stateData } from "../stateData";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 const LocationList = () => {
   const { data } = useParams();
-  console.log(data);
+  const [stateData, setStateData] = useState([]);
+
+  const fetchLocations = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (response.ok) {
+      setStateData(data);
+      console.log(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchLocations();
+  }, []);
+
   const filteredData = stateData.filter(
     (state) => state.state.toLowerCase() === data.toLowerCase()
   );
@@ -20,9 +36,16 @@ const LocationList = () => {
             >
               <h1 className="text-4xl font-bold">{state.state}</h1>
               <h2 className="text-2xl">{state.city}</h2>
+              <h4 className="text-l font-bold">{state.name}</h4>
+              <Link to={`/locations/${state.name.split(" ").join("_")}`}>
+                Go to Page
+              </Link>
             </div>
           );
         })}
+        {/* <button className="text-white" onClick={fetchLocations}>
+          Click me
+        </button> */}
       </div>
     </div>
   );
