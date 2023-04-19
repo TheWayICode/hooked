@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 export const LogoutNav = () => {
-  const [nav, setNav] = useState(true);
+  const [nav, setNav] = useState(false);
 
   const handleNav = () => {
     setNav(!nav);
@@ -22,7 +22,7 @@ export const LogoutNav = () => {
         </h1>
         <div
           onClick={handleNav}
-          className="md:hidden pt-2 flex justify-end pr-5"
+          className="md:hidden pt-2 flex justify-end pr-1"
         >
           <AiOutlineMenu size={30} />
         </div>
@@ -49,16 +49,20 @@ export const LogoutNav = () => {
         >
           <div
             onClick={handleNav}
-            className="md:hidden flex justify-end pr-11 pt-7"
+            className="md:hidden flex justify-end pr-4 pt-7"
           >
             {nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} />}
           </div>
           <ul className="bg-[#000] h-screen pl-5">
             <li className="pt-4 p-2 font-bold text-xl hover:text-[#2ddfb8]">
-              <Link to="/login">Login</Link>
+              <Link to="/login" onClick={handleNav}>
+                Login
+              </Link>
             </li>
             <li className="p-2 font-bold text-xl hover:text-[#29b798] text-[#2ddfb8]">
-              <Link to="signup">Register</Link>
+              <Link to="signup" onClick={handleNav}>
+                Register
+              </Link>
             </li>
           </ul>
         </div>
