@@ -6,6 +6,7 @@ import AllTripCard from "./searchPageInfoCards/allTripCard";
 import SubmitStory from "./searchPageInfoCards/submitStory";
 import NewsUpdate from "./searchPageInfoCards/newsUpdate";
 import { allStates } from "../allStates";
+import { LoggedNav } from "./NavLog/LoggedNav";
 
 const SearchPage = () => {
   const style = {
