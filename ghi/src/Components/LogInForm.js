@@ -90,6 +90,13 @@ const Login = () => {
                 required
               />
             </div>
+            <div className="w-full text-center">
+              {formSubmitted && !token && (
+                <div className="w-full bg-[#ffa3a9] rounded-md border border-gray-500 p-4 mb-4 inline-block">
+                  <div className="text-[#a3000b]">Invalid email or password</div>
+                </div>
+              )}
+            </div>
             <div className="flex items-center justify-between">
               <button
                 onMouseOver={handleChecker}

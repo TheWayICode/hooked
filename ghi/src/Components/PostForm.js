@@ -39,6 +39,7 @@ function PostForm() {
       },
     };
     const response = await fetch(postFormURL, fetchConfig);
+    console.log(response.status)
     if (response.ok) {
       setLocation("");
       setFish("");
@@ -209,4 +210,5 @@ function PostForm() {
     </>
   );
 }
+
 export default PostForm;
