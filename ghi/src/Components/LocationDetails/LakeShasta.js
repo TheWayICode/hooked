@@ -83,29 +83,23 @@ function Lake_Shasta_Details() {
                   ))}
                 </div>
               </div>
-              <div key={fish.id} className="bg-cover rounded-2xl shadow-2xl p-6 border border-gray-500 mx-auto" style={{backgroundImage: 'url(https://images.pexels.com/photos/3854025/pexels-photo-3854025.jpeg)'}}>
-                <h1 className="md:text-4xl text-center text-white font-bold mb-10">Fish found in this area</h1>
-                <div className="max-w-[1240px] mx-auto grid md:grid-cols-2 mb-8">
-                  <div>
-                    {fish.map(fish => (
-                      <div key={fish.id} className="flex items-center my-2">
-                        <img src={image} className="w-8 h-8 mr-2 filter invert" alt="Fish Icon" />
-                        <span className="md:text-2xl text-white">{fish.name}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="max-w-[1240px] mx-auto grid md:grid-cols-2 mb-8">
+                <div>
+                  {fish.map(fish => (
+                    <div key={fish.id} className="flex items-center my-2">
+                      <img src={image} className="w-8 h-8 mr-2 filter invert" alt="Fish Icon" />
+                      <span className="md:text-2xl text-white">{fish.name}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="text-center bg-white rounded-md border border-gray-500 p-4 inline-block">
-                  <div className="underline mb-4">Caught a fish not on the list? Be the first to report it!</div>
-                  <Link to="/fish_report">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
-                      New Fish
-                    </button>
-                  </Link>
-                </div>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
-                  New Fish
-                </button>
+              </div>
+              <div className="text-center bg-white rounded-md border border-gray-500 p-4 inline-block">
+                <div className="underline mb-4">Caught a fish not on the list? Be the first to report it!</div>
+                <Link to="/fish_report">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
+                    New Fish
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

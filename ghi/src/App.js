@@ -13,6 +13,7 @@ import Lake_Texoma_Details from "./Components/LocationDetails/LakeTexoma";
 import Lake_Travis_Details from "./Components/LocationDetails/LakeTravis";
 import Sebago_Lake_Details from "./Components/LocationDetails/SebagoLake";
 import Moosehead_Lake_Details from "./Components/LocationDetails/MooseheadLake";
+import Florida_Keys_Details from "./Components/LocationDetails/FloridaKeys";
 import Hero from "./Components/Hero";
 import Footer from "./Components/Footer";
 import Guide from "./Components/Guide";
@@ -53,6 +54,7 @@ function App() {
             <Route path="Lake_Travis" element={<Lake_Travis_Details />} />
             <Route path="Moosehead_Lake" element={<Moosehead_Lake_Details />} />
             <Route path="Sebago_Lake" element={<Sebago_Lake_Details />} />
+            <Route path="Florida_Keys" element={<Florida_Keys_Details />} />
           </Route>
           <Route path="/guides" element={<Guide />} />
           <Route path="/forum">
