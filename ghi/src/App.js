@@ -21,6 +21,7 @@ import LocationList from "./Components/LocationList";
 import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
+import FishRequestForm from "./Components/FishForm";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/locationlist/:data" element={<LocationList />} />
           <Route path="/users" element={<UserProfile />} />
+          <Route path="/fish_report" element={<FishRequestForm />}/>
         </Routes>
         <Footer />
       </AuthProvider>

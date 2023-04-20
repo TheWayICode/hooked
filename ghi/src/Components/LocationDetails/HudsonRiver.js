@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import image from "../assets/fish.png";
 import mapboxgl from 'mapbox-gl';
+import { Link } from "react-router-dom";
 
 function Hudson_River_Details() {
   const [fish, setFish] = useState([]);
@@ -63,7 +64,11 @@ function Hudson_River_Details() {
                 </div>
                 <div className="text-center bg-white rounded-md border border-gray-500 p-4 inline-block">
                   <div className="underline mb-4">Caught a fish not on the list? Be the first to report it!</div>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">New Fish</button>
+                  <Link to="/fish_report">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
+                      New Fish
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

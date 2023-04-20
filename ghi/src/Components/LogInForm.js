@@ -19,13 +19,13 @@ const Login = () => {
     } else {
       setFormSubmitted(false)
     }
-  }, [formSubmitted, token]);
+  }, [login, token]);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(username, password);
-    console.log(login.status);
+    // console.log(login)
     setFormSubmitted(true);
   };
 
