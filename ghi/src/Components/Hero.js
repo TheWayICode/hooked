@@ -3,10 +3,12 @@ import Typed from "react-typed";
 import InfoCard from "./InfoCard";
 import Newsletter from "./Newsletter";
 import { Link } from "react-router-dom";
+import { LogoutNav } from "./NavLog/LoggedOutNav";
 
 const Hero = () => {
   return (
     <>
+      <LogoutNav />
       <div className="text-white pb-5 bg ">
         <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center ">
           <p className="text-[#00df9a] text-xl font-bold">MODERN DAY FISHING</p>

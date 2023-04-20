@@ -21,6 +21,7 @@ import LocationList from "./Components/LocationList";
 import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
+import { LoggedNav } from "./Components/NavLog/LoggedNav";
 
 function App() {
   return (
@@ -28,16 +29,24 @@ function App() {
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
-        <NavBar />
         <Routes>
           <Route path="/" element={<Hero />} />
-          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/login/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/locations">
-            <Route path="Santa_Monica_Pier" element={<Santa_Monica_Pier_Details />} />
-            <Route path="Adirondack_Mountains" element={<Adirondack_Mountains_Details />} />
+            <Route
+              path="Santa_Monica_Pier"
+              element={<Santa_Monica_Pier_Details />}
+            />
+            <Route
+              path="Adirondack_Mountains"
+              element={<Adirondack_Mountains_Details />}
+            />
             <Route path="Hudson_River" element={<Hudson_River_Details />} />
-            <Route path="Lake_Okeechobee" element={<Lake_Okeechobee_Details />} />
+            <Route
+              path="Lake_Okeechobee"
+              element={<Lake_Okeechobee_Details />}
+            />
             <Route path="Lake_Shasta" element={<Lake_Shasta_Details />} />
             <Route path="Lake_Texoma" element={<Lake_Texoma_Details />} />
             <Route path="Lake_Travis" element={<Lake_Travis_Details />} />

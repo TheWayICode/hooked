@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { LogoutNav } from "./NavLog/LoggedOutNav";
 
 function Signup() {
   const navigate = useNavigate();
@@ -48,77 +49,80 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center mt-[-86px] bg">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
-        <h1 className="text-center text-2xl font-bold mb-4">
-          Join the HOOKED community!
-        </h1>
-        <form onSubmit={handleSubmit} id="new-user">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleNameChange}
-              placeholder="John Doe"
-              required
-              type="text"
-              name="name"
-              value={name}
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleEmailChange}
-              placeholder="example@email.com"
-              required
-              type="text"
-              name="email"
-              value={email}
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handlePasswordChange}
-              placeholder="********"
-              required
-              type="password"
-              name="password"
-              value={password}
-            />
-          </div>
-          <div className="flex justify-between">
-            <button
-              className="bg-[#05bd83] hover:bg-[#009767] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Sign Up
-            </button>
-            <p className="text-sm font-medium text-[#000000] hover:text-[#05bd83]">
-              <Link to="/login">Already a member?</Link>
-            </p>
-          </div>
-        </form>
+    <>
+      <LogoutNav />
+      <div className="min-h-screen flex justify-center items-center mt-[-86px] bg">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
+          <h1 className="text-center text-2xl font-bold mb-4">
+            Join the HOOKED community!
+          </h1>
+          <form onSubmit={handleSubmit} id="new-user">
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="name"
+              >
+                Name
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={handleNameChange}
+                placeholder="John Doe"
+                required
+                type="text"
+                name="name"
+                value={name}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={handleEmailChange}
+                placeholder="example@email.com"
+                required
+                type="text"
+                name="email"
+                value={email}
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                onChange={handlePasswordChange}
+                placeholder="********"
+                required
+                type="password"
+                name="password"
+                value={password}
+              />
+            </div>
+            <div className="flex justify-between">
+              <button
+                className="bg-[#05bd83] hover:bg-[#009767] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Sign Up
+              </button>
+              <p className="text-sm font-medium text-[#000000] hover:text-[#05bd83]">
+                <Link to="/login">Already a member?</Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 export default Signup;

@@ -32,20 +32,12 @@ const SearchPage = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // if (input === "") {
-    //   return alert("Please enter a location");
-    // } else if (
-    //   !stateList.includes(
-    //     input.charAt(0).toUpperCase() + input.slice(1).toLowerCase()
-    //   )
-    // ) {
-    //   return alert("Please enter a valid location");
-    // }
     navigate(`/locationlist/${input}`);
   };
 
   return (
     <>
+      <LoggedNav />
       <div
         className="w-full h-screen relative mt-[-80px] bg-white"
         style={style}
@@ -72,7 +64,11 @@ const SearchPage = () => {
                 onChange={handleInputChange}
               >
                 {allStates.map((state) => {
-                  return <option value={state.label}>{state.label}</option>;
+                  return (
+                    <option key={state.label} value={state.label}>
+                      {state.label}
+                    </option>
+                  );
                 })}
               </select>
             </div>
