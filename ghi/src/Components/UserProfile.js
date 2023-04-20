@@ -108,7 +108,7 @@ function UserProfile() {
               </div>
             </div>
             <div className="border-t-4 border-b-4 border-white w-3/5 pb-5 bg-black bg-opacity-90">
-              <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg p-6 font-semibold text-center text-white bg-[#22577E] mb-5">
+              <h2 className="lg:text-3xl md:text-2xl sm:text-xl text-lg p-6 font-bold text-center text-white bg-[#22577E] mb-5">
                 {user && <span>{user.name}'s Posts</span>}
               </h2>
               {!users ? (
