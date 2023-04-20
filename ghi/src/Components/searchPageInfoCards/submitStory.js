@@ -9,7 +9,7 @@ const SubmitStory = () => {
           Want to get featured on our headliner?{" "}
           <span>
             <Link
-              to="/submitstory"
+              to="/forum/new"
               className="text-[#31cd9c] hover:text-[#009767]"
             >
               Tell us your story!

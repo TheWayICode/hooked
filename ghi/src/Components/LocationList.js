@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { LoggedNav } from "./NavLog/LoggedNav";
 
 const LocationList = () => {
   const { data } = useParams();
@@ -26,28 +27,28 @@ const LocationList = () => {
   );
 
   return (
-    <div className="w-full min-h-screen bg-black mt-[-80px] pt-[80px]">
-      <div className="max-w-[1240px] flex flex-wrap text-center mx-auto p-5">
-        {filteredData.map((state) => {
-          return (
-            <div
-              key={state.id}
-              className="border-2 border-red-950 rounded-medium m-5 p-3 bg-white"
-            >
-              <h1 className="text-4xl font-bold">{state.state}</h1>
-              <h2 className="text-2xl">{state.city}</h2>
-              <h4 className="text-l font-bold">{state.name}</h4>
-              <Link to={`/locations/${state.name.split(" ").join("_")}`}>
-                Go to Page
-              </Link>
-            </div>
-          );
-        })}
-        {/* <button className="text-white" onClick={fetchLocations}>
-          Click me
-        </button> */}
+    <>
+      <LoggedNav />
+      <div className="w-full min-h-screen bg-black mt-[-80px] pt-[80px]">
+        <div className="max-w-[1240px] flex flex-wrap text-center mx-auto p-5">
+          {filteredData.map((state) => {
+            return (
+              <div
+                key={state.id}
+                className="border-2 border-red-950 rounded-medium m-5 p-3 bg-white"
+              >
+                <h1 className="text-4xl font-bold">{state.state}</h1>
+                <h2 className="text-2xl">{state.city}</h2>
+                <h4 className="text-l font-bold">{state.name}</h4>
+                <Link to={`/locations/${state.name.split(" ").join("_")}`}>
+                  Go to Page
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
