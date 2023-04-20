@@ -23,9 +23,16 @@ import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
 import { LoggedNav } from "./Components/NavLog/LoggedNav";
+import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import FishRequestForm from "./Components/FishForm";
 
 function App() {
+  const { token } = useAuthContext();
+
+  if (token === null) {
+    console.log("token is null");
+  }
+
   return (
     <BrowserRouter>
       <AuthProvider
@@ -64,7 +71,7 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/locationlist/:data" element={<LocationList />} />
           <Route path="/users" element={<UserProfile />} />
-          <Route path="/fish_report" element={<FishRequestForm />}/>
+          <Route path="/fish_report" element={<FishRequestForm />} />
         </Routes>
         <Footer />
       </AuthProvider>
