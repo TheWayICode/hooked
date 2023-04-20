@@ -36,3 +36,22 @@ I completed the home page and pushed to main, my next task is to clean it up and
 
 **4/13/2023**
 Completed the search page and added some info cards as well as news placeholders. Implemented search functionality to filter through database.
+
+**4/17/2023**
+We couldn't find out how to get one username from the token but tried to tackle it.
+I worked on locationlist now leading to location page.
+
+**4/18/2023**
+The team were able to fetch user data from token to use on our form post.
+Changed search bar to a drop down select.
+Walked through steps of the deployment process, stopped on step 3.
+
+**4/19/2023**
+Worked on deployment, but got stuck on step 3.
+Waiting for help from TA.
+Figured out a solution to the login issue, but it isn't the cleanest solution.
+
+**4/20/2023**
+Today, we worked on deployment and unit testing.
+Waiting on help from TA for both of these tasks.
+Personal tasks, replace placeholder pictures and redesign LocationList page.
