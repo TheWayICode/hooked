@@ -45,3 +45,15 @@ Team completed home page. I pulled from main and added the completed guides page
 
 **4/12/2023**
 Completed the forum page when there is no instance of a posts from the community.
+
+**4/17/2023**
+The team and I were figuring out how to get one user and were not able to implement it today.
+Other than that, I did some changes to the forum list page that shows either no content or content.
+
+**4/18/2023**
+The team and I were able to figure gettting one user's information by fetching from the token.
+I finished the forum lists implementation and added the userprofile.
+We also worked on doing steps 1-2 of our deployment.
+
+**4/19/2023**
+Today, we worked on deployment.

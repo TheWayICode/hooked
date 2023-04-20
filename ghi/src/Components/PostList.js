@@ -1,11 +1,16 @@
 import Fisherman from "./assets/fishermanforum.jpg";
 import FishPicture from "./assets/fish-background.jpg";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Typed from "react-typed";
 import { LoggedNav } from "./NavLog/LoggedNav";
 
 export default function PostList() {
+  const { token } = useToken();
+  const [user, setUser] = useState("");
+  const [users, setUsers] = useState([]);
+
   async function isImageURL(url) {
     const urlRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi;
     return urlRegex.test(url);
@@ -26,30 +31,49 @@ export default function PostList() {
     fetchPosts();
   }, []);
 
+  const fetchUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setUser(data.account);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [token]);
+
   if (posts.lengths === 0) {
     return (
-      <div
-        className="forum-container bg-center bg-no-repeat bg-cover w-full mt-[-80px] pt-[80px] md:pt-40 lg:pt-60 pb-20 md:pb-40 lg:pb-60 lg:px-40 text-center text-white mx-auto my-auto"
-        style={{
-          backgroundImage: `url(${Fisherman})`,
-          backgroundAttachment: "fixed",
-        }}
-      >
+      <>
+        <LoggedNav />
         <div
-          className="forum-item bg-black bg-opacity-50 rounded-3xl justify-center items-center p-6 sm:p-10 mx-auto my-auto mt-10 mb-10"
-          style={{ maxWidth: "750px", maxHeight: "300px" }}
+          className="forum-container bg-center bg-no-repeat bg-cover w-full mt-[-80px] pt-[80px] md:pt-40 lg:pt-60 pb-20 md:pb-40 lg:pb-60 lg:px-40 text-center text-white mx-auto my-auto"
+          style={{
+            backgroundImage: `url(${Fisherman})`,
+            backgroundAttachment: "fixed",
+          }}
         >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 lg:mb-8">
-            THE POND IS QUIET...
-          </h1>
-          <div className="text-lg sm:text-xl pb-4">
-            <p>Be the first Hooked member to share their adventure!</p>
+          <div
+            className="forum-item bg-black bg-opacity-50 rounded-3xl justify-center items-center p-6 sm:p-10 mx-auto my-auto mt-10 mb-10"
+            style={{ maxWidth: "750px", maxHeight: "300px" }}
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 lg:mb-8">
+              THE POND IS QUIET...
+            </h1>
+            <div className="text-lg sm:text-xl pb-4">
+              <p>Be the first Hooked member to share their adventure!</p>
+            </div>
+            <button className="bg-gray-500 text-sm sm:text-base rounded-xl p-3 sm:p-4 font-bold hover:bg-hooked m-4">
+              <Link to="/forum/new">Submit</Link>
+            </button>
           </div>
-          <button className="bg-gray-500 text-sm sm:text-base rounded-xl p-3 sm:p-4 font-bold hover:bg-hooked m-4">
-            <Link to="/forum/new">Submit</Link>
-          </button>
         </div>
-      </div>
+      </>
     );
   } else {
     return (
@@ -63,7 +87,7 @@ export default function PostList() {
           }}
         >
           <div className="bg-black bg-opacity-40 forum-item justify-center items-center">
-            <h1 className="bg-black bg-opacity-40 text-center text-white p-60 lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold mx-auto">
+            <h1 className="bg-black bg-opacity-40 text-center flex justify-center text-white p-60 lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold mx-auto">
               COMMUNITY FORUM
             </h1>
           </div>
@@ -119,9 +143,10 @@ export default function PostList() {
                     Location: {post.location}
                   </div>
                   <div className="font-bold mt-2">Name: {post.fish}</div>
-                  <div className="font-bold mt-2">
+                  <div className="font-bold mt-2 overflow-wrap">
                     Description: {post.description}
                   </div>
+                  <p className="font-bold mt-2">Posted by: {user.name}</p>
                   <div className="font-bold mt-2">
                     Posted on: {post.created_at}
                   </div>
