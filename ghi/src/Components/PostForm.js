@@ -1,6 +1,7 @@
 import Fishermanpostform from "./assets/test.png";
 import { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
 
 function PostForm() {
   const { token } = useToken();
@@ -18,6 +19,7 @@ function PostForm() {
   const handleDescriptionChange = (event) => setDescription(event.target.value);
   const handlePhotoURLChange = (event) => setPhotoURL(event.target.value);
   const handleCreatedChange = (event) => setCreatedAt(event.target.value);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,11 +42,7 @@ function PostForm() {
     };
     const response = await fetch(postFormURL, fetchConfig);
     if (response.ok) {
-      setLocation("");
-      setFish("");
-      setPhotoURL("");
-      setDescription("");
-      setCreatedAt("");
+      navigate("/Forum");
     }
   };
 
