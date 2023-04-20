@@ -56,4 +56,9 @@ I finished the forum lists implementation and added the userprofile.
 We also worked on doing steps 1-2 of our deployment.
 
 **4/19/2023**
-Today, we worked on deployment.
+Today, we worked on a little more of deployment and some error handling.
+
+**4/20/2023**
+Today, I finished the unit test of getting all users.
+I also updated the forum list to show two different rendering if there are posts or none.
+I updated user profile's delete button to be an X over showing the word delete.

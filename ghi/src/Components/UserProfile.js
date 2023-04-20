@@ -123,10 +123,11 @@ function UserProfile() {
                       >
                         <button
                           onClick={() => deleteUserPost(post.id)}
-                          className="bg-slate-500 rounded-2xl p-2 mb-2 mx-1 font-semibold text-white"
+                          className="border rounded-full bg-red-400 text-white font-semibold mb-2 w-8 h-8 flex items-center justify-center"
                         >
-                          Delete
+                          X
                         </button>
+
                         <div className="text-center font-bold px-2 py-2 bg-[#22577E] bg-opacity-80 text-white text-lg sm:text-xl">
                           {post.fish}
                         </div>
