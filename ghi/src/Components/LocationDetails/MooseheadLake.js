@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import image from "../assets/fish.png";
 import mapboxgl from "mapbox-gl";
 import { LoggedNav } from "../NavLog/LoggedNav";
+import { Link } from "react-router-dom";
 
 function Moosehead_Lake_Details() {
   const [fish, setFish] = useState([]);
@@ -20,14 +21,14 @@ function Moosehead_Lake_Details() {
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",
-        center: [45.67945022995479, -69.65452913012051],
+        center: [-69.65452913012051, 45.67945022995479],
         zoom: 12,
       });
 
       map.addControl(new mapboxgl.NavigationControl());
 
       const marker = new mapboxgl.Marker()
-        .setLngLat([45.67945022995479, -69.65452913012051])
+        .setLngLat([-69.65452913012051, 45.67945022995479])
         .addTo(map);
     }
   };
@@ -43,7 +44,7 @@ function Moosehead_Lake_Details() {
         <div className="max-w-[1240px] mx-auto grid md:grid-cols-">
           <img
             className="w-full mx-auto my-4 mb-8 rounded-2xl"
-            src="https://cdn.pixabay.com/photo/2015/09/06/20/08/lake-moose-927739_960_720.jpg"
+            src="https://www.nrcm.org/wp-content/uploads/2019/10/Moosehead.jpg"
             alt="SMP"
             style={{ width: "100%" }}
           />
@@ -82,13 +83,23 @@ function Moosehead_Lake_Details() {
                   ))}
                 </div>
               </div>
-              <div className="text-center bg-white rounded-md border border-gray-500 p-4 inline-block">
-                <div className="underline mb-4">
-                  Caught a fish not on the list? Be the first to report it!
+              <div className="max-w-[1240px] mx-auto grid md:grid-cols-2 mb-8">
+                <div>
+                  {fish.map(fish => (
+                    <div key={fish.id} className="flex items-center my-2">
+                      <img src={image} className="w-8 h-8 mr-2 filter invert" alt="Fish Icon" />
+                      <span className="md:text-2xl text-white">{fish.name}</span>
+                    </div>
+                  ))}
                 </div>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
-                  New Fish
-                </button>
+              </div>
+              <div className="text-center bg-white rounded-md border border-gray-500 p-4 inline-block">
+                <div className="underline mb-4">Caught a fish not on the list? Be the first to report it!</div>
+                <Link to="/fish_report">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
+                    New Fish
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
