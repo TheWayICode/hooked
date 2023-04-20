@@ -76,5 +76,18 @@ steps = [
         """
         DROP TABLE location_fish;
         """
+    ],
+    [
+        """
+        CREATE TABLE fish_requests (
+            id SERIAL PRIMARY KEY NOT NULL,
+            location VARCHAR(100) NOT NULL,
+            fish VARCHAR(100) NOT NULL,
+            picture_url TEXT NOT NULL
+        );
+        """,
+        """
+        DROP TABLE fish_requests;
+        """
     ]
 ]

@@ -13,6 +13,7 @@ import Lake_Texoma_Details from "./Components/LocationDetails/LakeTexoma";
 import Lake_Travis_Details from "./Components/LocationDetails/LakeTravis";
 import Sebago_Lake_Details from "./Components/LocationDetails/SebagoLake";
 import Moosehead_Lake_Details from "./Components/LocationDetails/MooseheadLake";
+import Florida_Keys_Details from "./Components/LocationDetails/FloridaKeys";
 import Hero from "./Components/Hero";
 import Footer from "./Components/Footer";
 import Guide from "./Components/Guide";
@@ -23,6 +24,7 @@ import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
 import { LoggedNav } from "./Components/NavLog/LoggedNav";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
+import FishRequestForm from "./Components/FishForm";
 
 function App() {
   const { token } = useAuthContext();
@@ -59,6 +61,7 @@ function App() {
             <Route path="Lake_Travis" element={<Lake_Travis_Details />} />
             <Route path="Moosehead_Lake" element={<Moosehead_Lake_Details />} />
             <Route path="Sebago_Lake" element={<Sebago_Lake_Details />} />
+            <Route path="Florida_Keys" element={<Florida_Keys_Details />} />
           </Route>
           <Route path="/guides" element={<Guide />} />
           <Route path="/forum">
@@ -68,6 +71,7 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/locationlist/:data" element={<LocationList />} />
           <Route path="/users" element={<UserProfile />} />
+          <Route path="/fish_report" element={<FishRequestForm />} />
         </Routes>
         <Footer />
       </AuthProvider>
