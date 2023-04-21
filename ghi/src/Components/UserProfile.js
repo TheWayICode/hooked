@@ -54,8 +54,8 @@ function UserProfile() {
   }, [token]);
 
   useEffect(() => {
-    fetchUserPosts(user.id);
-  }, [user, fetchUserPosts]);
+    fetchUserPosts();
+  }, [fetchUserPosts]);
 
   return (
     <>
