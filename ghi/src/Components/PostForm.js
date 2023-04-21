@@ -1,5 +1,7 @@
+import Fishermanpostform from "./assets/test.png";
 import { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
 import { LoggedNav } from "./NavLog/LoggedNav";
 
 function PostForm() {
@@ -18,6 +20,11 @@ function PostForm() {
   const handleDescriptionChange = (event) => setDescription(event.target.value);
   const handlePhotoURLChange = (event) => setPhotoURL(event.target.value);
   const handleCreatedChange = (event) => setCreatedAt(event.target.value);
+  const navigate = useNavigate();
+
+  if (!token) {
+    navigate("/login");
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,13 +46,9 @@ function PostForm() {
       },
     };
     const response = await fetch(postFormURL, fetchConfig);
-    console.log(response.status)
+    console.log(response.status);
     if (response.ok) {
-      setLocation("");
-      setFish("");
-      setPhotoURL("");
-      setDescription("");
-      setCreatedAt("");
+      navigate("/Forum");
     }
   };
 
@@ -84,127 +87,144 @@ function PostForm() {
     fetchFish();
     fetchUser();
   }, [token]);
-
   return (
     <>
       <LoggedNav />
-      <div className="bg-black bg-opacity-80 min-h-screen flex justify-center items-center p-10 mx-auto my-[-80px] pt-[80px]">
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
-          <h1 className="text-center text-3xl font-bold my-4">
-            Create a post, {user_id.name}
-          </h1>
-          <form
-            onSubmit={handleSubmit}
-            id="new-post"
-            className="mx-auto my-auto p-2"
-          >
-            <div className="my-4">
-              <label
-                className="block text-gray-700 font-bold mb-2"
-                htmlFor="location"
-              >
-                Location
-              </label>
-              <select
-                className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                onChange={handleLocationChange}
-                id="location"
-                required
-                name="location"
-                value={location}
-              >
-                <option value="">Select a location</option>
-                {locations &&
-                  locations.map((location) => {
-                    return (
-                      <option key={location.id} value={location.name}>
-                        {location.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
-            <div className="my-4">
-              <label
-                className="block text-gray-700 font-bold mb-2"
-                htmlFor="email"
-              >
-                Fish
-              </label>
-              <select
-                className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                onChange={handleFishChange}
-                id="fish"
-                required
-                name="fish"
-                value={fish}
-              >
-                <option value="">Select a fish</option>
-                {fishes &&
-                  fishes.map((fish) => {
-                    return (
-                      <option key={fish.id} value={fish.name}>
-                        {fish.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
-            <div className="my-6">
-              <label
-                className="block text-gray-700 font-bold mb-2"
-                htmlFor="password"
-              >
-                Picture
-              </label>
-              <input
+      <div
+        className="bg-cover forum-container bg-no-repeat bg-fixed mt-[-80px] pt-[80px] md:pt-40 lg:pt-60 pb-20 md:pb-40 lg:pb-60 px-4 sm:px-8 lg:px-40 mx-auto my-auto"
+        style={{
+          backgroundImage: `url(${Fishermanpostform})`,
+          backgroundAttachment: "fixed",
+          backgroundSize: "65%",
+          backgroundPosition: "center",
+          backgroundColor: "gray",
+        }}
+      >
+        <div
+          className="bg-black bg-opacity-70 h-290 flex justify-center items-center p-10 mx-auto my-[-80px] pt-8 pb-4 mt-[-20px] mb-[-20px]"
+          style={{ width: "25vw" }}
+        >
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
+            <h1 className="text-center text-3xl font-bold my-4">
+              Share Your Story,{" "}
+              {user_id &&
+                user_id.name.charAt(0).toUpperCase() + user_id.name.slice(1)}
+            </h1>
+            <form
+              onSubmit={handleSubmit}
+              id="new-post"
+              className="mx-auto my-auto p-2"
+            >
+              <div className="my-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="location"
+                >
+                  Location
+                </label>
+                <select
+                  className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  onChange={handleLocationChange}
+                  id="location"
+                  required
+                  name="location"
+                  value={location}
+                >
+                  <option value="">Select a location</option>
+                  {locations &&
+                    locations.map((location) => {
+                      return (
+                        <option key={location.id} value={location.name}>
+                          {location.name}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+              <div className="my-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="email"
+                >
+                  Fish
+                </label>
+                <select
+                  className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  onChange={handleFishChange}
+                  id="fish"
+                  required
+                  name="fish"
+                  value={fish}
+                >
+                  <option value="">Select a fish</option>
+                  {fishes &&
+                    fishes.map((fish) => {
+                      return (
+                        <option key={fish.id} value={fish.name}>
+                          {fish.name}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+              <div className="my-6">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Picture
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  onChange={handlePhotoURLChange}
+                  placeholder="Share a photo"
+                  required
+                  type="text"
+                  name="picture_url"
+                  value={picture_url}
+                  id="picture_url"
+                />
+              </div>
+              <div className="my-6">
+                <label className="block text-gray-700 font-bold mb-2">
+                  Description
+                </label>
+              </div>
+              <textarea
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                onChange={handlePhotoURLChange}
-                placeholder="Share a photo"
+                onChange={handleDescriptionChange}
+                placeholder="Tell us about it"
                 required
                 type="text"
-                name="picture_url"
-                value={picture_url}
-                id="picture_url"
+                name="description"
+                value={description}
               />
-            </div>
-            <div className="my-6">
-              <label className="block text-gray-700 font-bold mb-2">
-                Description
-              </label>
-            </div>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleDescriptionChange}
-              placeholder="Tell us about it"
-              required
-              type="text"
-              name="description"
-              value={description}
-            />
-            <div className="my-6">
-              <label className="block text-gray-700 font-bold mb-2">
-                Created at
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                onChange={handleCreatedChange}
-                placeholder="created_at"
-                required
-                type="date"
-                name="created_at"
-                value={created_at}
-              />
-            </div>
-            <div>
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white my-6 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Post
-              </button>
-            </div>
-          </form>
+              <div className="my-6">
+                <label className="block text-gray-700 font-bold mb-2">
+                  Caught on
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  onChange={handleCreatedChange}
+                  placeholder="created_at"
+                  required
+                  type="date"
+                  name="created_at"
+                  value={created_at}
+                />
+              </div>
+              <div>
+                <div className="flex justify-center">
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white my-3 font-bold py-2 px-5 rounded focus:outline-none focus:shadow-outline mx-auto"
+                    type="submit"
+                  >
+                    Share
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>

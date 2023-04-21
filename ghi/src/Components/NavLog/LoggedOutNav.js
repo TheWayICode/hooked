@@ -34,7 +34,7 @@ export const LogoutNav = () => {
             Login
           </Link>
           <Link
-            to="signup"
+            to="/login/signup"
             className="p-4 font-bold text-xl hover:text-[#29b798] text-[#2ddfb8]"
           >
             Register
