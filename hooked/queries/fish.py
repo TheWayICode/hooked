@@ -157,4 +157,3 @@ class FishRepository:
             fishing_technique=record[3],
             type=record[4]
         )
-`
