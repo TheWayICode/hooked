@@ -28,13 +28,15 @@ import FishRequestForm from "./Components/FishForm";
 
 function App() {
   const { token } = useAuthContext();
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   if (token === null) {
     console.log("token is null");
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
