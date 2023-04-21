@@ -41,7 +41,7 @@ class UserRepository:
                         FROM users
                         WHERE email = %s
                         """,
-                        [email]
+                        [email],
                     )
                     record = result.fetchone()
                     if record is None:
@@ -50,7 +50,6 @@ class UserRepository:
         except Exception as e:
             print(e)
             return {"message": "User not found"}
-
 
     def get_all_users(self) -> Union[UserOutWithPassword, Error]:
         try:
@@ -64,15 +63,15 @@ class UserRepository:
                         """
                     )
                     return [
-                        self.record_to_user_out(record)
-                        for record in result
+                        self.record_to_user_out(record) for record in result
                     ]
         except Exception as e:
             print(e)
             return None
 
-
-    def create_user(self, user: UserIn, hashed_password: str) -> UserOutWithPassword:
+    def create_user(
+        self, user: UserIn, hashed_password: str
+    ) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -82,16 +81,17 @@ class UserRepository:
                         VALUES (%s, %s, %s)
                         RETURNING id;
                         """,
-                    [user.name, user.email, hashed_password]
+                        [user.name, user.email, hashed_password],
                     )
                     id = result.fetchone()[0]
                     if id is None:
                         return None
-                    return self.record_to_user_in_to_out(id, user, hashed_password)
+                    return self.record_to_user_in_to_out(
+                        id, user, hashed_password
+                    )
         except Exception as e:
             print("Create did not work", e)
             return None
-
 
     def update(self, user_id: int, user: UserIn) -> Union[UserOut, Error]:
         try:
@@ -103,7 +103,7 @@ class UserRepository:
                         FROM users
                         WHERE id = %s
                         """,
-                        [user_id]
+                        [user_id],
                     )
                     fetching = result.fetchone()
                     if not fetching:
@@ -114,12 +114,13 @@ class UserRepository:
                         SET name = %s, email = %s
                         WHERE id = %s
                         """,
-                        [user.name, user.email, user_id]
+                        [user.name, user.email, user_id],
                     )
-                    return self.record_to_user_in_to_out_without_password(user_id, user)
+                    return self.record_to_user_in_to_out_without_password(
+                        user_id, user
+                    )
         except Exception:
             return {"message": "User could not be updated"}
-
 
     def delete_user(self, user_id: int) -> Union[bool, Error]:
         try:
@@ -130,30 +131,26 @@ class UserRepository:
                         DELETE from users
                         WHERE id = %s
                         """,
-                        [user_id]
+                        [user_id],
                     )
                     return True
         except Exception:
             return {"message": "User does not exists"}
 
-
-    def record_to_user_in_to_out(self, id: int, user: UserIn, hashed_password: str):
+    def record_to_user_in_to_out(
+        self, id: int, user: UserIn, hashed_password: str
+    ):
         old_data = user.dict()
-        return UserOutWithPassword(id=id, hashed_password=hashed_password,**old_data)
-
+        return UserOutWithPassword(
+            id=id, hashed_password=hashed_password, **old_data
+        )
 
     def record_to_user_in_to_out_without_password(self, id: int, user: UserIn):
         old_data = user.dict()
         return UserOut(id=id, **old_data)
 
-
     def record_to_user_out(self, record):
-            return UserOut(
-                id=record[0],
-                name=record[1],
-                email=record[2]
-            )
-
+        return UserOut(id=record[0], name=record[1], email=record[2])
 
     def record_to_hashed_user_out(self, record):
         return UserOutWithPassword(
@@ -162,7 +159,6 @@ class UserRepository:
             email=record[2],
             hashed_password=record[3],
         )
-
 
     def record_to_user_with_pw_out(self, record):
         return UserOut(
