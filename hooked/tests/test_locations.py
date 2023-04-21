@@ -4,6 +4,7 @@ from queries.locations import LocationRepository
 
 client = TestClient(app)
 
+
 class MockUserRepo:
     def get_all_locations(self):
         return [
@@ -16,6 +17,7 @@ class MockUserRepo:
                 "description": "description"
             }
         ]
+
 
 def test_get_all_locations():
     app.dependency_overrides[LocationRepository] = MockUserRepo
