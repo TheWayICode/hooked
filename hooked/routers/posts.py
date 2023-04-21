@@ -11,10 +11,13 @@ from queries.posts import (
 from authenticator import authenticator
 from queries.users import UserOut
 
+
 class AccountToken(Token):
     account: UserOut
 
+
 router = APIRouter()
+
 
 @router.get('/api/protected', response_model=bool)
 async def get_protected(
@@ -50,17 +53,19 @@ def create_post(
     else:
         return response
 
+
 @router.delete("/api/posts/{post_id}", response_model= bool)
 def delete_post(
     post_id: int,
     response: Response,
     repo: PostRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data)
-)-> bool:
+) -> bool:
     response = repo.delete(post_id)
     if not response:
         response.status_code = 400
     return response
+
 
 @router.put("/api/posts/{post_id}", response_model=Union[PostOut, Error])
 def update_post(
@@ -75,12 +80,14 @@ def update_post(
         response.status_code = 400
     return response
 
+
 @router.get('/api/posts', response_model=Union[List[PostOut], Error])
 def get_all_posts(
     repo: PostRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_posts()
+
 
 @router.get('/api/posts/{post_id}', response_model=Optional[PostOut])
 def get_one_post(

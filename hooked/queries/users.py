@@ -1,11 +1,11 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
-from datetime import date
+from typing import Optional, Union
 from queries.pool import pool
 
 
 class Error(BaseModel):
     message: str
+
 
 class UserIn(BaseModel):
     name: Optional[str]
@@ -18,15 +18,16 @@ class UserOut(BaseModel):
     name: str
     email: str
 
+
 class DuplicateUserError(ValueError):
     pass
+
 
 class UserOutWithPassword(UserOut):
     hashed_password: str
 
 
 class UserRepository:
-
     def get_one(self, email: str) -> UserOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -116,7 +117,7 @@ class UserRepository:
                         [user.name, user.email, user_id]
                     )
                     return self.record_to_user_in_to_out_without_password(user_id, user)
-        except Exception as e:
+        except Exception:
             return {"message": "User could not be updated"}
 
 
@@ -132,7 +133,7 @@ class UserRepository:
                         [user_id]
                     )
                     return True
-        except Exception as e:
+        except Exception:
             return {"message": "User does not exists"}
 
 
@@ -140,9 +141,11 @@ class UserRepository:
         old_data = user.dict()
         return UserOutWithPassword(id=id, hashed_password=hashed_password,**old_data)
 
+
     def record_to_user_in_to_out_without_password(self, id: int, user: UserIn):
         old_data = user.dict()
         return UserOut(id=id, **old_data)
+
 
     def record_to_user_out(self, record):
             return UserOut(
@@ -159,6 +162,7 @@ class UserRepository:
             email=record[2],
             hashed_password=record[3],
         )
+
 
     def record_to_user_with_pw_out(self, record):
         return UserOut(

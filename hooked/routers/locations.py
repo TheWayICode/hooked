@@ -18,6 +18,7 @@ def get_all_locations(
 ):
     return repo.get_all_locations()
 
+
 @router.post('/api/locations', response_model=Union[LocationOut, Error])
 def create_location(
     location: LocationIn,
@@ -29,6 +30,7 @@ def create_location(
         response.status_code = 400
     else:
         return response
+
 
 @router.put("/api/locations/{location_id}", response_model=Union[LocationOut, Error])
 def update_location(
@@ -42,6 +44,7 @@ def update_location(
         response.status_code = 400
     return response
 
+
 @router.get('/api/locations/{location_id}', response_model=Optional[LocationOutWithFish])
 def get_one_location(
     location_id: int,
@@ -53,13 +56,14 @@ def get_one_location(
         response.status_code = 400
     return location
 
-@router.delete("/api/locations/{location_id}", response_model =bool)
+
+@router.delete("/api/locations/{location_id}", response_model=bool)
 def delete_location(
     location_id: int,
     response: Response,
     repo: LocationRepository = Depends(),
-)->  bool:
+) -> bool:
     response = repo.delete_location(location_id)
     if response is None:
-        response.status_code=400
+        response.status_code = 400
     return response

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
+from typing import List, Union
 from datetime import date
 from queries.pool import pool
 
@@ -7,6 +7,7 @@ from queries.pool import pool
 
 class Error(BaseModel):
     message: str
+
 
 class PostIn(BaseModel):
     user_id: int
@@ -16,6 +17,7 @@ class PostIn(BaseModel):
     picture_url: str
     created_at: date
 
+
 class PostOut(BaseModel):
     id: int
     user_id: int
@@ -24,6 +26,7 @@ class PostOut(BaseModel):
     description: str
     picture_url: str
     created_at: date
+
 
 class PostRepository:
     def get_one_post(self, post_id: int) -> Union[PostOut, Error]:
@@ -46,6 +49,7 @@ class PostRepository:
             print(e)
             return {"message": "Post not found"}
 
+
     def get_all_posts(self) -> Union[List[PostOut], Error]:
         try:
             with pool.connection() as conn:
@@ -64,6 +68,7 @@ class PostRepository:
         except Exception as e:
             print(e)
             return None
+
 
     def get_all_user_posts(self, user_id: int) -> Union[List[PostOut], Error]:
         try:
@@ -85,6 +90,7 @@ class PostRepository:
         except Exception as e:
             print(e)
             return None
+
 
     def create_post(self, post: PostIn) -> Union[PostOut, Error]:
         try:
@@ -109,7 +115,6 @@ class PostRepository:
             return None
 
 
-
     def delete(self, post_id: int) -> Union[bool, Error]:
         try:
             with pool.connection() as connection:
@@ -124,6 +129,7 @@ class PostRepository:
                     return True
         except Exception:
             return {"message": "Post does not exist"}
+
 
     def update_post(self, post_id: int, post: PostIn) -> Union[PostOut, Error]:
         try:
@@ -150,12 +156,14 @@ class PostRepository:
                     [post.user_id, post.location, post.fish, post.description, post.picture_url, post_id]
                     )
                     return self.record_to_post_in_to_out(post_id, post)
-        except Exception as e:
+        except Exception:
             return {"message": "Update failed"}
+
 
     def record_to_post_in_to_out(self, id: int, post: PostIn):
         old_data = post.dict()
         return PostOut(id=id, **old_data)
+
 
     def record_to_post_out(self, record):
         return PostOut(

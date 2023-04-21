@@ -1,15 +1,17 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
-from datetime import date
+from typing import Optional, Union
 from queries.pool import pool
+
 
 class Error(BaseModel):
     message: str
+
 
 class FishRequestIn(BaseModel):
     location: str
     fish: str
     picture_url: str
+
 
 class FishRequestOut(BaseModel):
     id: int
@@ -37,6 +39,7 @@ class FishRequestsRepository:
         except Exception:
             return {"message": "Unable to get fish requests"}
 
+
     def get_one_fish_request(self, fish_request_id:int) -> Optional[FishRequestOut]:
         try:
             with pool.connection() as conn:
@@ -61,6 +64,7 @@ class FishRequestsRepository:
             print(e)
             return {"message": "Fish request not found"}
 
+
     def create_fish_request(self, fish_request: FishRequestIn) -> Union[FishRequestOut, Error]:
         try:
             with pool.connection() as conn:
@@ -81,6 +85,7 @@ class FishRequestsRepository:
             print("Create fish request did not work")
             return None
 
+
     def delete_fish_request(self, fish_request_id: int) -> Union[bool, Error]:
         try:
             with pool.connection() as connection:
@@ -93,12 +98,14 @@ class FishRequestsRepository:
                         [fish_request_id]
                     )
                     return True
-        except Exception as e:
+        except Exception:
             return {"message": "Fish request does not exists"}
+
 
     def record_to_fish_request_in_to_out(self, id: int, fish_request: FishRequestIn):
         old_data = fish_request.dict()
         return FishRequestOut(id=id, **old_data)
+
 
     def record_to_fish_request_out(self, record):
         return FishRequestOut(

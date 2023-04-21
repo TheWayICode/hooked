@@ -1,21 +1,17 @@
 from fastapi import APIRouter, Depends, Response
 from typing import List, Optional, Union
-from queries.fish import (
-    Error,
-    FishIn,
-    FishOut,
-    FishRepository
-)
+from queries.fish import Error, FishIn, FishOut, FishRepository
+
 
 router = APIRouter()
 
-@router.get('/api/fish', response_model=Union[List[FishOut], Error])
-def get_all_fish(
-    repo: FishRepository = Depends()
-):
+
+@router.get("/api/fish", response_model=Union[List[FishOut], Error])
+def get_all_fish(repo: FishRepository = Depends()):
     return repo.get_all_fish()
 
-@router.get('/api/fish/{fish_id}', response_model=Optional[FishOut])
+
+@router.get("/api/fish/{fish_id}", response_model=Optional[FishOut])
 def get_one_fish(
     fish_id: int,
     response: Response,
@@ -27,7 +23,8 @@ def get_one_fish(
     else:
         return fish
 
-@router.post('/api/fish', response_model=Union[FishOut, Error])
+
+@router.post("/api/fish", response_model=Union[FishOut, Error])
 def create_fish(
     fish: FishIn,
     location_fish_id: int,
@@ -40,27 +37,29 @@ def create_fish(
     else:
         return response
 
-@router.delete("/api/fish/{fish_id}", response_model =bool)
+
+@router.delete("/api/fish/{fish_id}", response_model=bool)
 def delete_fish(
     fish_id: int,
     response: Response,
     repo: FishRepository = Depends(),
-)->  bool:
+) -> bool:
     response = repo.delete_fish(fish_id)
     if not response:
-        response.status_code=400
+        response.status_code = 400
     else:
         return response
+
 
 @router.put("/api/fish/{fish_id}", response_model=Union[FishOut, Error])
 def update_fish(
     fish_id: int,
     fish: FishIn,
     response: Response,
-    repo: FishRepository = Depends()
+    repo: FishRepository = Depends(),
 ) -> FishOut:
     response = repo.update_fish(fish_id, fish)
     if not response:
-        response.status_code=400
+        response.status_code = 400
     else:
         return response

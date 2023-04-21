@@ -1,10 +1,11 @@
 from pydantic import BaseModel
 from typing import List, Optional, Union
-from datetime import date
 from queries.pool import pool
+
 
 class Error(BaseModel):
     message: str
+
 
 class LocationIn(BaseModel):
     name: str
@@ -12,6 +13,7 @@ class LocationIn(BaseModel):
     city: str
     picture_url: str
     description: str
+
 
 class LocationOut(BaseModel):
     id:int
@@ -21,11 +23,12 @@ class LocationOut(BaseModel):
     picture_url: str
     description: str
 
+
 class LocationOutWithFish(LocationOut):
     fish: List[dict] = []
 
-class LocationRepository:
 
+class LocationRepository:
     def get_all_locations(self) -> Optional[LocationOut]:
         try:
             with pool.connection() as conn:
@@ -44,6 +47,7 @@ class LocationRepository:
         except Exception as e:
             print(e)
             return None
+
 
     def create_location(self, location: LocationIn) -> Union[LocationOut, Error]:
         try:
@@ -65,6 +69,7 @@ class LocationRepository:
         except Exception as e:
             print("Create Location did not work", e)
             return None
+
 
     def update_location(self, location_id: int, location: LocationIn) -> Union[LocationOut, Error]:
         try:
@@ -91,7 +96,7 @@ class LocationRepository:
                     [location.name, location.state, location.city, location.picture_url, location.description, location_id]
                     )
                     return self.record_to_location_in_to_out(location_id, location)
-        except Exception as e:
+        except Exception:
             return {"message": "Update location failed"}
 
 
@@ -133,6 +138,8 @@ class LocationRepository:
             except Exception as e:
                 print(e)
                 return {"message": "Location not found"}
+
+
     def delete_location(self, location_id: int) -> Union[bool, Error]:
         try:
             with pool.connection() as connection:
@@ -155,9 +162,11 @@ class LocationRepository:
         except Exception:
             return {"message": "Location does not exist"}
 
+
     def record_to_location_in_to_out(self, id: int, location: LocationIn):
         old_data = location.dict()
         return LocationOut(id=id, **old_data)
+
 
     def record_to_location_out(self, record):
         return LocationOut(
@@ -168,6 +177,7 @@ class LocationRepository:
             picture_url=record[4],
             description=record[5],
         )
+
 
     def record_to_location_out_with_fish(self, record, fish_list):
         return LocationOutWithFish(

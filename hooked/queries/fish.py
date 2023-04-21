@@ -1,16 +1,18 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
-from datetime import date
+from typing import Optional, Union
 from queries.pool import pool
+
 
 class Error(BaseModel):
     message: str
+
 
 class FishIn(BaseModel):
     name: str
     size: str
     fishing_technique: str
     type: str
+
 
 class FishOut(BaseModel):
     id:int
@@ -39,6 +41,7 @@ class FishRepository:
         except Exception:
             return {"message": "Unable to successfully create a fish"}
 
+
     def get_one_fish(self, fish_id:int) -> Optional[FishOut]:
         try:
             with pool.connection() as conn:
@@ -63,6 +66,7 @@ class FishRepository:
         except Exception as e:
             print(e)
             return {"message": "Fish not found"}
+
 
     def create_fish(self, fish: FishIn, location_fish_id: int) -> Union[FishOut, Error]:
         try:
@@ -91,6 +95,7 @@ class FishRepository:
             print("Create fish did not work")
             return None
 
+
     def delete_fish(self, fish_id: int) -> Union[bool, Error]:
         try:
             with pool.connection() as connection:
@@ -110,8 +115,9 @@ class FishRepository:
                         [fish_id]
                     )
                     return True
-        except Exception as e:
+        except Exception:
             return {"message": "User does not exists"}
+
 
     def update_fish(self, fish_id: int, fish: FishIn) -> Union[FishOut, Error]:
         print(fish)
@@ -140,13 +146,14 @@ class FishRepository:
                         [fish.name, fish.size, fish.fishing_technique, fish.type, fish_id]
                     )
                     return self.record_to_fish_in_to_out(fish_id, fish)
-        except Exception as e:
+        except Exception:
             return {"message": "Fish could not be updated"}
 
 
     def record_to_fish_in_to_out(self, id: int, fish: FishIn):
         old_data = fish.dict()
         return FishOut(id=id, **old_data)
+
 
     def record_to_fish_out(self, record):
         return FishOut(
