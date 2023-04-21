@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import Hooked from "./assets/HookedLogo.png";
 import UserBackground from "./assets/UserProfile.png";
@@ -20,7 +20,7 @@ function UserProfile() {
     }
   };
 
-  const fetchUserPosts = async () => {
+  const fetchUserPosts = useCallback(async () => {
     const url = `http://localhost:8000/api/user/posts/${user.id}`;
     const response = await fetch(url, {
       method: "GET",
@@ -30,7 +30,7 @@ function UserProfile() {
       const data = await response.json();
       setUsers(data);
     }
-  };
+  }, [user.id]);
 
   async function isImageURL(url) {
     const urlRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi;
@@ -54,8 +54,8 @@ function UserProfile() {
   }, [token]);
 
   useEffect(() => {
-    fetchUserPosts(user.id);
-  }, [user]);
+    fetchUserPosts();
+  }, [fetchUserPosts]);
 
   return (
     <>

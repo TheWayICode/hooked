@@ -49,7 +49,7 @@ const LocationList = () => {
                   <h2 className="text-2xl font-bold py-1">{state.city}</h2>
                   <h4 className="text-base font-medium">{state.name}</h4>
                   <Link
-                    to={`/locations/${state.name.split(" ").join("_")}`}
+                    to={`/locations/${state.name.split(" ").join("")}`}
                     className="text-sm text-[#00df9a] hover:text-black"
                   >
                     Go to Page

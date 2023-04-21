@@ -1,19 +1,18 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
-import NavBar from "./Components/Navbar";
 import SignUpForm from "./Components/SignUpForm";
 import LoginForm from "./Components/LogInForm";
-import Santa_Monica_Pier_Details from "./Components/LocationDetails/SantaMonicaPier";
-import Lake_Shasta_Details from "./Components/LocationDetails/LakeShasta";
-import Adirondack_Mountains_Details from "./Components/LocationDetails/AdirondackMountains";
-import Hudson_River_Details from "./Components/LocationDetails/HudsonRiver";
-import Lake_Okeechobee_Details from "./Components/LocationDetails/LakeOkeechobee";
-import Lake_Texoma_Details from "./Components/LocationDetails/LakeTexoma";
-import Lake_Travis_Details from "./Components/LocationDetails/LakeTravis";
-import Sebago_Lake_Details from "./Components/LocationDetails/SebagoLake";
-import Moosehead_Lake_Details from "./Components/LocationDetails/MooseheadLake";
-import Florida_Keys_Details from "./Components/LocationDetails/FloridaKeys";
+import SantaMonicaPierDetails from "./Components/LocationDetails/SantaMonicaPier";
+import LakeShastaDetails from "./Components/LocationDetails/LakeShasta";
+import AdirondackMountainsDetails from "./Components/LocationDetails/AdirondackMountains";
+import HudsonRiverDetails from "./Components/LocationDetails/HudsonRiver";
+import LakeOkeechobeeDetails from "./Components/LocationDetails/LakeOkeechobee";
+import LakeTexomaDetails from "./Components/LocationDetails/LakeTexoma";
+import LakeTravisDetails from "./Components/LocationDetails/LakeTravis";
+import SebagoLakeDetails from "./Components/LocationDetails/SebagoLake";
+import MooseheadLakeDetails from "./Components/LocationDetails/MooseheadLake";
+import FloridaKeysDetails from "./Components/LocationDetails/FloridaKeys";
 import Hero from "./Components/Hero";
 import Footer from "./Components/Footer";
 import Guide from "./Components/Guide";
@@ -22,7 +21,6 @@ import LocationList from "./Components/LocationList";
 import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
-import { LoggedNav } from "./Components/NavLog/LoggedNav";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import FishRequestForm from "./Components/FishForm";
 
@@ -46,24 +44,24 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/locations">
             <Route
-              path="Santa_Monica_Pier"
-              element={<Santa_Monica_Pier_Details />}
+              path="SantaMonicaPier"
+              element={<SantaMonicaPierDetails />}
             />
             <Route
-              path="Adirondack_Mountains"
-              element={<Adirondack_Mountains_Details />}
+              path="AdirondackMountains"
+              element={<AdirondackMountainsDetails />}
             />
-            <Route path="Hudson_River" element={<Hudson_River_Details />} />
+            <Route path="HudsonRiver" element={<HudsonRiverDetails />} />
             <Route
-              path="Lake_Okeechobee"
-              element={<Lake_Okeechobee_Details />}
+              path="LakeOkeechobee"
+              element={<LakeOkeechobeeDetails />}
             />
-            <Route path="Lake_Shasta" element={<Lake_Shasta_Details />} />
-            <Route path="Lake_Texoma" element={<Lake_Texoma_Details />} />
-            <Route path="Lake_Travis" element={<Lake_Travis_Details />} />
-            <Route path="Moosehead_Lake" element={<Moosehead_Lake_Details />} />
-            <Route path="Sebago_Lake" element={<Sebago_Lake_Details />} />
-            <Route path="Florida_Keys" element={<Florida_Keys_Details />} />
+            <Route path="LakeShasta" element={<LakeShastaDetails />} />
+            <Route path="LakeTexoma" element={<LakeTexomaDetails />} />
+            <Route path="LakeTravis" element={<LakeTravisDetails />} />
+            <Route path="MooseheadLake" element={<MooseheadLakeDetails />} />
+            <Route path="SebagoLake" element={<SebagoLakeDetails />} />
+            <Route path="FloridaKeys" element={<FloridaKeysDetails />} />
           </Route>
           <Route path="/guides" element={<Guide />} />
           <Route path="/forum">
@@ -73,7 +71,7 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/locationlist/:data" element={<LocationList />} />
           <Route path="/users" element={<UserProfile />} />
-          <Route path="/fish_report" element={<FishRequestForm />} />
+          <Route path="/fishreport" element={<FishRequestForm />} />
         </Routes>
         <Footer />
       </AuthProvider>

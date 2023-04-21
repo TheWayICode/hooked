@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
-import { getToken } from "@galvanize-inc/jwtdown-for-react";
+
 
 function FishRequestForm() {
   const { token } = useToken();

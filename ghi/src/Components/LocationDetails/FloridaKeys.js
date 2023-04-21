@@ -3,7 +3,7 @@ import image from "../assets/fish.png";
 import mapboxgl from "mapbox-gl";
 import { LoggedNav } from "../NavLog/LoggedNav";
 
-function Florida_Keys_Details() {
+function FloridaKeysDetails() {
   const [fish, setFish] = useState([]);
   const [description, setDescription] = useState("");
 
@@ -26,7 +26,7 @@ function Florida_Keys_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([25.05567240363122, -81.54271754156703])
         .addTo(map);
     }
@@ -109,4 +109,4 @@ function Florida_Keys_Details() {
   );
 }
 
-export default Florida_Keys_Details;
+export default FloridaKeysDetails;
