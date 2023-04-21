@@ -17,11 +17,15 @@ const Hero = () => {
           </h1>
           <div className="flex justify-center items-center">
             <p className="md:text-4xl sm:text-3xl text-xl font-bold">
-              Find fishing&nbsp;
+              Find fishing
             </p>
             <Typed
               className="md:text-4xl sm:text-3xl text-xl font-bold text-[#00df9a]"
-              strings={["locations", "techniques", "communities"]}
+              strings={[
+                "&nbsp;locations",
+                "&nbsp;techniques",
+                "&nbsp;communities",
+              ]}
               typeSpeed={60}
               backSpeed={80}
               loop
