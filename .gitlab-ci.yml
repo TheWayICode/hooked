@@ -37,7 +37,7 @@ build-ghi-service:
     REACT_APP_USER_SERVICE_API_HOST: https://hooked.dec-pt-16.mod3projects.com
   script:
     - cd ghi
-    - npm install
+    - npm install --force
     - npm run build
     - cp build/index.html build/404.html
   artifacts:
