@@ -35,8 +35,7 @@ class FishRepository:
                         """
                     )
                     return [
-                        self.record_to_fish_out(record)
-                        for record in result
+                        self.record_to_fish_out(record) for record in result
                     ]
         except Exception:
             return {"message": "Unable to successfully create a fish"}
@@ -45,7 +44,6 @@ class FishRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    print(FishOut)
                     result = db.execute(
                         """
                         SELECT id
@@ -56,7 +54,7 @@ class FishRepository:
                         FROM fish
                         WHERE id = %s
                         """,
-                        [fish_id]
+                        [fish_id],
                     )
                     record = result.fetchone()
                 if record is None:
@@ -66,7 +64,9 @@ class FishRepository:
             print(e)
             return {"message": "Fish not found"}
 
-    def create_fish(self, fish: FishIn, location_fish_id: int) -> Union[FishOut, Error]:
+    def create_fish(
+        self, fish: FishIn, location_fish_id: int
+    ) -> Union[FishOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -76,7 +76,12 @@ class FishRepository:
                         VALUES (%s, %s, %s, %s)
                         RETURNING id;
                         """,
-                    [fish.name, fish.size, fish.fishing_technique, fish.type]
+                        [
+                            fish.name,
+                            fish.size,
+                            fish.fishing_technique,
+                            fish.type,
+                        ],
                     )
                     id = result.fetchone()[0]
                     if id is None:
@@ -86,7 +91,10 @@ class FishRepository:
                         INSERT INTO location_fish (location_id, fish_id)
                         VALUES (%s, %s);
                         """,
-                    [location_fish_id, id]  # Replace 1 with the actual location_id
+                        [
+                            location_fish_id,
+                            id,
+                        ],  # Replace 1 with the actual location_id
                     )
                     return self.record_to_fish_in_to_out(id, fish)
         except Exception:
@@ -102,21 +110,20 @@ class FishRepository:
                         DELETE from location_fish
                         WHERE fish_id = %s
                         """,
-                        [fish_id]
+                        [fish_id],
                     )
                     db.execute(
                         """
                         DELETE from fish
                         WHERE id = %s
                         """,
-                        [fish_id]
+                        [fish_id],
                     )
                     return True
         except Exception:
             return {"message": "User does not exists"}
 
     def update_fish(self, fish_id: int, fish: FishIn) -> Union[FishOut, Error]:
-        print(fish)
         try:
             with pool.connection() as connection:
                 with connection.cursor() as db:
@@ -125,9 +132,8 @@ class FishRepository:
                         SELECT *
                         FROM fish
                         WHERE id = %s
-                        """
-                        ,
-                        [fish_id]
+                        """,
+                        [fish_id],
                     )
                     fetching = result.fetchone()
                     if not fetching:
@@ -135,11 +141,19 @@ class FishRepository:
                     db.execute(
                         """
                         UPDATE fish
-                        SET name = %s, size = %s, fishing_technique = %s, type = %s
+                        SET name = %s,
+                            size = %s,
+                            fishing_technique = %s,
+                            type = %s
                         WHERE id = %s
-                        """
-                        ,
-                        [fish.name, fish.size, fish.fishing_technique, fish.type, fish_id]
+                        """,
+                        [
+                            fish.name,
+                            fish.size,
+                            fish.fishing_technique,
+                            fish.type,
+                            fish_id,
+                        ],
                     )
                     return self.record_to_fish_in_to_out(fish_id, fish)
         except Exception:
@@ -155,5 +169,5 @@ class FishRepository:
             name=record[1],
             size=record[2],
             fishing_technique=record[3],
-            type=record[4]
+            type=record[4],
         )
