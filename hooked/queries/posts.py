@@ -4,7 +4,6 @@ from datetime import date
 from queries.pool import pool
 
 
-
 class Error(BaseModel):
     message: str
 
@@ -35,11 +34,17 @@ class PostRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, user_id, location, fish, description, picture_url, created_at
+                        SELECT id,
+                            user_id,
+                            location,
+                            fish,
+                            description,
+                            picture_url,
+                            created_at
                         FROM posts
                         WHERE id = %s
                         """,
-                        [post_id]
+                        [post_id],
                     )
                     record = result.fetchone()
                     if record is None:
@@ -49,26 +54,29 @@ class PostRepository:
             print(e)
             return {"message": "Post not found"}
 
-
     def get_all_posts(self) -> Union[List[PostOut], Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, user_id, location, fish, description, picture_url, created_at
+                        SELECT id,
+                            user_id,
+                            location,
+                            fish,
+                            description,
+                            picture_url,
+                            created_at
                         FROM posts
                         ORDER BY id DESC
                         """
                     )
                     return [
-                        self.record_to_post_out(record)
-                        for record in result
+                        self.record_to_post_out(record) for record in result
                     ]
         except Exception as e:
             print(e)
             return None
-
 
     def get_all_user_posts(self, user_id: int) -> Union[List[PostOut], Error]:
         try:
@@ -76,21 +84,25 @@ class PostRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, user_id, location, fish, description, picture_url, created_at
+                        SELECT id,
+                            user_id,
+                            location,
+                            fish,
+                            description,
+                            picture_url,
+                            created_at
                         FROM posts
                         WHERE user_id = %s
                         ORDER BY id DESC
                         """,
-                        [user_id]
+                        [user_id],
                     )
                     return [
-                        self.record_to_post_out(record)
-                        for record in result
+                        self.record_to_post_out(record) for record in result
                     ]
         except Exception as e:
             print(e)
             return None
-
 
     def create_post(self, post: PostIn) -> Union[PostOut, Error]:
         try:
@@ -98,12 +110,32 @@ class PostRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO posts (user_id, location, fish, description, picture_url, created_at)
-                        VALUES ((SELECT id FROM users WHERE id = %s), %s, %s, %s, %s, %s)
+                        INSERT INTO posts (
+                                            user_id,
+                                            location,
+                                            fish,
+                                            description,
+                                            picture_url,
+                                            created_at
+                                        )
+                        VALUES (
+                                (SELECT id FROM users WHERE id = %s),
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s
+                                )
                         RETURNING id;
-                        """
-                    ,
-                    [post.user_id, post.location, post.fish, post.description, post.picture_url, post.created_at]
+                        """,
+                        [
+                            post.user_id,
+                            post.location,
+                            post.fish,
+                            post.description,
+                            post.picture_url,
+                            post.created_at,
+                        ],
                     )
                     id = result.fetchone()[0]
                     if id is None:
@@ -114,7 +146,6 @@ class PostRepository:
             print("Create did not work", e)
             return None
 
-
     def delete(self, post_id: int) -> Union[bool, Error]:
         try:
             with pool.connection() as connection:
@@ -124,12 +155,11 @@ class PostRepository:
                         DELETE from posts
                         WHERE id = %s
                         """,
-                        [post_id]
+                        [post_id],
                     )
                     return True
         except Exception:
             return {"message": "Post does not exist"}
-
 
     def update_post(self, post_id: int, post: PostIn) -> Union[PostOut, Error]:
         try:
@@ -141,7 +171,7 @@ class PostRepository:
                         FROM posts
                         WHERE id = %s
                         """,
-                        [post_id]
+                        [post_id],
                     )
                     fetching = result.fetchone()
                     if not fetching:
@@ -149,21 +179,29 @@ class PostRepository:
                     db.execute(
                         """
                         UPDATE posts
-                        SET user_id = %s, location = %s, fish = %s, description = %s, picture_url = %s
+                        SET user_id = %s,
+                            location = %s,
+                            fish = %s,
+                            description = %s,
+                            picture_url = %s
                         WHERE id = %s
-                        """
-                    ,
-                    [post.user_id, post.location, post.fish, post.description, post.picture_url, post_id]
+                        """,
+                        [
+                            post.user_id,
+                            post.location,
+                            post.fish,
+                            post.description,
+                            post.picture_url,
+                            post_id,
+                        ],
                     )
                     return self.record_to_post_in_to_out(post_id, post)
         except Exception:
             return {"message": "Update failed"}
 
-
     def record_to_post_in_to_out(self, id: int, post: PostIn):
         old_data = post.dict()
         return PostOut(id=id, **old_data)
-
 
     def record_to_post_out(self, record):
         return PostOut(
@@ -173,5 +211,5 @@ class PostRepository:
             fish=record[3],
             description=record[4],
             picture_url=record[5],
-            created_at=record[6]
+            created_at=record[6],
         )

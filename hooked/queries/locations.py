@@ -16,7 +16,7 @@ class LocationIn(BaseModel):
 
 
 class LocationOut(BaseModel):
-    id:int
+    id: int
     name: str
     state: str
     city: str
@@ -48,19 +48,31 @@ class LocationRepository:
             print(e)
             return None
 
-
-    def create_location(self, location: LocationIn) -> Union[LocationOut, Error]:
+    def create_location(
+        self, location: LocationIn
+    ) -> Union[LocationOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO location (name, state, city, picture_url, description)
+                        INSERT INTO location (
+                                name,
+                                state,
+                                city,
+                                picture_url,
+                                description
+                            )
                         VALUES (%s, %s, %s, %s, %s)
                         RETURNING id;
-                        """
-                    ,
-                    [location.name, location.state, location.city, location.picture_url, location.description]
+                        """,
+                        [
+                            location.name,
+                            location.state,
+                            location.city,
+                            location.picture_url,
+                            location.description,
+                        ],
                     )
                     id = result.fetchone()[0]
                     if id is None:
@@ -70,8 +82,9 @@ class LocationRepository:
             print("Create Location did not work", e)
             return None
 
-
-    def update_location(self, location_id: int, location: LocationIn) -> Union[LocationOut, Error]:
+    def update_location(
+        self, location_id: int, location: LocationIn
+    ) -> Union[LocationOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -81,7 +94,7 @@ class LocationRepository:
                         FROM location
                         WHERE id = %s
                         """,
-                        [location_id]
+                        [location_id],
                     )
                     fetching = result.fetchone()
                     if not fetching:
@@ -89,56 +102,82 @@ class LocationRepository:
                     db.execute(
                         """
                         UPDATE location
-                        SET name = %s, state = %s, city = %s, picture_url = %s, description = %s
+                        SET name = %s,
+                            state = %s,
+                            city = %s,
+                            picture_url = %s,
+                            description = %s
                         WHERE id = %s
-                        """
-                    ,
-                    [location.name, location.state, location.city, location.picture_url, location.description, location_id]
+                        """,
+                        [
+                            location.name,
+                            location.state,
+                            location.city,
+                            location.picture_url,
+                            location.description,
+                            location_id,
+                        ],
                     )
-                    return self.record_to_location_in_to_out(location_id, location)
+                    return self.record_to_location_in_to_out(
+                        location_id, location
+                    )
         except Exception:
             return {"message": "Update location failed"}
 
-
-    def get_one_location(self, location_id: int) -> Optional[LocationOutWithFish]:
-            try:
-                with pool.connection() as conn:
-                    with conn.cursor() as db:
-                        result = db.execute(
-                            """
-                            SELECT id, name, state, city, picture_url, description
+    def get_one_location(
+        self, location_id: int
+    ) -> Optional[LocationOutWithFish]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                            SELECT id,
+                                    name,
+                                    state,
+                                    city,
+                                    picture_url,
+                                    description
                             FROM location
                             WHERE id = %s
                             """,
-                        [location_id]
-                        )
-                        record = result.fetchone()
-                        if record is None:
-                            return None
-                        fish_result = db.execute(
-                            """
-                            SELECT fish.name, fish.size, fish.fishing_technique, fish.type
+                        [location_id],
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    fish_result = db.execute(
+                        """
+                            SELECT fish.name,
+                                    fish.size,
+                                    fish.fishing_technique,
+                                    fish.type
                             FROM fish
-                            JOIN location_fish ON fish.id = location_fish.fish_id
-                            JOIN location ON location.id = location_fish.location_id
+                            JOIN location_fish ON fish.id =
+                                    location_fish.fish_id
+                            JOIN location ON location.id =
+                                    location_fish.location_id
                             WHERE location.id = %s;
                             """,
-                            [location_id]
-                        )
-                        fish_records = fish_result.fetchall()
-                        fish_list = []
-                        for fish_record in fish_records:
-                            fish_list.append({
+                        [location_id],
+                    )
+                    fish_records = fish_result.fetchall()
+                    fish_list = []
+                    for fish_record in fish_records:
+                        fish_list.append(
+                            {
                                 "name": fish_record[0],
                                 "size": fish_record[1],
                                 "fishing_technique": fish_record[2],
-                                "type": fish_record[3]
-                            })
-                        return self.record_to_location_out_with_fish(record, fish_list)
-            except Exception as e:
-                print(e)
-                return {"message": "Location not found"}
-
+                                "type": fish_record[3],
+                            }
+                        )
+                    return self.record_to_location_out_with_fish(
+                        record, fish_list
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Location not found"}
 
     def delete_location(self, location_id: int) -> Union[bool, Error]:
         try:
@@ -149,24 +188,22 @@ class LocationRepository:
                         DELETE from location_fish
                         WHERE location_id = %s
                         """,
-                        [location_id]
+                        [location_id],
                     )
                     db.execute(
                         """
                         DELETE from location
                         WHERE id = %s
                         """,
-                        [location_id]
+                        [location_id],
                     )
                     return True
         except Exception:
             return {"message": "Location does not exist"}
 
-
     def record_to_location_in_to_out(self, id: int, location: LocationIn):
         old_data = location.dict()
         return LocationOut(id=id, **old_data)
-
 
     def record_to_location_out(self, record):
         return LocationOut(
@@ -178,7 +215,6 @@ class LocationRepository:
             description=record[5],
         )
 
-
     def record_to_location_out_with_fish(self, record, fish_list):
         return LocationOutWithFish(
             id=record[0],
@@ -187,5 +223,5 @@ class LocationRepository:
             city=record[3],
             picture_url=record[4],
             description=record[5],
-            fish=fish_list
+            fish=fish_list,
         )

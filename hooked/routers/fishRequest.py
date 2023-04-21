@@ -4,21 +4,24 @@ from queries.fishRequest import (
     Error,
     FishRequestIn,
     FishRequestOut,
-    FishRequestsRepository
+    FishRequestsRepository,
 )
 
 
 router = APIRouter()
 
 
-@router.get('/api/fish_requests', response_model=Union[List[FishRequestOut], Error])
-def get_all_fish_requests(
-    repo: FishRequestsRepository = Depends()
-):
+@router.get(
+    "/api/fish_requests", response_model=Union[List[FishRequestOut], Error]
+)
+def get_all_fish_requests(repo: FishRequestsRepository = Depends()):
     return repo.get_all_fish_requests()
 
 
-@router.get('/api/fish_requests/{fish_request_id}', response_model=Optional[FishRequestOut])
+@router.get(
+    "/api/fish_requests/{fish_request_id}",
+    response_model=Optional[FishRequestOut],
+)
 def get_one_fish_request(
     fish_request_id: int,
     response: Response,
@@ -31,7 +34,7 @@ def get_one_fish_request(
         return fish_request
 
 
-@router.post('/api/fish_requests', response_model=Union[FishRequestOut, Error])
+@router.post("/api/fish_requests", response_model=Union[FishRequestOut, Error])
 def create_fish_request(
     fish_request: FishRequestIn,
     response: Response,

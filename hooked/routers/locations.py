@@ -12,14 +12,12 @@ from queries.locations import (
 router = APIRouter()
 
 
-@router.get('/api/locations', response_model=Union[List[LocationOut], Error])
-def get_all_locations(
-    repo: LocationRepository = Depends()
-):
+@router.get("/api/locations", response_model=Union[List[LocationOut], Error])
+def get_all_locations(repo: LocationRepository = Depends()):
     return repo.get_all_locations()
 
 
-@router.post('/api/locations', response_model=Union[LocationOut, Error])
+@router.post("/api/locations", response_model=Union[LocationOut, Error])
 def create_location(
     location: LocationIn,
     response: Response,
@@ -32,12 +30,14 @@ def create_location(
         return response
 
 
-@router.put("/api/locations/{location_id}", response_model=Union[LocationOut, Error])
+@router.put(
+    "/api/locations/{location_id}", response_model=Union[LocationOut, Error]
+)
 def update_location(
     location_id: int,
     location: LocationIn,
     response: Response,
-    repo: LocationRepository = Depends()
+    repo: LocationRepository = Depends(),
 ) -> LocationOut:
     response = repo.update_location(location_id, location)
     if response is None:
@@ -45,7 +45,10 @@ def update_location(
     return response
 
 
-@router.get('/api/locations/{location_id}', response_model=Optional[LocationOutWithFish])
+@router.get(
+    "/api/locations/{location_id}",
+    response_model=Optional[LocationOutWithFish],
+)
 def get_one_location(
     location_id: int,
     response: Response,
