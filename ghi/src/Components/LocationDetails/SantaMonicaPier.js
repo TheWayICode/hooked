@@ -27,7 +27,7 @@ function Santa_Monica_Pier_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-118.498446, 34.0086955])
         .addTo(map);
     }

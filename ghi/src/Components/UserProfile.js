@@ -55,7 +55,7 @@ function UserProfile() {
 
   useEffect(() => {
     fetchUserPosts(user.id);
-  }, [user]);
+  }, [user, fetchUserPosts]);
 
   return (
     <>

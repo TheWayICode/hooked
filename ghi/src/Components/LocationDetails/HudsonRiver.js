@@ -27,7 +27,7 @@ function Hudson_River_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-73.79993546808437, 42.550187229084955])
         .addTo(map);
     }

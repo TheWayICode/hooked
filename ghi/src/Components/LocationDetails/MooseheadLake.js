@@ -27,7 +27,7 @@ function Moosehead_Lake_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-69.65452913012051, 45.67945022995479])
         .addTo(map);
     }

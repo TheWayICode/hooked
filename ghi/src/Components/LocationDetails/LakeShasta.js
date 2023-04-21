@@ -27,7 +27,7 @@ function Lake_Shasta_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-122.362651, 40.679964])
         .addTo(map);
     }

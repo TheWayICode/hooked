@@ -27,7 +27,7 @@ function Lake_Texoma_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-96.6733002959825, 33.909157256060276])
         .addTo(map);
     }

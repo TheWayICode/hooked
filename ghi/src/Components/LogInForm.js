@@ -47,7 +47,7 @@ const Login = () => {
 
   useEffect(() => {
     login(username, password);
-  }, [checker]);
+  }, [checker, login, username, password]);
 
   return (
     <>

@@ -1,7 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
-import NavBar from "./Components/Navbar";
 import SignUpForm from "./Components/SignUpForm";
 import LoginForm from "./Components/LogInForm";
 import Santa_Monica_Pier_Details from "./Components/LocationDetails/SantaMonicaPier";
@@ -22,7 +21,6 @@ import LocationList from "./Components/LocationList";
 import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
-import { LoggedNav } from "./Components/NavLog/LoggedNav";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import FishRequestForm from "./Components/FishForm";
 
@@ -46,24 +44,24 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/locations">
             <Route
-              path="Santa_Monica_Pier"
+              path="SantaMonicaPier"
               element={<Santa_Monica_Pier_Details />}
             />
             <Route
-              path="Adirondack_Mountains"
+              path="AdirondackMountains"
               element={<Adirondack_Mountains_Details />}
             />
-            <Route path="Hudson_River" element={<Hudson_River_Details />} />
+            <Route path="HudsonRiver" element={<Hudson_River_Details />} />
             <Route
-              path="Lake_Okeechobee"
+              path="LakeOkeechobee"
               element={<Lake_Okeechobee_Details />}
             />
-            <Route path="Lake_Shasta" element={<Lake_Shasta_Details />} />
-            <Route path="Lake_Texoma" element={<Lake_Texoma_Details />} />
-            <Route path="Lake_Travis" element={<Lake_Travis_Details />} />
-            <Route path="Moosehead_Lake" element={<Moosehead_Lake_Details />} />
-            <Route path="Sebago_Lake" element={<Sebago_Lake_Details />} />
-            <Route path="Florida_Keys" element={<Florida_Keys_Details />} />
+            <Route path="LakeShasta" element={<Lake_Shasta_Details />} />
+            <Route path="LakeTexoma" element={<Lake_Texoma_Details />} />
+            <Route path="LakeTravis" element={<Lake_Travis_Details />} />
+            <Route path="MooseheadLake" element={<Moosehead_Lake_Details />} />
+            <Route path="SebagoLake" element={<Sebago_Lake_Details />} />
+            <Route path="FloridaKeys" element={<Florida_Keys_Details />} />
           </Route>
           <Route path="/guides" element={<Guide />} />
           <Route path="/forum">
@@ -73,7 +71,7 @@ function App() {
           <Route path="/searchpage" element={<SearchPage />} />
           <Route path="/locationlist/:data" element={<LocationList />} />
           <Route path="/users" element={<UserProfile />} />
-          <Route path="/fish_report" element={<FishRequestForm />} />
+          <Route path="/fishreport" element={<FishRequestForm />} />
         </Routes>
         <Footer />
       </AuthProvider>

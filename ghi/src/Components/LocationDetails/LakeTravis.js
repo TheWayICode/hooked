@@ -27,7 +27,7 @@ function Lake_Travis_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-97.9149898743467, 30.451588319411332])
         .addTo(map);
     }

@@ -27,7 +27,7 @@ function Adirondack_Mountains_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-73.86663077768854, 44.13089086909482])
         .addTo(map);
     }

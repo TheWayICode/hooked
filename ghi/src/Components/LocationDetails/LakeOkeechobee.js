@@ -27,7 +27,7 @@ function Lake_Okeechobee_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-80.80259388849842, 26.990875868550347])
         .addTo(map);
     }

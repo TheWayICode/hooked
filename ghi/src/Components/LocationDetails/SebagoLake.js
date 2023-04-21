@@ -27,7 +27,7 @@ function Sebago_Lake_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-70.572392332463, 43.87849944804798])
         .addTo(map);
     }
