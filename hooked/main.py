@@ -14,9 +14,8 @@ app.include_router(fishRequest.router)
 app.include_router(authenticator.router)
 
 origins = [
-    "http://localhost:3000",
-    "https://hooked2.gitlab.io",
     os.environ.get("CORS_HOST", None),
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
