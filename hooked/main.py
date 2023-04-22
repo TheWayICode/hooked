@@ -16,6 +16,7 @@ app.include_router(authenticator.router)
 origins = [
     os.environ.get("CORS_HOST", None),
     "http://localhost:3000",
+    "https://hooked2.gitlab.io/module3-project-gamma/"
 ]
 
 app.add_middleware(
