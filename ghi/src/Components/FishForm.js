@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
-
+import { useNavigate } from "react-router-dom";
 
 function FishRequestForm() {
   const { token } = useToken();
@@ -11,6 +11,7 @@ function FishRequestForm() {
   const handleFishChange = (event) => setFish(event.target.value);
   const [picture_url, setPhotoURL] = useState("");
   const handlePhotoURLChange = (event) => setPhotoURL(event.target.value);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,6 +46,12 @@ function FishRequestForm() {
       setLocations(data);
     }
   };
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }}
+  );
 
   useEffect(() => {
     fetchLocation();

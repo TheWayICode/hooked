@@ -3,10 +3,14 @@ import image from "../assets/fish.png";
 import mapboxgl from "mapbox-gl";
 import { LoggedNav } from "../NavLog/LoggedNav";
 import { Link } from "react-router-dom";
+import  useToken  from '@galvanize-inc/jwtdown-for-react';
+import { useNavigate } from "react-router-dom";
 
 function LakeTravisDetails() {
   const [fish, setFish] = useState([]);
   const [description, setDescription] = useState("");
+  const { token } = useToken();
+  const navigate = useNavigate();
 
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/5";
@@ -32,6 +36,12 @@ function LakeTravisDetails() {
         .addTo(map);
     }
   };
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }}
+  );
 
   useEffect(() => {
     fishList();
