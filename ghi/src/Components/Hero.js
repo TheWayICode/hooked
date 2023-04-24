@@ -38,7 +38,7 @@ const Hero = () => {
           </div>
 
           <button className="bg-[#05bd83] w-[150px] rounded-md font-medium my-3 mx-auto py-3 hover:bg-[#009767]">
-            <Link to="/signup">Get Started</Link>
+            <Link to="/login/signup">Get Started</Link>
           </button>
         </div>
       </div>

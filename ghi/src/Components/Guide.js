@@ -9,9 +9,17 @@ import Lures from "./assets/Lures.jpg";
 import Reeling from "./assets/Reeling.png";
 import Regulations from "./assets/Regulations.png";
 import { LoggedNav } from "./NavLog/LoggedNav";
+import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
 
 function GuideItem({ title, img, description, link, tutorial }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
+  const { token } = useToken();
+
+  if (!token) {
+    navigate("/login");
+  }
 
   return (
     <div className="w-3/5 mx-auto">

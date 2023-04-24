@@ -30,7 +30,7 @@ function Florida_Keys_Details() {
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      const marker = new mapboxgl.Marker()
+      new mapboxgl.Marker()
         .setLngLat([-81.42312722095829, 24.752151191414374])
         .addTo(map);
 

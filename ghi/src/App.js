@@ -21,17 +21,11 @@ import LocationList from "./Components/LocationList";
 import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
-import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import FishRequestForm from "./Components/FishForm";
 
 function App() {
-  const { token } = useAuthContext();
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
-
-  if (token === null) {
-    console.log("token is null");
-  }
 
   return (
     <BrowserRouter basename={basename}>

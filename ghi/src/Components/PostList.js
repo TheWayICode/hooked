@@ -3,17 +3,22 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState, useEffect } from "react";
 import Typed from "react-typed";
 import { LoggedNav } from "./NavLog/LoggedNav";
+import { useNavigate } from "react-router-dom";
 
 export default function PostList() {
   const { token } = useToken();
   const [user, setUser] = useState("");
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
 
   async function isImageURL(url) {
     const urlRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi;
     return urlRegex.test(url);
   }
 
-  const [posts, setPosts] = useState([]);
+  if (!token) {
+    navigate("/login");
+  }
 
   useEffect(() => {
     async function fetchPosts() {

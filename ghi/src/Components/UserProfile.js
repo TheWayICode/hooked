@@ -3,11 +3,17 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import Hooked from "./assets/HookedLogo.png";
 import UserBackground from "./assets/UserProfile.png";
 import { LoggedNav } from "./NavLog/LoggedNav";
+import { useNavigate } from "react-router-dom";
 
 function UserProfile() {
   const { token } = useToken();
+  const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [users, setUsers] = useState([]);
+
+  if (!token) {
+    navigate("/login");
+  }
 
   const deleteUserPost = async (id) => {
     const url = `http://localhost:8000/api/posts/${id}`;
@@ -21,6 +27,7 @@ function UserProfile() {
   };
 
   const fetchUserPosts = useCallback(async () => {
+    if (!user) return;
     const url = `http://localhost:8000/api/user/posts/${user.id}`;
     const response = await fetch(url, {
       method: "GET",
