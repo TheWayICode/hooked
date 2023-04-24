@@ -12,6 +12,10 @@ function MooseheadLakeDetails() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/10";
     const fishResponse = await fetch(fishUrl);
@@ -36,12 +40,6 @@ function MooseheadLakeDetails() {
         .addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();

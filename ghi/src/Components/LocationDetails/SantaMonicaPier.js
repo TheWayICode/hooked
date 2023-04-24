@@ -13,6 +13,10 @@ function SantaMonicaPierDetails() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/1";
     const fishResponse = await fetch(fishUrl);
@@ -35,12 +39,6 @@ function SantaMonicaPierDetails() {
       new mapboxgl.Marker().setLngLat([-118.498446, 34.0086955]).addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();
