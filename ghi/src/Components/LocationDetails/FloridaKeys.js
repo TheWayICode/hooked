@@ -11,6 +11,10 @@ function Florida_Keys_Details() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/8";
     const fishResponse = await fetch(fishUrl);
@@ -37,12 +41,6 @@ function Florida_Keys_Details() {
 
     }
   }
-
-   useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();

@@ -12,6 +12,10 @@ function SebagoLakeDetails() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/9";
     const fishResponse = await fetch(fishUrl);
@@ -36,12 +40,6 @@ function SebagoLakeDetails() {
         .addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();

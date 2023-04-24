@@ -13,6 +13,9 @@ function FishRequestForm() {
   const handlePhotoURLChange = (event) => setPhotoURL(event.target.value);
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
@@ -29,8 +32,8 @@ function FishRequestForm() {
         'Content-Type': 'application/json',
       }
     };
+
     const response = await fetch(fishRequestURL, fetchConfig);
-    console.log(response)
     if (response.ok) {
       setLocation("");
       setFish("");
@@ -46,12 +49,6 @@ function FishRequestForm() {
       setLocations(data);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fetchLocation();
