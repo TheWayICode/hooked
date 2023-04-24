@@ -1,12 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { LocationListNav } from "./NavLog/LocationListNav";
 import image from "./assets/fishingboat.svg";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 const LocationList = () => {
+  const navigate = useNavigate();
+  const { token } = useToken();
   const { data } = useParams();
   const [stateData, setStateData] = useState([]);
+
+  if (!token) {
+    navigate("/login");
+  }
 
   const fetchLocations = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations`;
