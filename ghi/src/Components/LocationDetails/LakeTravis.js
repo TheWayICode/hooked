@@ -12,6 +12,10 @@ function LakeTravisDetails() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/5";
     const fishResponse = await fetch(fishUrl);
@@ -36,12 +40,6 @@ function LakeTravisDetails() {
         .addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();

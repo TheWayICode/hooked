@@ -12,6 +12,9 @@ function LakeOkeechobeeDetails() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
 
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/7";
@@ -37,12 +40,6 @@ function LakeOkeechobeeDetails() {
         .addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();

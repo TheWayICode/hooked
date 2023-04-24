@@ -37,7 +37,7 @@ function UserProfile() {
       const data = await response.json();
       setUsers(data);
     }
-  }, [user.id]);
+  }, [user]);
 
   async function isImageURL(url) {
     const urlRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi;

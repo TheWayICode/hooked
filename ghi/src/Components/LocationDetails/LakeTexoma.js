@@ -13,6 +13,10 @@ function LakeTexomaDetails() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/6";
     const fishResponse = await fetch(fishUrl);
@@ -37,12 +41,6 @@ function LakeTexomaDetails() {
         .addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();

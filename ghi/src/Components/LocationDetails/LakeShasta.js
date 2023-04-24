@@ -13,6 +13,10 @@ function LakeShastaDetails() {
   const { token } = useToken();
   const navigate = useNavigate();
 
+  if (!token) {
+    navigate("/login")
+  };
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/2";
     const fishResponse = await fetch(fishUrl);
@@ -35,12 +39,6 @@ function LakeShastaDetails() {
       new mapboxgl.Marker().setLngLat([-122.362651, 40.679964]).addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();

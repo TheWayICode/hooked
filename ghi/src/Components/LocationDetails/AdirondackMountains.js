@@ -12,6 +12,10 @@ function AdirondackMountainsDetails() {
   const navigate = useNavigate();
   const { token } = useToken();
 
+  if (!token) {
+    navigate("/login")
+  }
+
   const fishList = async () => {
     const fishUrl = "http://localhost:8000/api/locations/3";
     const fishResponse = await fetch(fishUrl);
@@ -37,12 +41,6 @@ function AdirondackMountainsDetails() {
         .addTo(map);
     }
   };
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }}
-  );
 
   useEffect(() => {
     fishList();
