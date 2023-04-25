@@ -17,7 +17,7 @@ function SantaMonicaPierDetails() {
   }
 
   const fishList = async () => {
-    const fishUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations/1`;
+    const fishUrl = `http://hooked2.gitlab.io/module3-project-gamma/api/locations/1`;
     const fishResponse = await fetch(fishUrl);
     if (fishResponse.ok) {
       const fishData = await fishResponse.json();
