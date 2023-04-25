@@ -17,7 +17,8 @@ function SantaMonicaPierDetails() {
   }
 
   const fishList = async () => {
-    const fishUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations/1`;
+    const fishUrl =
+      "pk.eyJ1IjoiYnVycml0b2JveWNobzMiLCJhIjoiY2xnZW00dDdsMm1neDNtbzgzdHA5ZTA2aiJ9.x_k3x1B_c9Htw7jgUzCn0A";
     const fishResponse = await fetch(fishUrl);
     if (fishResponse.ok) {
       const fishData = await fishResponse.json();

@@ -22,6 +22,18 @@ import PostList from "./Components/PostList";
 import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
 import FishRequestForm from "./Components/FishForm";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+function ScrollToTopOnRouteChange() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -32,6 +44,7 @@ function App() {
       <AuthProvider
         tokenUrl={`${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`}
       >
+        <ScrollToTopOnRouteChange />
         <Routes>
           <Route path="/" element={<Hero />} />
           <Route path="/login/signup" element={<SignUpForm />} />
@@ -46,10 +59,7 @@ function App() {
               element={<AdirondackMountainsDetails />}
             />
             <Route path="HudsonRiver" element={<HudsonRiverDetails />} />
-            <Route
-              path="LakeOkeechobee"
-              element={<LakeOkeechobeeDetails />}
-            />
+            <Route path="LakeOkeechobee" element={<LakeOkeechobeeDetails />} />
             <Route path="LakeShasta" element={<LakeShastaDetails />} />
             <Route path="LakeTexoma" element={<LakeTexomaDetails />} />
             <Route path="LakeTravis" element={<LakeTravisDetails />} />
