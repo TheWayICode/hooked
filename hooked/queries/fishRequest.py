@@ -45,7 +45,6 @@ class FishRequestsRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    print("bruh")
                     result = db.execute(
                         """
                         SELECT id

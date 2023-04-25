@@ -37,7 +37,7 @@ steps = [
         """
         CREATE TABLE fish (
             id SERIAL PRIMARY KEY NOT NULL,
-            name VARCHAR(50) NOT NULL UNIQUE,
+            name VARCHAR(50) NOT NULL,
             size VARCHAR(50) NOT NULL,
             fishing_technique TEXT NOT NULL,
             type VARCHAR(50) NOT NULL

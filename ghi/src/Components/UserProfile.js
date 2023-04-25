@@ -16,7 +16,7 @@ function UserProfile() {
   }
 
   const deleteUserPost = async (id) => {
-    const url = `http://localhost:8000/api/posts/${id}`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts/${id}`;
     const response = await fetch(url, {
       method: "delete",
       credentials: "include",
@@ -28,7 +28,7 @@ function UserProfile() {
 
   const fetchUserPosts = useCallback(async () => {
     if (!user) return;
-    const url = `http://localhost:8000/api/user/posts/${user.id}`;
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/user/posts/${user.id}`;
     const response = await fetch(url, {
       method: "GET",
       credentials: "include",

@@ -62,3 +62,13 @@ Today, we worked on a little more of deployment and some error handling.
 Today, I finished the unit test of getting all users.
 I also updated the forum list to show two different rendering if there are posts or none.
 I updated user profile's delete button to be an X over showing the word delete.
+
+**4/21/2023**
+The team worked on most of deployment today.
+
+**4/24/2023**
+The team finished deployment today but ran into one error on my end.
+
+**4/25/2023**
+We fixed some fetch calls from localhost to the environment url and changed hrefs to links.
+The error was fixed as it was due to third party cookies being blocked.

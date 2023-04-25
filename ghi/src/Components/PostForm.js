@@ -36,7 +36,7 @@ function PostForm() {
     data.description = description;
     data.created_at = created_at;
 
-    const postFormURL = "http://localhost:8000/api/posts/";
+    const postFormURL = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts/`;
     const fetchConfig = {
       method: "POST",
       credentials: "include",
@@ -53,7 +53,7 @@ function PostForm() {
   };
 
   const fetchLocation = async () => {
-    const url = "http://localhost:8000/api/locations/";
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations/`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
@@ -62,7 +62,7 @@ function PostForm() {
   };
 
   const fetchFish = async () => {
-    const url = "http://localhost:8000/api/fish/";
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/fish/`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
