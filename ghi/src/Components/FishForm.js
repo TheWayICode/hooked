@@ -14,8 +14,8 @@ function FishRequestForm() {
   const navigate = useNavigate();
 
   if (!token) {
-    navigate("/login")
-  };
+    navigate("/login");
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
@@ -29,8 +29,8 @@ function FishRequestForm() {
       credentials: "include",
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json',
-      }
+        "Content-Type": "application/json",
+      },
     };
 
     const response = await fetch(fishRequestURL, fetchConfig);
@@ -55,14 +55,28 @@ function FishRequestForm() {
   }, [token]);
 
   return (
-    <div className="bg-cover min-h-screen flex justify-center items-center" style={{backgroundImage: 'url(https://i.imgur.com/ocKWQ3L.jpg)', backgroundPosition: 'center -350px', backgroundRepeat: 'no-repeat'}}>
+    <div
+      className="bg-cover min-h-screen flex justify-center items-center"
+      style={{
+        backgroundImage: "url(https://i.imgur.com/ocKWQ3L.jpg)",
+        backgroundPosition: "center -350px",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
         <h1 className="text-center text-2xl font-bold mb-4">
           Report a newly found fish
         </h1>
         <form onSubmit={handleSubmit} id="new-fish-request">
           <div className="mb-6">
-            <select className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={handleLocationChange} id="location" required name="location" value={location}>
+            <select
+              className="form-select file:shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={handleLocationChange}
+              id="location"
+              required
+              name="location"
+              value={location}
+            >
               <option value="">Select a location</option>
               {locations &&
                 locations.map((location) => {
@@ -81,7 +95,16 @@ function FishRequestForm() {
             >
               What new fish did you catch?
             </label>
-            <input onChange={handleFishChange} value={fish} placeholder="Fish" required type="text" name="fish" id="fish" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+            <input
+              onChange={handleFishChange}
+              value={fish}
+              placeholder="Fish"
+              required
+              type="text"
+              name="fish"
+              id="fish"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
           </div>
           <div className="mb-4">
             <label
@@ -90,14 +113,23 @@ function FishRequestForm() {
             >
               Submit a photo
             </label>
-            <input onChange={handlePhotoURLChange} value={picture_url} placeholder="Picture URL" required type="text" name="picture_url" id="picture_url" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+            <input
+              onChange={handlePhotoURLChange}
+              value={picture_url}
+              placeholder="Picture URL"
+              required
+              type="text"
+              name="picture_url"
+              id="picture_url"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
           </div>
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Report
-            </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Report
+          </button>
         </form>
       </div>
     </div>

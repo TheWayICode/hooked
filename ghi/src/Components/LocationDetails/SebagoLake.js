@@ -3,7 +3,7 @@ import image from "../assets/fish.png";
 import mapboxgl from "mapbox-gl";
 import { LoggedNav } from "../NavLog/LoggedNav";
 import { Link } from "react-router-dom";
-import  useToken  from '@galvanize-inc/jwtdown-for-react';
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 
 function SebagoLakeDetails() {
@@ -13,19 +13,18 @@ function SebagoLakeDetails() {
   const navigate = useNavigate();
 
   if (!token) {
-    navigate("/login")
-  };
+    navigate("/login");
+  }
 
   const fishList = async () => {
-    const fishUrl = "http://localhost:8000/api/locations/9";
+    const fishUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations/9`;
     const fishResponse = await fetch(fishUrl);
     if (fishResponse.ok) {
       const fishData = await fishResponse.json();
       setFish(fishData.fish);
       setDescription(fishData.description);
 
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoiYnVycml0b2JveWNobzMiLCJhIjoiY2xnZW00dDdsMm1neDNtbzgzdHA5ZTA2aiJ9.x_k3x1B_c9Htw7jgUzCn0A";
+      mapboxgl.accessToken = `${process.env.MAPBOX_API_KEY}`;
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",

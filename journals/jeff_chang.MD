@@ -55,3 +55,6 @@ Figured out a solution to the login issue, but it isn't the cleanest solution.
 Today, we worked on deployment and unit testing.
 Waiting on help from TA for both of these tasks.
 Personal tasks, replace placeholder pictures and redesign LocationList page.
+
+**4/24/2023**
+Had a meeting with TA to help with deployment. We were able to deploy our backend, and fix all our deployment bugs.
