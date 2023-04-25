@@ -10,7 +10,7 @@ import Reeling from "./assets/Reeling.png";
 import Regulations from "./assets/Regulations.png";
 import { LoggedNav } from "./NavLog/LoggedNav";
 import useToken from "@galvanize-inc/jwtdown-for-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function GuideItem({ title, img, description, link, tutorial }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -159,21 +159,21 @@ function Guide() {
           <p className="text-2xl font-bold text-center">
             Get started by checking out the local fishing spots near you!
           </p>
-          <a
-            href="/searchpage"
+          <Link
+            to="/searchpage"
             className="bg-yellow-400 text-gray-800 font-bold py-2 px-4 my-4 rounded-full hover:bg-yellow-500 transition duration-300 ease-in-out"
           >
             Explore Locations
-          </a>
+          </Link>
           <p className="text-2xl font-bold text-center">
             Already have some catches? Add to our community forum!
           </p>
-          <a
-            href="/forum"
+          <Link
+            to="/forum"
             className="bg-yellow-400 text-gray-800 font-bold py-2 px-4 my-4 rounded-full hover:bg-yellow-500 transition duration-300 ease-in-out"
           >
             Explore Community Forum
-          </a>
+          </Link>
         </div>
       </div>
     </>

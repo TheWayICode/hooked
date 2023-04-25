@@ -3,7 +3,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState, useEffect } from "react";
 import Typed from "react-typed";
 import { LoggedNav } from "./NavLog/LoggedNav";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function PostList() {
   const { token } = useToken();
@@ -154,12 +154,12 @@ export default function PostList() {
               loop
             />
           </p>
-          <a
-            href="/forum/new"
+          <Link
+            to="/forum/new"
             className="bg-yellow-400 text-gray-800 font-bold py-4 px-4 my-4 rounded-full hover:bg-yellow-500 transition duration-300 ease-in-out"
           >
             NEW +
-          </a>
+          </Link>
         </div>
       </div>
     </>
