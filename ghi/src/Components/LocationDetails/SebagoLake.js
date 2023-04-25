@@ -17,7 +17,7 @@ function SebagoLakeDetails() {
   };
 
   const fishList = async () => {
-    const fishUrl = "http://localhost:8000/api/locations/9";
+    const fishUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations/9`;
     const fishResponse = await fetch(fishUrl);
     if (fishResponse.ok) {
       const fishData = await fishResponse.json();
@@ -95,7 +95,7 @@ function SebagoLakeDetails() {
                 <div className="underline mb-4">
                   Caught a fish not on the list? Be the first to report it!
                 </div>
-                <Link to="/fish_report">
+                <Link to="/fishreport">
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
                     New Fish
                   </button>
