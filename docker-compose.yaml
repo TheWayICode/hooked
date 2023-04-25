@@ -7,7 +7,7 @@ services:
       context: hooked
       dockerfile: Dockerfile.dev
     environment:
-      SIGNING_KEY: ${process.env.SIGNING_KEY}
+      SIGNING_KEY: $${process.env.SIGNING_KEY}
       WAIT_HOSTS: db:5432
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60

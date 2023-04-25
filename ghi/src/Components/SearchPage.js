@@ -18,6 +18,11 @@ const SearchPage = () => {
     height: "100vh",
   };
 
+  window.addEventListener("load", () => {
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
+  });
+
   const navigate = useNavigate();
   const { token } = useToken();
   const [input, setInput] = useState("");
