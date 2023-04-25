@@ -15,6 +15,9 @@ lint-test-job:
 api-unit-test-job:
   image: python:3-bullseye
   stage: test
+  variables:
+    SIGNING_KEY: bMTjK6hBHkG20zNO55tqDeiT9r5JIjKxfa4TTc27DUYz
+    DATABASE_URL: postgres://hooked_user:hooked_pw@srv-captain--hooked-data/postgres
   needs:
     - lint-test-job
   script:
