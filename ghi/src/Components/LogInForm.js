@@ -31,7 +31,6 @@ const Login = () => {
       const data = await response.json();
       if (data === null) {
         handleInvalid();
-        console.log("error");
       } else {
         navigate("/searchpage");
       }
