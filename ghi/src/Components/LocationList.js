@@ -41,7 +41,7 @@ const LocationList = () => {
           Search Results
         </h1>
         {filteredData.length > 0 ? (
-          <div className="max-w-[840px] flex text-center mx-auto p-5">
+          <div className="max-w-[840px] flex text-center p-5 mx-auto grid md:grid-cols-3 gap-16">
             {filteredData.map((state) => {
               return (
                 <div
