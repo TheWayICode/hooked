@@ -22,7 +22,7 @@ export default function PostList() {
 
   useEffect(() => {
     async function fetchPosts() {
-      const response = await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts/`, {
+      const response = await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts`, {
         credentials: "include",
       });
       if (response.ok) {
