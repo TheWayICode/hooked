@@ -4,6 +4,7 @@ import mapboxgl from "mapbox-gl";
 import { Link } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
+import { LoggedNav } from "../NavLog/LoggedNav";
 
 function Florida_Keys_Details() {
   const [fish, setFish] = useState([]);
@@ -45,6 +46,7 @@ function Florida_Keys_Details() {
 
   return (
     <>
+    <LoggedNav />
       <div className="w-full bg-cover bg-white bg-no-repeat py-10 px-4">
         <div className="max-w-[1240px] mx-auto grid md:grid-cols-">
           <img
