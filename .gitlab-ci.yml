@@ -20,6 +20,7 @@ api-unit-test-job:
   script:
     - cd hooked
     - pip install -r requirements.txt
+    - pip install requests
     - python -m pytest
 
 # Build the React/JavaScript front-end
