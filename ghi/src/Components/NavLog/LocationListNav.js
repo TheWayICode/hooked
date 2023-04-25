@@ -36,16 +36,16 @@ export const LocationListNav = () => {
 
         <ul className="md:flex hidden">
           <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
-            <a href="/searchpage">Search</a>
+            <Link to="/searchpage">Search</Link>
           </li>
           <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
-            <a href="/guides">Guides</a>
+            <Link to="/guides">Guides</Link>
           </li>
           <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
-            <a href="/forum">Forum</a>
+            <Link to="/forum">Forum</Link>
           </li>
           <li className="p-4 font-bold text-xl hover:text-[#2ddfb8]">
-            <a href="/users">Profile</a>
+            <Link to="/users">Profile</Link>
           </li>
           <li className="p-4 font-bold text-xl hover:text-[#29b798] text-[#2ddfb8]">
             <button onClick={handleLogout}>Logout</button>
@@ -69,24 +69,24 @@ export const LocationListNav = () => {
           </div>
           <ul className="bg-[#000] h-screen pl-3">
             <li className="p-2 font-bold text-xl hover:text-[#2ddfb8]">
-              <a href="/searchpage" onClick={handleNav}>
+              <Link to="/searchpage" onClick={handleNav}>
                 Search
-              </a>
+              </Link>
             </li>
             <li className="p-2 font-bold text-xl hover:text-[#2ddfb8]">
-              <a href="/guides" onClick={handleNav}>
+              <Link to="/guides" onClick={handleNav}>
                 Guides
-              </a>
+              </Link>
             </li>
             <li className="p-2 font-bold text-xl hover:text-[#2ddfb8]">
-              <a href="/forum" onClick={handleNav}>
+              <Link to="/forum" onClick={handleNav}>
                 Forum
-              </a>
+              </Link>
             </li>
             <li className="p-2 font-bold text-xl hover:text-[#2ddfb8]">
-              <a href="/users" onClick={handleNav}>
+              <Link to="/users" onClick={handleNav}>
                 Profile
-              </a>
+              </Link>
             </li>
             <li className="p-2 font-bold text-xl hover:text-[#29b798] text-[#2ddfb8]">
               <button onClick={handleLogout}>Logout</button>
