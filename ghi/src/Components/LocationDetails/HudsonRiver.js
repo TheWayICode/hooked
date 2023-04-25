@@ -90,22 +90,6 @@ function HudsonRiverDetails() {
                   ))}
                 </div>
               </div>
-              <div className="max-w-[1240px] mx-auto grid md:grid-cols-2 mb-8">
-                <div>
-                  {fish.map((fish) => (
-                    <div key={fish.id} className="flex items-center my-2">
-                      <img
-                        src={image}
-                        className="w-8 h-8 mr-2 filter invert"
-                        alt="Fish Icon"
-                      />
-                      <span className="md:text-2xl text-white">
-                        {fish.name}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
               <div className="text-center bg-white rounded-md border border-gray-500 p-4 inline-block">
                 <div className="underline mb-4">
                   Caught a fish not on the list? Be the first to report it!
