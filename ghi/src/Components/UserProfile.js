@@ -80,7 +80,7 @@ function UserProfile() {
             <img className="h-100 w-100" src={Hooked} alt="" />
           </div>
           <div className="flex-1 flex flex-grow">
-            <div className="w-2/5 bg-black bg-opacity-90 border-t-4 border-r-8 border-b-4 border-white flex flex-col items-center">
+            <div className="w-2/5 bg-black bg-opacity-90 border-t-4 border-r-4 border-b-4 border-white flex flex-col items-center pb-6">
               <div className="bg-[#22577E] p-6 font-bold w-full text-center">
                 {user && (
                   <h1 className="mx-auto text-white lg:text-3xl md:text-2xl sm:text-xl text-lg">
@@ -130,7 +130,7 @@ function UserProfile() {
                       >
                         <button
                           onClick={() => deleteUserPost(post.id)}
-                          className="border rounded-full bg-red-400 text-white font-semibold mb-2 w-8 h-8 flex items-center justify-center"
+                          className="text-red-500 font-bold mb-2 w-8 h-8 flex items-center justify-center"
                         >
                           X
                         </button>

@@ -36,7 +36,7 @@ function PostForm() {
     data.description = description;
     data.created_at = created_at;
 
-    const postFormURL = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts/`;
+    const postFormURL = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts`;
     const fetchConfig = {
       method: "POST",
       credentials: "include",

@@ -1,11 +1,11 @@
 import Fisherman from "./assets/Fisherguide_final.jpg";
 import { useState } from "react";
 import Bait from "./assets/Bait.png";
-import Casting from "./assets/Casting.jpg";
+import Casting from "./assets/Casting.png";
 import Cooking from "./assets/Cooking.png";
-import Gutting from "./assets/Gutting.jpg";
-import Hooking from "./assets/Hooking.jpg";
-import Lures from "./assets/Lures.jpg";
+import Gutting from "./assets/Gutting.png";
+import Hooking from "./assets/Hooking.png";
+import Lures from "./assets/Lures.png";
 import Reeling from "./assets/Reeling.png";
 import Regulations from "./assets/Regulations.png";
 import { LoggedNav } from "./NavLog/LoggedNav";

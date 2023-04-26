@@ -35,8 +35,8 @@ const Footer = () => {
           <div>
             <h6 className="text-white font-medium py-2">Community</h6>
             <ul className="text-white">
-              <li className="py-2 text-sm">Join Today!</li>
-              <li className="py-2 text-sm">Access Account</li>
+              <li className="py-2 text-sm"><Link to="/login/signup">Join Today!</Link></li>
+              <li className="py-2 text-sm"><Link to="/users">Access Account</Link></li>
               <li className="py-2 text-sm">Forgot Username?</li>
               <li className="py-2 text-sm">Forgot Password?</li>
               <li className="py-2 text-sm">Report Post</li>
