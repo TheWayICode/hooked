@@ -86,3 +86,10 @@ In addition, we are still trying to fix a mapbox error regarding deployment and 
 **4/23/2023**
 Today I completed the readme, and we are now working on the final bugs on our project regarding deployment and the API key.
 In addition, we are working on minor stretch goals at the moment that will not hinder the project if the dead line is not met prior to Friday.
+
+**4/25/2023**
+Today I revised the Readme to better fit the project parameters. We still are continuing on fixing the API key issues we were
+dealing with specifically with mapbox as well. In addition, we are continuing working on minor visual improvements and bug handling as we find them.
+
+**4/26/2023**
+Today I completed the visual edits of the readme on Gitlab to better represent the data provided. We as a group did more visual tweaks to the project, and noticed more bugs here and there that are minor that we are cleaning up. Later we will be working outside of the project code, and more working on the presentation aspect of our project. In addition, we added photos that will be needed for the About us stretch goal that we are currently implementing to the project.

@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function PostList() {
   const { token } = useToken();
   const [user, setUser] = useState("");
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
@@ -50,6 +51,22 @@ export default function PostList() {
 
   useEffect(() => {
     fetchUser();
+  }, [token]);
+
+  const fetchAllUsers = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/users`;
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setUsers(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllUsers();
   }, [token]);
 
   return (
@@ -137,7 +154,10 @@ export default function PostList() {
                     <div className="font-bold mt-2 overflow-wrap">
                       Description: {post.description}
                     </div>
-                    <p className="font-bold mt-2">Posted by: {user.name}</p>
+                    <p className="font-bold mt-2">
+                      Posted by:{" "}
+                      {users.find((user) => user.id === post.user_id)?.name}
+                    </p>
                     <div className="font-bold mt-2">
                       Posted on: {post.created_at}
                     </div>

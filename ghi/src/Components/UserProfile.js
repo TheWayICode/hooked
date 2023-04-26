@@ -159,7 +159,7 @@ function UserProfile() {
                           Location: {post.location}
                         </div>
                         <div className="font-bold mt-2 text-sm sm:text-base">
-                          Name: {post.fish}
+                          Fish: {post.fish}
                         </div>
                         <div className="font-bold mt-2 text-sm sm:text-base">
                           Description: {post.description}

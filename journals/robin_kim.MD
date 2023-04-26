@@ -72,3 +72,8 @@ The team finished deployment today but ran into one error on my end.
 **4/25/2023**
 We fixed some fetch calls from localhost to the environment url and changed hrefs to links.
 The error was fixed as it was due to third party cookies being blocked.
+
+**4/26/2023**
+The team fixed some minor bugs today with logging in.
+I changed the guide item icons, making it all colorful.
+I fixed an error on the forum where it reflected the current user's name on the post versus the owner of the post.

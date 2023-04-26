@@ -13,7 +13,7 @@ function PostForm() {
   const [fish, setFish] = useState("");
   const [picture_url, setPhotoURL] = useState("");
   const [description, setDescription] = useState("");
-  const [created_at, setCreatedAt] = useState(new Date().toLocaleDateString());
+  const [created_at, setCreatedAt] = useState(new Date().toISOString().split('T')[0]);
 
   const handleLocationChange = (event) => setLocation(event.target.value);
   const handleFishChange = (event) => setFish(event.target.value);
@@ -99,12 +99,9 @@ function PostForm() {
           backgroundColor: "gray",
         }}
       >
-        <div
-          className="bg-black bg-opacity-70 h-290 flex justify-center items-center p-10 mx-auto my-[-80px] pt-8 pb-4 mt-[-20px] mb-[-20px]"
-          style={{ width: "25vw" }}
-        >
-          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
-            <h1 className="text-center text-3xl font-bold my-4">
+        <div className="bg-black bg-opacity-70 h-290 flex justify-center items-center p-10 mx-auto my-[-80px] pt-8 pb-4 mt-[-20px] mb-[-20px] max-w-screen-sm">
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md lg:max-w-lg w-full mx-auto">
+            <h1 className="text-center font-bold my-4 lg:text-3xl md:text-2xl sm:text-xl text-lg">
               Share Your Story,{" "}
               {user_id &&
                 user_id.name.charAt(0).toUpperCase() + user_id.name.slice(1)}
