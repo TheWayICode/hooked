@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function PostList() {
   const { token } = useToken();
-  const [user, setUser] = useState("");
+  const [setUser] = useState("");
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
