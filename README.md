@@ -57,12 +57,12 @@ built using React and Tailwind.
 ## Hooked Directories
 
 Hooked contains a migrations file that will create our tables for our various components in our application. In this, you will find the tables needed for our project. These consist of the following:
-==User==
-==Posts==
-==Fish==
-=Locations==
-==Location_fish==
-==Fish_request==
+`User`
+`Posts`
+`Fish`
+`Locations`
+`Location_fish`
+`Fish_request`
 
 In the queries, we used these data tables to create the various CRUD functionality necessary for our project to operate, on these tables listed above using Pydantic modeling. These then are used in our various router files, to route these to the various endpoints neccesary for operation. These are then validated in our various test files, which were used to verify that the different endpoints are getting the desired interaction with our data/tables. In addition, our authenticator file is where we set up our authentication for the project, to protect the endpoints via verified login.
 
