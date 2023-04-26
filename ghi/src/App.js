@@ -23,7 +23,7 @@ import UserProfile from "./Components/UserProfile";
 import PostForm from "./Components/PostForm";
 import FishRequestForm from "./Components/FishForm";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
