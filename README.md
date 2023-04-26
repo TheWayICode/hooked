@@ -39,30 +39,30 @@ built using React and Tailwind.
 ## Clone The Repository
 
 - In terminal verify that you are in your correct directory you would like to clone the project.
-- In your terminal, ==git clone== our project. Project URL: ==https://gitlab.com/hooked2/module3-project-gamma==.
+- In your terminal, `git clone` our project. Project URL: `https://gitlab.com/hooked2/module3-project-gamma`.
 - enter the newly cloned directory.
 
 ## Starting up your Docker
 
-- In your terminal, create a volume labelled ==hooked-data== , using the command ==docker volume create hooked-data== .
-- In your terminal, create and build your docker start up with ==docker compose up --build== .
+- In your terminal, create a volume labelled `hooked-data` , using the command `docker volume create hooked-data` .
+- In your terminal, create and build your docker start up with `docker compose up --build` .
   Upon completion of this process, there will be three newly created containers in your Docker Desktop.
 
 ## Localhost resources
 
-- The default settings to view the FastAPI Documentation, is located at ==http:localhost:8000/docs==
-- The default settings to view the React-based Front end, is located at ==http:localhost:3000==
-- the default port settings for the Database, is located at ==http:localhost:15432==
+- The default settings to view the FastAPI Documentation, is located at `http:localhost:8000/docs`
+- The default settings to view the React-based Front end, is located at `http:localhost:3000`
+- the default port settings for the Database, is located at `http:localhost:15432`
 
 ## Hooked Directories
 
 Hooked contains a migrations file that will create our tables for our various components in our application. In this, you will find the tables needed for our project. These consist of the following:
-`User`
-`Posts`
-`Fish`
-`Locations`
-`Location_fish`
-`Fish_request`
+`User`,
+`Posts`,
+`Fish`,
+`Locations`,
+`Location_fish`,
+`Fish_request`,
 
 In the queries, we used these data tables to create the various CRUD functionality necessary for our project to operate, on these tables listed above using Pydantic modeling. These then are used in our various router files, to route these to the various endpoints neccesary for operation. These are then validated in our various test files, which were used to verify that the different endpoints are getting the desired interaction with our data/tables. In addition, our authenticator file is where we set up our authentication for the project, to protect the endpoints via verified login.
 
@@ -80,25 +80,25 @@ their user profile and view their user information and their posts.
 
 ## Hooked Endpoints
 
-- ==http://localhost:3000/==: Homepage where the user is inclined to login or register their account.
-- ==http://localhost:3000/login/signup== Registration form where the user is inclined to sign up for an account.
-- ==http://localhost:3000/login== Login form where the user is inclined to login to their account.
-- ==http://localhost:3000/searchpage== Redirect after login. Navigation bar at the top can take them to Search (this page),
-  forum, profile, or to logout and return to ==http://localhost:3000/==. The search bar directs to their search based on state selection.
-- ==http://localhost:3000/guides==: A page of community approved tutorials to get started with your fishing experience.
-- ==http://localhost:3000/forum==: A list view of the community posts shared by community members.
-- ==http://localhost:3000/forum/new==: A form submission to enter a new post in the forum.
-- ==http://localhost:3000/users==: A Profile view page of the members user information and forum posts. The user can delete their own posts here.
-- ==http://localhost:3000/locationlist/StateName==: The endpoint for the available fishing locations per state.
-- ==http://localhost:3000/locations/LocationName==: The endpoint to get the details view of the specific location selected. Contains information about the location, as well as a Google Maps API call to redirect them to the location to provide directions.
-- ==http://localhost:3000/fishreport==: A form submission to enter a new fish found at that specific location.
+- `http://localhost:3000/`: Homepage where the user is inclined to login or register their account.
+- `http://localhost:3000/login/signup` Registration form where the user is inclined to sign up for an account.
+- `http://localhost:3000/login` Login form where the user is inclined to login to their account.
+- `http://localhost:3000/searchpage` Redirect after login. Navigation bar at the top can take them to Search (this page),
+  forum, profile, or to logout and return to `http://localhost:3000/`. The search bar directs to their search based on state selection.
+- `http://localhost:3000/guides`: A page of community approved tutorials to get started with your fishing experience.
+- `http://localhost:3000/forum`: A list view of the community posts shared by community members.
+- `http://localhost:3000/forum/new`: A form submission to enter a new post in the forum.
+- `http://localhost:3000/users`: A Profile view page of the members user information and forum posts. The user can delete their own posts here.
+- `http://localhost:3000/locationlist/StateName`: The endpoint for the available fishing locations per state.
+- `http://localhost:3000/locations/LocationName`: The endpoint to get the details view of the specific location selected. Contains information about the location, as well as a Google Maps API call to redirect them to the location to provide directions.
+- `http://localhost:3000/fishreport`: A form submission to enter a new fish found at that specific location.
 
 ## FastAPI Endpoints and I/Os
 
 ## User
 
-- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
-- Paths: ==/api/users==, ==/api/users/{user_id}==
+- Method: `POST`, `GET`, `GET`, `PUT`, `DELETE`
+- Paths: `/api/users`, `/api/users/{user_id}`
 
 ```
 Expected Input:
@@ -126,8 +126,8 @@ user information of name, email, and password, will generate an outputted respon
 
 ## Posts
 
-- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
-- Paths: ==/api/posts/==, ==/api/posts/{post_id}==
+- Method: `POST`, `GET`, `GET`, `PUT`, `DELETE`
+- Paths: `/api/posts/`, `/api/posts/{post_id}`
 
 Expected Input:
 
@@ -161,8 +161,8 @@ the individual post to a user, as well as share information that others can view
 
 ## Locations
 
-- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
-- Paths: ==/api/locations==, ==/api/locations/{locations_id}==
+- Method: `POST`, `GET`, `GET`, `PUT`, `DELETE`
+- Paths: `/api/locations`, `/api/locations/{locations_id}`
 
 Expected Input:
 ```
@@ -191,8 +191,8 @@ the name, state, city, picture_url, and description, are all required fields for
 
 ## Fish
 
-- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
-- Paths: ==/api/fish==, ==/api/fish/{fish_id}==
+- Method: `POST`, `GET`, `GET`, `PUT`, `DELETE`
+- Paths: `/api/fish`, `/api/fish/{fish_id}`
 
 Expected Input:
 ```
@@ -217,8 +217,8 @@ The purpose of the Fish endpoints is for the user to be able to see what fish ar
 
 ## FishRequest
 
-- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
-- Paths: ==/api/fish_requests==, ==/api/fish/{fish_request_id}==
+- Method: `POST`, `GET`, `GET`, `PUT`, `DELETE`
+- Paths: `/api/fish_requests`, `/api/fish/{fish_request_id}`
 
 
 Expected Input:
