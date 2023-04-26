@@ -3,5 +3,8 @@
     "dotenv": "^16.0.3",
     "react-icons": "^4.8.0",
     "react-typed": "^1.2.0"
+  },
+  "devDependencies": {
+    "dotenv-webpack": "^8.0.1"
   }
 }

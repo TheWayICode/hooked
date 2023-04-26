@@ -24,7 +24,7 @@ function LakeTexomaDetails() {
       setFish(fishData.fish);
       setDescription(fishData.description);
 
-      mapboxgl.accessToken = `${process.env.MAPBOX_API_KEY}`;
+      mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11",

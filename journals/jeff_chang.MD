@@ -58,3 +58,6 @@ Personal tasks, replace placeholder pictures and redesign LocationList page.
 
 **4/24/2023**
 Had a meeting with TA to help with deployment. We were able to deploy our backend, and fix all our deployment bugs.
+
+**4/25/2023**
+Fixed deployment map bug, spent a lot of time on trying to make our api key dynamic but keep failing. Will try again tomorrow.
