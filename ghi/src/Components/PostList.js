@@ -22,9 +22,12 @@ export default function PostList() {
 
   useEffect(() => {
     async function fetchPosts() {
-      const response = await fetch(`${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts`, {
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/posts`,
+        {
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         setPosts(data);
@@ -88,7 +91,11 @@ export default function PostList() {
               <h2> BE THE FIRST TO SHARE YOUR FISHING ADVENTURE!</h2>
             </div>
             <div className="justify-center p-20 bg-black bg-opacity-80 text-xl text-white font-semibold text-center">
-              <i>No posts available.<br/>Be the first to contribute!</i>
+              <i>
+                No posts available.
+                <br />
+                Be the first to contribute!
+              </i>
             </div>
           </>
         ) : (
@@ -126,7 +133,7 @@ export default function PostList() {
                     <div className="font-bold mt-2">
                       Location: {post.location}
                     </div>
-                    <div className="font-bold mt-2">Name: {post.fish}</div>
+                    <div className="font-bold mt-2">Fish: {post.fish}</div>
                     <div className="font-bold mt-2 overflow-wrap">
                       Description: {post.description}
                     </div>

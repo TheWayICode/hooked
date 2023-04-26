@@ -94,7 +94,7 @@ function UserProfile() {
                 alt=""
               />
               <div className="text-center lg:text-xl md:text-lg sm:text-md xs:text-xss font-semibold text-white inline-flex flex-wrap py-2 px-1 sm:px-2 md:px-4 mx-auto">
-                <p className="">Name:&nbsp;</p>
+                <p className="">Fish:&nbsp;</p>
                 <p
                   className="flex-1 overflow-wrap"
                   key={user.id}

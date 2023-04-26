@@ -51,7 +51,7 @@ const Login = () => {
     <>
       <LogoutNav />
       <div className="min-h-screen flex justify-center items-center mt-[-86px] bg">
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
+        <div className="bg-white/60 backdrop-blur-md shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full">
           <h1 className="text-3xl font-bold mb-4 text-center">Login</h1>
           <form onSubmit={handleSubmit} className="w-full max-w-sm">
             <div className="mb-4">

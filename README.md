@@ -1,147 +1,226 @@
-# Module3 Project Gamma
+**Team:**
 
-## Getting started
+- Sean Cho: Software Developer
+- Jeff Chang: Software Developer
+- Robin Kim: Software Developer
+- Mike Mielnicki: Software Developer
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+Link to our project: https://hooked2.gitlab.io/module3-project-gamma
 
-## Install Extensions
+## Design
 
-* Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-* Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+Hooked is a informational database platform designed for fishing enthusiasts. The idealogy behind the platform is to allow avid
 
-## Deliverables
+fishing community members to be able to log in, and find nearby fishing locations. These authentication protected endpoints on our
 
-* [ ] Wire-frame diagrams
-* [ ] API documentation
-* [ ] Project is deployed to Render.com/GitLab-pages
-* [ ] GitLab issue board is setup and in use
-* [ ] Journals
+website, will in addition, provide guides on how to start fishing, fish found at each location, and the abiltiy to request a new
 
-## Project layout
+fish to be added to a specific location. As well as these features, the user will be able to post their fishing experiences to
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+share with other Hooked members, and be able to view other's posts. On the user profile page, is a list of posts they have shared
 
-### Directories
+themselves, that they can remove from the database. The back-end of our application is built using FastAPI and the front end is
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+built using React and Tailwind.
 
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
+## Hooked Wireframe Diagram
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
+![Hooked Application Diagram](https://i.imgur.com/Dr1bJhZ.png)
+![Hooked Application Diagram Landing Page and Login enhanced](https://i.imgur.com/XhHZKQV.png)
+![Hooked Application Diagram Forum, Guides, and User Profiles enhanced](https://i.imgur.com/WxvXqXi.png)
+![Hooked Application Diagram Search functionality enhanced](https://i.imgur.com/wE91Xfy.png)
 
-Inside of `sample_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
+## Clone The Repository
 
-Also in `sample_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+- In terminal verify that you are in your correct directory you would like to clone the project.
+- In your terminal, ==git clone== our project. Project URL: ==https://gitlab.com/hooked2/module3-project-gamma==.
+- enter the newly cloned directory.
 
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+## Starting up your Docker
 
-### Other files
+- In your terminal, create a volume labelled ==hooked-data== , using the command ==docker volume create hooked-data== .
+- In your terminal, create and build your docker start up with ==docker compose up --build== .
+  Upon completion of this process, there will be three newly created containers in your Docker Desktop.
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
+## Localhost resources
 
-* `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-* `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to Render.com. We will learn much more about this file.
-* `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
+- The default settings to view the FastAPI Documentation, is located at ==http:localhost:8000/docs==
+- The default settings to view the React-based Front end, is located at ==http:localhost:3000==
+- the default port settings for the Database, is located at ==http:localhost:15432==
 
-## How to complete the initial deploy
+## Hooked Directories
 
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
+Hooked contains a migrations file that will create our tables for our various components in our application. In this, you will find the tables needed for our project. These consist of the following:
+==User==
+==Posts==
+==Fish==
+=Locations==
+==Location_fish==
+==Fish_request==
 
-### Setup GitLab repo/project
+In the queries, we used these data tables to create the various CRUD functionality necessary for our project to operate, on these tables listed above using Pydantic modeling. These then are used in our various router files, to route these to the various endpoints neccesary for operation. These are then validated in our various test files, which were used to verify that the different endpoints are getting the desired interaction with our data/tables. In addition, our authenticator file is where we set up our authentication for the project, to protect the endpoints via verified login.
 
-* make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-* remove the fork relationship: In GitLab go to:
-  
-  Settings -> General -> Advanced -> Remove fork relationship
+## API Outline
 
-* add these GitLab CI/CD variables:
-  * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
+Hooked is built with FastAPI. Using this FastAPI back-end to interact with our React based front-end,
 
-#### Your GitLab pages URL
+We allow users to be able to register and login to protected endpoints that allow the user to
 
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
+search fishing locations, view fish in that location, post fish requests to implement new fish in the database, search guide
 
-If this is your project URL
+redirects, get directions using a Google Maps API call, and Post/view user's fishing trips. In addition, the user can go onto
 
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
+their user profile and view their user information and their posts.
 
-then your GitLab pages URL will be
+## Hooked Endpoints
 
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
+- ==http://localhost:3000/==: Homepage where the user is inclined to login or register their account.
+- ==http://localhost:3000/login/signup== Registration form where the user is inclined to sign up for an account.
+- ==http://localhost:3000/login== Login form where the user is inclined to login to their account.
+- ==http://localhost:3000/searchpage== Redirect after login. Navigation bar at the top can take them to Search (this page),
+  forum, profile, or to logout and return to ==http://localhost:3000/==. The search bar directs to their search based on state selection.
+- ==http://localhost:3000/guides==: A page of community approved tutorials to get started with your fishing experience.
+- ==http://localhost:3000/forum==: A list view of the community posts shared by community members.
+- ==http://localhost:3000/forum/new==: A form submission to enter a new post in the forum.
+- ==http://localhost:3000/users==: A Profile view page of the members user information and forum posts. The user can delete their own posts here.
+- ==http://localhost:3000/locationlist/StateName==: The endpoint for the available fishing locations per state.
+- ==http://localhost:3000/locations/LocationName==: The endpoint to get the details view of the specific location selected. Contains information about the location, as well as a Google Maps API call to redirect them to the location to provide directions.
+- ==http://localhost:3000/fishreport==: A form submission to enter a new fish found at that specific location.
 
-### Create render.com account and application
+## FastAPI Endpoints and I/Os
 
-* create account on render.com
-* one person create a group and invite all other members
-* create a new "Web Service"
-  * authenticate with GitLab and choose your project
-  * Enter fields:
-    * Name: name of your service
-    * Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
-    * Environment: Docker
-    * Plan Type: Free
-  * click the "Create Web Service" button to create it
-  * the build will succeed and it will look like the server is running,
-    most likely, in 6-10 minutes, it will fail.
-  * click "Manual Deploy" -> "Deploy latest commit" and the service
-    should deploy successfully.
+## User
 
-### Update GitLab CI/CD variables
+- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
+- Paths: ==/api/users==, ==/api/users/{user_id}==
 
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
+Expected Input:
+{
+"name": "string",
+"email": "string",
+"password": "string"
+}
+Expected Output:
 
-### Deploy it
+{
+"access_token": "string",
+"token_type": "Bearer",
+"account": {
+"id": 1,
+"name": "string",
+"email": "string"
+}
+}
+The purpose of the User is to get an authentication token for the user to enter our auth protected website. Entering the
+user information of name, email, and password, will generate an outputted response of an access token, and the user ID associated to the user's information.
 
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+## Posts
+
+- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
+- Paths: ==/api/posts/==, ==/api/posts/{post_id}==
+
+Expected Input:
+
+{
+"user_id": 0,
+"location": "string",
+"fish": "string",
+"description": "string",
+"picture_url": "string",
+"created_at": "2023-04-25"
+}
+
+Expected Output:
+
+{
+"id": 1,
+"user_id": 0,
+"location": "string",
+"fish": "string",
+"description": "string",
+"picture_url": "string",
+"created_at": "2023-04-25" (Date of Creation)
+}
+The purpose of the Post is for the user to be able to share their experiences fishing with other hooked users. The
+requirements of the user_id, location, fish, description, picture_url, and created_at times are all required inputs to associate
+the individual post to a user, as well as share information that others can view as they interact with our front end.
+
+## Locations
+
+- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
+- Paths: ==/api/locations==, ==/api/locations/{locations_id}==
+
+Expected Input:
+{
+"name": "string",
+"state": "string",
+"city": "string",
+"picture_url": "string",
+"description": "string"
+}
+
+Expected Output:
+{
+"id": 1,
+"name": "string",
+"state": "string",
+"city": "string",
+"picture_url": "string",
+"description": "string"
+}
+
+    The purpose of the Locations request is for the user to be able to look up locations inside of our website. The requirements of
+
+the name, state, city, picture_url, and description, are all required fields for the post to render. These parameters associate the inputs to a specific location ID, that the Database filters via state and city. The Output is then joined with the Fish Database, creating a Location_fish table for the fish to be connected to our Locations. This is so we can get specific locations that have unique fish associated.
+
+## Fish
+
+- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
+- Paths: ==/api/fish==, ==/api/fish/{fish_id}==
+
+Expected Input:
+{
+"name": "string",
+"size": "string",
+"fishing_technique": "string",
+"type": "string"
+}
+
+Expected Output:
+{
+"id": 1,
+"name": "string",
+"size": "string",
+"fishing_technique": "string",
+"type": "string"
+}
+
+    The purpose of the Fish endpoints is for the user to be able to see what fish are at each specific location. In addition, it associates the posts that a user can post, to be assigned to a specific fish. Upon Output, fish are linked to locations in our DB in a location_fish datatable. The name, size, fishing_technique, and type, are all required fields for the fish to be be entered into the Database. These parameters allows for unique fish to be associated to specific locations.
+
+## FishRequest
+
+- Method: ==POST==, ==GET==, ==GET==, ==PUT==, ==DELETE==
+- Paths: ==/api/fish_requests==, ==/api/fish/{fish_request_id}==
+
+Expected Input:
+{
+"location": "string",
+"fish": "string",
+"picture_url": "string"
+}
+
+Expected Output:
+{
+"id": 1,
+"location": "string",
+"fish": "string",
+"picture_url": "string"
+}
+
+    The purpose of the FishRequest endpoints is for the user to be able to create a new fish that has not be implemented in the
+
+database yet. the location, fish, and picture_url are all required fields for the user to be able to make a fish form request. The fish request is then put into a database that an admin can review and determine if it should be implemented into the database, for that specific location.
+
+## Intergrations
+
+The application uses a GoogleMaps and MapBox API call to get location data. The purpose of this is to provide directions for the user to the desired fishing location.
