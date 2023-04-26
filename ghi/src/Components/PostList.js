@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function PostList() {
   const { token } = useToken();
-  const [setUser] = useState("");
+  const [user, setUser] = useState("");
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
@@ -67,7 +67,7 @@ export default function PostList() {
 
   useEffect(() => {
     fetchAllUsers();
-  }, [token]);
+  }, []);
 
   return (
     <>
@@ -154,7 +154,7 @@ export default function PostList() {
                     <div className="font-bold mt-2 overflow-wrap">
                       Description: {post.description}
                     </div>
-                    <p className="font-bold mt-2">
+                    <p className="font-bold mt-2" key={user}>
                       Posted by:{" "}
                       {users.find((user) => user.id === post.user_id)?.name}
                     </p>
