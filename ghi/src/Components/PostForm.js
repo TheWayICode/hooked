@@ -53,7 +53,12 @@ function PostForm() {
 
   const fetchLocation = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations`;
-    const response = await fetch(url);
+    const response = await fetch(
+      url,
+      {
+        credentials: "include"
+      }
+    );
     if (response.ok) {
       const data = await response.json();
       setLocations(data);
@@ -62,7 +67,12 @@ function PostForm() {
 
   const fetchFish = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/fish`;
-    const response = await fetch(url);
+    const response = await fetch(
+      url,
+      {
+        credentials: "include"
+      }
+    );
     if (response.ok) {
       const data = await response.json();
       setFishs(data);

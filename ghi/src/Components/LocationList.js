@@ -17,7 +17,12 @@ const LocationList = () => {
 
   const fetchLocations = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations`;
-    const response = await fetch(url);
+    const response = await fetch(
+      url,
+      {
+        credentials: "include"
+      }
+    );
     const data = await response.json();
 
     if (response.ok) {

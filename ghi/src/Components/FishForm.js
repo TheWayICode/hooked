@@ -44,7 +44,12 @@ function FishRequestForm() {
 
   const fetchLocation = async () => {
     const url = "http://localhost:8000/api/locations/";
-    const response = await fetch(url);
+    const response = await fetch(
+      url,
+      {
+        credentials: "include"
+      }
+    );
     if (response.ok) {
       const data = await response.json();
       setLocations(data);

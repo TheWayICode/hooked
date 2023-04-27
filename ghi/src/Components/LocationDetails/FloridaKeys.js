@@ -18,7 +18,12 @@ function Florida_Keys_Details() {
 
   const fishList = async () => {
     const fishUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations/8`;
-    const fishResponse = await fetch(fishUrl);
+    const fishResponse = await fetch(
+      fishUrl,
+      {
+        credentials: "include"
+      }
+    );
     if (fishResponse.ok) {
       const fishData = await fishResponse.json();
       setFish(fishData.fish);
