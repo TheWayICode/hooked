@@ -24,7 +24,7 @@ function FishRequestForm() {
     data.fish = fish;
     data.picture_url = picture_url;
 
-    const fishRequestURL = "http://localhost:8000/api/fish_requests/";
+    const fishRequestURL = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/fish_requests`;
     const fetchConfig = {
       method: "POST",
       credentials: "include",
@@ -43,7 +43,7 @@ function FishRequestForm() {
   };
 
   const fetchLocation = async () => {
-    const url = "http://localhost:8000/api/locations/";
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/locations`;
     const response = await fetch(
       url,
       {
