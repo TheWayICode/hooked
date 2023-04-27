@@ -73,7 +73,7 @@ export default function PostList() {
     <>
       <LoggedNav />
       <div
-        className="bg-center bg-no-repeat w-full mt-[-80px] pt-[80px]"
+        className="bg-center bg-cover bg-no-repeat w-full mt-[-80px] pt-[80px]"
         style={{
           backgroundImage: `url(${FishPicture})`,
           backgroundAttachment: "fixed",
