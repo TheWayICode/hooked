@@ -15,6 +15,7 @@ from queries.users import UserOut
 class AccountToken(Token):
     account: UserOut
 
+
 router = APIRouter()
 
 

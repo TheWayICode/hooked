@@ -5,8 +5,10 @@ from typing import List, Optional, Union
 from queries.fish import Error, FishIn, FishOut, FishRepository
 from queries.users import UserOut
 
+
 class AccountToken(Token):
     account: UserOut
+
 
 router = APIRouter()
 
@@ -17,6 +19,7 @@ async def get_protected(
 ):
     print(account_data)
     return True
+
 
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
@@ -29,6 +32,7 @@ async def get_token(
             "type": "Bearer",
             "account": user,
         }
+
 
 @router.get("/api/fish", response_model=Union[List[FishOut], Error])
 def get_all_fish(
