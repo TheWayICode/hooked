@@ -24,6 +24,7 @@ import PostForm from "./Components/PostForm";
 import FishRequestForm from "./Components/FishForm";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import AboutUs from "./Components/AboutUs";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
@@ -75,6 +76,7 @@ function App() {
           <Route path="/locationlist/:data" element={<LocationList />} />
           <Route path="/users" element={<UserProfile />} />
           <Route path="/fishreport" element={<FishRequestForm />} />
+          <Route path="/aboutus" element={<AboutUs /> } />
         </Routes>
         <Footer />
       </AuthProvider>
