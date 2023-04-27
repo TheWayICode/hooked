@@ -64,7 +64,7 @@ async def get_token(
 def get_all_users(
     repo: UserRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
-    ):
+):
     return repo.get_all_users()
 
 
