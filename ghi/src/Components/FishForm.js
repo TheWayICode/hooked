@@ -65,7 +65,7 @@ function FishRequestForm() {
       <LoggedNav />
       <div></div>
       <div
-        className="bg-cover min-h-screen flex justify-center items-center"
+        className="bg-cover min-h-screen flex justify-center items-center mt-[-80px]"
         style={{
           backgroundImage: "url(https://i.imgur.com/ocKWQ3L.jpg)",
           backgroundPosition: "center -350px",
